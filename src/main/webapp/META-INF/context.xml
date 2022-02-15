@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Définir le pool de connexions vers la base de données GestionAvisBDD (serveur SQLServer) -->
+<Context>
+	<Resource
+		name="jdbc/pool_cnx_encheresBDD"
+		type="javax.sql.DataSource"
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		
+		url="jdbc:sqlserver://localhost:1433;databasename=EncheresBDD"
+		username="sa"
+		password="Pa$$w0rd"
+		
+		maxIdle="10"
+		maxTotal="20"
+		maxWaitMillis="10000"
+		
+		removeAbandoned="true"
+		removeAbandonedTimeout="15"
+		/>
+</Context>
