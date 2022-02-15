@@ -11,7 +11,7 @@ public class Utilisateur {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private String credit;
+	private int credit;
 	private boolean administrateur;
 	
 	
@@ -192,7 +192,7 @@ public class Utilisateur {
 	 * getter string
 	 * @return credit string
 	 */
-	public String getCredit() {
+	public int getCredit() {
 		return credit;
 	}
 
@@ -200,7 +200,7 @@ public class Utilisateur {
 	 * setter credit
 	 * @param credit string
 	 */
-	public void setCredit(String credit) {
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 
