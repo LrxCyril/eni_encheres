@@ -6,10 +6,6 @@ import fr.eni.ecole.encheres.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 public class ConnexionManager {
 
-	// --- paramètres transmiss par la servlet
-	private String email;
-	private String mdp;
-	
 	// --- association avec la DAL
 	private Utilisateur utilisateur;
 	
@@ -26,9 +22,6 @@ public class ConnexionManager {
 	// --- récupérer les paramètres de SeConnecterServlet
 	// --- paramètres "email" et "mdp" (mdp : mot de passe)
 	public boolean VerificationUtilisateur(String email, String mdp) throws BLLException{
-		this.email = email;
-		this.mdp = mdp;
-		
 		boolean cnx = false;
 		
 		// --- récupérer le résultat du travail de la DAL
