@@ -2,6 +2,8 @@ package fr.eni.ecole.encheres.bll;
 
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
+import fr.eni.ecole.encheres.dal.DAOFactory;
+import fr.eni.ecole.encheres.dal.UtilisateurDAO;
 import fr.eni.ecole.encheres.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 public class ConnexionManager {
@@ -10,13 +12,18 @@ public class ConnexionManager {
 	private Utilisateur utilisateur;
 	
 	// --- attribut de navigation vers la DAL
-	private UtilisateurDAOJdbcImpl utilisateurDAO;
+	private UtilisateurDAO utilisateurDAO;
 	
 	
 	// --- récupérer une instance de la DAL
 	public ConnexionManager(){
 		super();
-		utilisateurDAO = new UtilisateurDAOJdbcImpl();
+		try {
+			utilisateurDAO = DAOFactory.getUtilisateurDAO();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	// --- récupérer les paramètres de SeConnecterServlet
