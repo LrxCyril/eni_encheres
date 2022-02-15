@@ -15,7 +15,7 @@
 	<h1>ENI-Enchères</h1>
 </header>
 
-<form action="/connexion/connect" method="get">
+<form action="/connect" method="post">
 	<input type="text" name="email" placeholder="Email ici..">
 	<input type="text" name="mdp" placeholder="Mot de passe ici..">
 	<br>
