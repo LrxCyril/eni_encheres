@@ -90,6 +90,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 				break;
 				
 			}
+
 			
 			connexion.close();
 		}catch  (SQLException sqle){
