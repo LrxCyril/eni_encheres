@@ -28,13 +28,19 @@ public class ConnexionManager {
 	
 	// --- récupérer les paramètres de SeConnecterServlet
 	// --- paramètres "email" et "mdp" (mdp : mot de passe)
-	public boolean VerificationUtilisateur(String email, String mdp) throws BLLException{
+	public boolean VerificationUtilisateur(String identifiant, String mdp) throws BLLException{
 		boolean cnx = false;
 		
 		// --- récupérer le résultat du travail de la DAL
 		// --- récupérer un utilisateur
 		try {
-			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateur(email);
+			if (identifiant.contains("@")) {
+				//appel du pseudo
+			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurPseudo(identifiant);
+			}else {
+				//appel de l'email
+			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurEmail(identifiant);
+			}
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
 			throw new BLLException("L'email n'existe pas !");
