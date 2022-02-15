@@ -14,7 +14,7 @@
 		</header>
 	
 		<form action="./connect" method="post">
-			<input type="text" name="email" value="" placeholder="Email ici..">
+			<input type="text" name="identifiant" value="" placeholder="Email ici..">
 			<input type="text" name="mdp" value="" placeholder="Mot de passe ici..">
 			<br>
 			<br>

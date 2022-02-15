@@ -34,12 +34,13 @@ public class ConnexionManager {
 		// --- récupérer le résultat du travail de la DAL
 		// --- récupérer un utilisateur
 		try {
+			System.out.println(identifiant);
 			if (identifiant.contains("@")) {
 				//appel du pseudo
-			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurPseudo(identifiant);
+			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurEmail(identifiant);
 			}else {
 				//appel de l'email
-			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurEmail(identifiant);
+			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurPseudo(identifiant);
 			}
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
