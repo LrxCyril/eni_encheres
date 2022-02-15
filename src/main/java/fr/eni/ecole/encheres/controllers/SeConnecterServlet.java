@@ -45,10 +45,10 @@ public class SeConnecterServlet extends HttpServlet {
 		ConnexionManager manager= new ConnexionManager();
 		boolean connecte = false;
 		try {
-			String email = request.getParameter("email");
+			String identifiant = request.getParameter("identifiant");
 			String mdp = request.getParameter("mdp");
 			
-		connecte = manager.VerificationUtilisateur(email, mdp);
+		connecte = manager.VerificationUtilisateur(identifiant, mdp);
 		} catch (BLLException e) {
 		
 		e.printStackTrace();
@@ -58,8 +58,6 @@ public class SeConnecterServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
 			rd.forward(request, response);
 		}
-		
-		
 		
 		
 	}
