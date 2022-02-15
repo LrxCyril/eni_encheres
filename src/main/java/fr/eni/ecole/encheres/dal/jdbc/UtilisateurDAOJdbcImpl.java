@@ -33,10 +33,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			// 2- Contruire la requete
 			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_EMAIL);
 			// ajout du paramètre à la requete(Where identifiant)
-			ordre.setString(1,identifiant);
+			ordre.setString(1,identifiant.trim());
 			// 3- Executer la requete
 			ResultSet rs =ordre.executeQuery();
-						
+			//si il y'a un resultat de requete
+			if (rs.next()) {
 			//Alimentation de l'instance d'utilisateur depuis les champs récupérés de la  requette
 			utilisateurConnecte.setNo_utilisateur(rs.getInt("no_utilisateur"));
 			utilisateurConnecte.setPseudo(rs.getString("pseudo"));
@@ -48,6 +49,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			utilisateurConnecte.setCodePostal(rs.getString("code_postal"));
 			utilisateurConnecte.setVille(rs.getString("ville"));
 			utilisateurConnecte.setCredit(rs.getInt("credit"));
+			}
 			// verification si admin et transformation en booleen
 			switch (rs.getByte("administrateur")) {
 			case 0:
@@ -59,7 +61,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 
 			default:
 				break;
+				
 			}
+			
+			connexion.close();
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de lire l'utilisateur");
