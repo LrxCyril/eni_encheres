@@ -1,0 +1,4 @@
+INSERT into UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur) values('slo','louerat','samuel','samuel.louerat2021@campus-eni.fr','faraday','44000','Nantes','mdp','0',0);
+INSERT into UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur) values('clr','leroux','cyril','cyril.leroux2021@campus-eni.fr','faraday','44000','Nantes','mdp','0',0);
+INSERT into UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur) values('tvr','verre','teddy','teddy.verre2021@campus-eni.fr','faraday','44000','Nantes','mdp','0',0);
+INSERT into UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur) values('admin','admin','admin','admin@admin.fr','faraday','44000','Nantes','Pa$$w0rd','0',);
