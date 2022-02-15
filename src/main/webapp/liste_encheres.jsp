@@ -9,12 +9,13 @@
 <meta charset="UTF-8">
 </head>
 
-<header>
-	<h1>ENI-Encheres</h1>
-</header>
+
 
 <body>
 
+<header>
+	<h1>ENI-Enchères</h1>
+</header>
 
 <h1>Liste des enchères</h1>
 
