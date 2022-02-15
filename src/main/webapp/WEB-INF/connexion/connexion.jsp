@@ -6,9 +6,14 @@
 <meta charset="UTF-8">
 
 </head>
+
+
+
 <body>
 
-<%@ include file="../fragments/header.html" %>
+<header>
+	<h1>ENI-Enchères</h1>
+</header>
 
 <form action="/connexion/connect" method="get">
 	<input type="text" name="email" placeholder="Email ici..">
