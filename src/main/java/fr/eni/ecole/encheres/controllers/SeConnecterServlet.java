@@ -47,6 +47,7 @@ public class SeConnecterServlet extends HttpServlet {
 		try {
 			String email = request.getParameter("email");
 			String mdp = request.getParameter("mdp");
+			
 		connecte = manager.VerificationUtilisateur(email, mdp);
 		} catch (BLLException e) {
 		
