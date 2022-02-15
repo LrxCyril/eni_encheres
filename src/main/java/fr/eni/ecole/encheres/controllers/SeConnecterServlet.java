@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.ecole.encheres.bll.BLLException;
+import fr.eni.ecole.encheres.bll.ConnexionManager;
+
 /**
  * Servlet implementation class SeConnecterServlet
  */
@@ -30,6 +33,7 @@ public class SeConnecterServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 		rd.forward(request, response);
+		
 	}
 
 	/**
@@ -37,7 +41,25 @@ public class SeConnecterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		ConnexionManager manager= new ConnexionManager();
+		boolean connecte = false;
+		try {
+		connecte = manager.VerificationUtilisateur(request.getParameter("email"), request.getParameter("mdp"));
+		System.out.println(connecte);
+		} catch (BLLException e) {
+		
+		e.printStackTrace();
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/liste_encheres.jsp");
+		if(connecte) {
+			rd.forward(request, response);
+		}
+		
+		
+		
+		
 	}
 
 }
