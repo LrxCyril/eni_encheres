@@ -1,7 +1,5 @@
 package fr.eni.ecole.encheres.dal;
 
-import java.sql.SQLException;
-
 import fr.eni.ecole.encheres.bo.Utilisateur;
 
 /**
@@ -17,5 +15,5 @@ public interface UtilisateurDAO {
 	 */
 	Utilisateur VerifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException;
 	String VerifIdentifiantExistant(String email,String pseudo) throws DALException ;
-	void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException, SQLException;
+	void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException;
 }

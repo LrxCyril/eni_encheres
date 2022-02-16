@@ -4,7 +4,6 @@ import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
 import fr.eni.ecole.encheres.dal.UtilisateurDAO;
-import fr.eni.ecole.encheres.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 public class UtilisateurManager {
 
@@ -27,7 +26,7 @@ public class UtilisateurManager {
 	}
 	// --- récupérer les paramètres de SeConnecterServlet
 	// --- paramètres "email" et "mdp" (mdp : mot de passe)
-	public boolean VerificationUtilisateur(String identifiant, String mdp) throws BLLException{
+	public boolean verificationUtilisateur(String identifiant, String mdp) throws BLLException{
 		boolean cnx = false;
 		
 		// --- récupérer le résultat du travail de la DAL
@@ -41,7 +40,7 @@ public class UtilisateurManager {
 		}
 		return cnx;	
 	}
-	public boolean ExistanceIdentifiant(String pseudo, String email) throws BLLException {
+	public boolean existanceIdentifiant(String pseudo, String email) throws BLLException {
 		// verifier si l'identifiant ou pseudo existe en base
 		boolean exist = false;
 		try {
@@ -70,7 +69,7 @@ public class UtilisateurManager {
 	 * @param Credit
 	 * @throws BLLException
 	 */
-	public void InsererUtilisateur(String pseudo, String nom, String prenom, String email, String motDePasse,
+	public void insererUtilisateur(String pseudo, String nom, String prenom, String email, String motDePasse,
 			String rue, String codePostal, String ville, int Credit) throws BLLException {
 		Utilisateur nouvelUtilisateur = new Utilisateur();
 		// construire un utilisateur

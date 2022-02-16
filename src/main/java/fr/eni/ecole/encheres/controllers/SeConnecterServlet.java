@@ -50,19 +50,19 @@ public class SeConnecterServlet extends HttpServlet {
 		try {
 			String identifiant = request.getParameter("identifiant");
 			String mdp = request.getParameter("mdp");
-		connecte = manager.VerificationUtilisateur(identifiant, mdp);
+		connecte = manager.verificationUtilisateur(identifiant, mdp);
 		
 		
 		
 		// --- Si l'identifiant et le mot de passe sont " vide " alors connexion refusée et redirection vers la page de connexion
 		if(identifiant.isBlank() || mdp.isBlank()) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/connexion/connexion.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 			rd.forward(request, response);
 		}
 		
 		// --- Si l'identifant OU le mot de passe est " vide " alors la connexion refusée et redirection vers la page de connexion
 		if(identifiant.isBlank() || mdp.isBlank()) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/connexion/connexion.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 			rd.forward(request, response);
 		}
 		
