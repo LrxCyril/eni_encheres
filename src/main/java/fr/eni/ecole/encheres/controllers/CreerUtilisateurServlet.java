@@ -51,6 +51,7 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		String motDePasse = request.getParameter("motDePasse");
 		String confirmMotDePasse = request.getParameter("confirmMotDePasse");
 		
+		//TODO gérer un objet erreur
 		//vérfier si les champs sont vides 
 		if (pseudo.isEmpty()) {
 			request.setAttribute("pseudo", "vide");
