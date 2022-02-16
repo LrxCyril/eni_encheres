@@ -31,16 +31,8 @@
 		</form>
 			<br>
 			<br>
-
-		<main>
-			<form action="./connect" method="post">
-				<input type="text" name="identifiant" value="" placeholder="Email ici..">
-				<input type="password" name="mdp" value="" placeholder="Mot de passe ici..">
-				<input type="submit" value="Connexion">
-				<a href="#" >Mot de passe oublié ?</a>
-			</form>
-
-	<!--  <button type="submit" name="creercompte">Créer un compte</button>-->
-		</main>
+		<a href="${pageContext.request.contextPath}/mon_profil.jsp">
+			<input type="submit" name="creercompte" value="Créer un compte">
+		</a>
 	</body>
 </html>
