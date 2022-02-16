@@ -47,13 +47,11 @@ public class SeConnecterServlet extends HttpServlet {
 		try {
 			String identifiant = request.getParameter("identifiant");
 			String mdp = request.getParameter("mdp");
-			
 		connecte = manager.VerificationUtilisateur(identifiant, mdp);
 		} catch (BLLException e) {
 		
 		e.printStackTrace();
 		}
-		
 		if(connecte) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
 			rd.forward(request, response);

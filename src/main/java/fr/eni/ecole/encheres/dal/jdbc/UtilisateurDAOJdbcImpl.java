@@ -9,48 +9,20 @@ import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.UtilisateurDAO;
 
-
-
 /**
  * Classe gerant les methodes de gestion d'un utilisateur
  * @author slouerat2021
  *
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
-	private static final String SQL_SELECT_EMAIL = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE email=?";
-	private static final String SQL_SELECT_PSEUDO = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=?";
-	/**
-	 * Methode permettant de recuperer un utilisateur selon son email
-	 */
-	@Override
-	public Utilisateur VerifUtilisateurEmail(String identifiant) throws DALException {
-		String CommandeSQL=SQL_SELECT_EMAIL;
-		Utilisateur utilisateurConnecte = VerifUtilisateur(identifiant, CommandeSQL);
-		
-		return utilisateurConnecte;
-	}
-	
+	private static final String SQL_SELECT_IDENTIFIANT = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=? and mot_de_passe=?";
+
 	/**
 	 * Methode permettant de recuperer un utilisateur selon son pseudo
 	 */
 	@Override
-	public Utilisateur VerifUtilisateurPseudo(String identifiant) throws DALException {
+	public Utilisateur VerifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException {
 
-		String CommandeSQL=SQL_SELECT_PSEUDO;
-		Utilisateur utilisateurConnecte = VerifUtilisateur(identifiant, CommandeSQL);
-		
-		return utilisateurConnecte;
-	}
-	
-	
-	/**
-	 * Methode de selection de l'utilisateur
-	 * @param identifiant pseudo ou email
-	 * @param Commande Sql String requete selon email ou pseudo
-	 * @return utilisateur complet
-	 * @throws DALException
-	 */
-	private Utilisateur VerifUtilisateur(String identifiant, String Commande) throws DALException {
 		Utilisateur utilisateurConnecte= new Utilisateur();
 		
 		//Recherche de l'utilisateur selon son identifiant dans la Base de donnée
@@ -58,9 +30,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			// 1- Obtenir une connexion
 			Connection connexion = ConnectionProvider.getConnection();
 			// 2- Contruire la requete
-			PreparedStatement ordre = connexion.prepareStatement(Commande);
+			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_IDENTIFIANT);
 			// ajout du paramètre à la requete(Where identifiant)
 			ordre.setString(1,identifiant.trim());
+			ordre.setString(2,identifiant.trim());
+			ordre.setString(3,motdepasse.trim());
 			// 3- Executer la requete
 			ResultSet rs =ordre.executeQuery();
 			//si il y'a un resultat de requete
@@ -90,14 +64,15 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 				break;
 				
 			}
-
-			
 			connexion.close();
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
-			throw new DALException("Impossible de lire l'utilisateur");
+			throw new DALException("Impossible de lire la connexion");
 		}
 		return utilisateurConnecte;
 	}
+	
+	
+
 
 }

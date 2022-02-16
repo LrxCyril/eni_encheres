@@ -9,6 +9,9 @@ import fr.eni.ecole.encheres.bo.Utilisateur;
  */
 public interface UtilisateurDAO {
 	
-	Utilisateur VerifUtilisateurEmail(String identifiant) throws DALException;
-	Utilisateur VerifUtilisateurPseudo(String identifiant) throws DALException;
+
+	/**
+	 * Methode permettant de recuperer un utilisateur selon son pseudo
+	 */
+	Utilisateur VerifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException;
 }

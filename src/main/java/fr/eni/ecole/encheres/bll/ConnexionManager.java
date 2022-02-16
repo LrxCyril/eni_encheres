@@ -25,7 +25,6 @@ public class ConnexionManager {
 			e.printStackTrace();
 		}
 	}
-	
 	// --- récupérer les paramètres de SeConnecterServlet
 	// --- paramètres "email" et "mdp" (mdp : mot de passe)
 	public boolean VerificationUtilisateur(String identifiant, String mdp) throws BLLException{
@@ -34,23 +33,11 @@ public class ConnexionManager {
 		// --- récupérer le résultat du travail de la DAL
 		// --- récupérer un utilisateur
 		try {
-			System.out.println(identifiant);
-			if (identifiant.contains("@")) {
-				//appel du pseudo
-			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurEmail(identifiant);
-			}else {
-				//appel de l'email
-			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurPseudo(identifiant);
-			}
+			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurIdentifiant(identifiant, mdp);
+			cnx = true;
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
-			throw new BLLException("L'email n'existe pas !");
-		}
-		
-		// --- vérifier si l'utilisateur a un compte
-		if (utilisateur.getMotDePasse().contentEquals(mdp)) {
-			//cnx est ok
-			cnx = true;
+			throw new BLLException("L'utilisateur n'existe pas !");
 		}
 		return cnx;	
 	}	
