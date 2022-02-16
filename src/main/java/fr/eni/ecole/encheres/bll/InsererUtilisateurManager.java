@@ -3,12 +3,15 @@ package fr.eni.ecole.encheres.bll;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
+import fr.eni.ecole.encheres.dal.InsererUtilisateurDAO;
+
 
 public class InsererUtilisateurManager {
-
-	public InsererUtilisateurManager() {
+private static InsererUtilisateurDAO Insert;
+	
+public InsererUtilisateurManager() {
 		try {
-			InsererUtilisateurDAO = DAOFactory.getInsererUtilisateurDAO();
+			Insert = (InsererUtilisateurDAO) DAOFactory.getInsererUtilisateurDAO();
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -25,9 +28,9 @@ public class InsererUtilisateurManager {
 		//verifier si l'identifiant ou pseudo existe en base
 		boolean exist=false;
 		try {	
-			InsererUtilisateurDAO.VerifIdentifiantExistant(email,pseudo);
+			Insert.VerifIdentifiantExistant(email,pseudo);
 			exist=true;
-		}(DALException e) {
+		}catch(DALException e) {
 			//il n'existe pas, on fait rien, tout est ok.
 		}
 		return exist;
@@ -60,7 +63,7 @@ public class InsererUtilisateurManager {
 		nouvelUtilisateur.setCredit(Credit+100);
 		//inserer l'utilisateur en  base
 		try {
-			InsererUtilisateurDAO.InsertUtilisateur(nouvelUtilisateur);
+			Insert.InsertUtilisateur(nouvelUtilisateur);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
 			throw new BLLException("Erreur lors de l'insertion!");
