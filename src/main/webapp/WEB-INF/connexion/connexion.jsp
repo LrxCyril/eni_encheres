@@ -31,7 +31,7 @@
 		</form>
 			<br>
 			<br>
-		<a href="${pageContext.request.contextPath}/mon_profil.jsp">
+		<a href="${pageContext.request.contextPath}/creer/utilisateur">
 			<input type="submit" name="creercompte" value="Créer un compte">
 		</a>
 	</body>
