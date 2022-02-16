@@ -42,20 +42,44 @@ public class SeConnecterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		
 		ConnexionManager manager= new ConnexionManager();
 		boolean connecte = false;
+		request.setAttribute("La_connexion", connecte);
+		
 		try {
 			String identifiant = request.getParameter("identifiant");
 			String mdp = request.getParameter("mdp");
 		connecte = manager.VerificationUtilisateur(identifiant, mdp);
+		
+		// --- Si l'identifiant et le mot de passe sont " vide " alors connexion refusée et redirection vers la page de connexion
+		if(identifiant == null && mdp == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/connexion/connexion.jsp");
+			rd.forward(request, response);
+		}
+		
+		// --- Si l'identifant OU le mot de passe est " vide " alors la connexion refusée et redirection vers la page de connexion
+		if(identifiant == null || mdp == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/connexion/connexion.jsp");
+			rd.forward(request, response);
+		}
+		
 		} catch (BLLException e) {
 		
-		e.printStackTrace();
+		// --- Si la connexion échoue, redirige vers la page de connexion
+		if(connecte == false) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
+			rd.forward(request, response);
+		}
+		
+		// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
 		}
 		if(connecte) {
+			request.setAttribute("La_connexion", connecte);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
 			rd.forward(request, response);
 		}
+		
 		
 		
 	}
