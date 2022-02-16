@@ -91,7 +91,7 @@ public class CreerUtilisateurServlet extends HttpServlet {
 			request.setAttribute("motDePasse", "vide");
 			doGet(request, response);
 		}
-		
+ 
 		if (confirmMotDePasse.isEmpty()) {
 			request.setAttribute("confirmMotDePasse", "vide");
 		}
