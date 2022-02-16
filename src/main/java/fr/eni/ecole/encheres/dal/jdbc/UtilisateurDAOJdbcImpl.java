@@ -71,6 +71,18 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		}
 		return utilisateurConnecte;
 	}
+
+	@Override
+	public String VerifIdentifiantExistant(String email, String pseudo) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

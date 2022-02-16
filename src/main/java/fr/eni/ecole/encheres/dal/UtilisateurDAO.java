@@ -14,4 +14,6 @@ public interface UtilisateurDAO {
 	 * Methode permettant de recuperer un utilisateur selon son pseudo
 	 */
 	Utilisateur VerifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException;
+	String VerifIdentifiantExistant(String email,String pseudo) throws DALException ;
+	void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException;
 }
