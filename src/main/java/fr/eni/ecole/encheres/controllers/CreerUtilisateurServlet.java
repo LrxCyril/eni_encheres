@@ -9,19 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.ecole.encheres.bll.BLLException;
+import fr.eni.ecole.encheres.bll.UtilisateurManager;
+
 /**
  * Servlet implementation class CreerUtilisateurServlet
  */
 @WebServlet("/creer/utilisateur")
 public class CreerUtilisateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private UtilisateurManager manager;  
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CreerUtilisateurServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+        manager = new UtilisateurManager();
     }
 
 	/**
@@ -95,6 +97,23 @@ public class CreerUtilisateurServlet extends HttpServlet {
  
 		if (confirmMotDePasse.isEmpty()) {
 			request.setAttribute("confirmMotDePasse", "vide");
+			doGet(request, response);
 		}
+		
+		//comparer motDePasse et confirmMotDePasse
+		if (!motDePasse.equals(confirmMotDePasse)) {
+			request.setAttribute("motDePasseInvalide", "invalide");
+			doGet(request, response);
+		}
+		
+		try {
+			manager.insererUtilisateur(pseudo, nom, prenom, email, motDePasse, rue, codePostal, ville, 0);
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+		
+		//appeler liste des enchères
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
+		rd.forward(request, response);
 	}
 }
