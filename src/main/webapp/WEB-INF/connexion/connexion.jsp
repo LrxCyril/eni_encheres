@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +22,11 @@
 			<br>
 			<br>
 			<input type="submit" value="Connexion">
+			<br>
+				<c:if test="${requestScope.La_connexion == false }">
+					<p>La connexion est invalide </p>
+				</c:if>
+				
 			<br>
 			<br>
 			<a href="#" >Mot de passe oublié ?</a>
