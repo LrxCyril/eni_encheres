@@ -109,9 +109,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	}
 
 	@Override
-	public void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException, SQLException {
+	public void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException {
 		
-		
+		try {
 		//---  1- Obtenir une connexion
 		Connection connexion = ConnectionProvider.getConnection();
 		
@@ -135,8 +135,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		}
 		
 		//--- 3- Exécuter la requête
-		ordre.executeQuery();
-		
+		ordre.executeUpdate();
+		} catch (SQLException sqle){
+			//Levé de l'exception pas de Nom
+			throw new DALException("Insert invalide !");
+	}
 	}
 	
 }
