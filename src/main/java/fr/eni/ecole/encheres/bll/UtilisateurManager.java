@@ -4,7 +4,6 @@ import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
 import fr.eni.ecole.encheres.dal.UtilisateurDAO;
-import fr.eni.ecole.encheres.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 public class UtilisateurManager {
 
