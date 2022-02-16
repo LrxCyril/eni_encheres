@@ -6,33 +6,53 @@ import fr.eni.ecole.encheres.dal.DAOFactory;
 import fr.eni.ecole.encheres.dal.UtilisateurDAO;
 
 public class UtilisateurManager {
-
-	// --- association avec la DAL
+	// --- variable d'implementation utilsateur
 	private Utilisateur utilisateur;
-	
-	// --- attribut de navigation vers la DAL
+	// --- variable d'implementation DAL
 	private UtilisateurDAO utilisateurDAO;
 	
 	
-	// --- récupérer une instance de la DAL
+	//Constructeur
 	public UtilisateurManager(){
-		super();
+		//creation d'une instance d'utilisateur
+		utilisateur = new Utilisateur();
 		try {
+			//creation d'une instance de date
 			utilisateurDAO = DAOFactory.getUtilisateurDAO();
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	// --- récupérer les paramètres de SeConnecterServlet
-	// --- paramètres "email" et "mdp" (mdp : mot de passe)
+	
+	public Utilisateur lectureUtilisateur(String pseudo) throws BLLException{
+		boolean cnx = false;
+		// --- récupérer le résultat du travail de la DAL
+		// --- récupérer un utilisateur
+		try {
+			utilisateur = utilisateurDAO.lireUtilisateurPseudo(pseudo);
+			cnx = true;
+		} catch (DALException e) {
+			// --- Levée d'une exception quand l'email n'est pas reconnu
+			throw new BLLException("L'utilisateur n'existe pas !");
+		}
+		return utilisateur;	
+	}
+	
+	
+/**
+ * Verification de l'existence d'un utilisateur
+ * @param identifiant String
+ * @param mdp String
+ * @return
+ * @throws BLLException
+ */
 	public boolean verificationUtilisateur(String identifiant, String mdp) throws BLLException{
 		boolean cnx = false;
 		
 		// --- récupérer le résultat du travail de la DAL
 		// --- récupérer un utilisateur
 		try {
-			utilisateur = (Utilisateur) utilisateurDAO.VerifUtilisateurIdentifiant(identifiant, mdp);
+			utilisateur = utilisateurDAO.VerifUtilisateurIdentifiant(identifiant, mdp);
 			cnx = true;
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
@@ -40,6 +60,15 @@ public class UtilisateurManager {
 		}
 		return cnx;	
 	}
+	
+	
+	/**
+	 * Verification si email ou pseudo deja present en base
+	 * @param pseudo
+	 * @param email
+	 * @return
+	 * @throws BLLException
+	 */
 	public boolean existanceIdentifiant(String pseudo, String email) throws BLLException {
 		// verifier si l'identifiant ou pseudo existe en base
 		boolean exist = false;
@@ -70,7 +99,7 @@ public class UtilisateurManager {
 	 * @throws BLLException
 	 */
 	public void insererUtilisateur(String pseudo, String nom, String prenom, String email, String motDePasse,
-			String rue, String codePostal, String ville, int Credit) throws BLLException {
+		String rue, String codePostal, String ville, int Credit) throws BLLException {
 		Utilisateur nouvelUtilisateur = new Utilisateur();
 		// construire un utilisateur
 		nouvelUtilisateur.setPseudo(pseudo);
