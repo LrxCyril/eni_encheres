@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.ecole.encheres.bll.BLLException;
-import fr.eni.ecole.encheres.bll.ConnexionManager;
+import fr.eni.ecole.encheres.bll.UtilisateurManager;
 
 /**
  * Servlet implementation class SeConnecterServlet
@@ -43,7 +43,7 @@ public class SeConnecterServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		
-		ConnexionManager manager= new ConnexionManager();
+		UtilisateurManager manager= new UtilisateurManager();
 		boolean connecte = false;
 		request.setAttribute("La_connexion", connecte);
 		
@@ -52,14 +52,16 @@ public class SeConnecterServlet extends HttpServlet {
 			String mdp = request.getParameter("mdp");
 		connecte = manager.VerificationUtilisateur(identifiant, mdp);
 		
+		
+		
 		// --- Si l'identifiant et le mot de passe sont " vide " alors connexion refusée et redirection vers la page de connexion
-		if(identifiant == null && mdp == null) {
+		if(identifiant.isBlank() || mdp.isBlank()) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/connexion/connexion.jsp");
 			rd.forward(request, response);
 		}
 		
 		// --- Si l'identifant OU le mot de passe est " vide " alors la connexion refusée et redirection vers la page de connexion
-		if(identifiant == null || mdp == null) {
+		if(identifiant.isBlank() || mdp.isBlank()) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/connexion/connexion.jsp");
 			rd.forward(request, response);
 		}
@@ -67,7 +69,7 @@ public class SeConnecterServlet extends HttpServlet {
 		} catch (BLLException e) {
 		
 		// --- Si la connexion échoue, redirige vers la page de connexion
-		if(connecte == false) {
+		if(!connecte ) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 			rd.forward(request, response);
 		}
