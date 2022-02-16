@@ -15,8 +15,10 @@ import fr.eni.ecole.encheres.dal.UtilisateurDAO;
  *
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
+	private static final String SQL_SELECT_NOM = "SELECT nom FROM UTILISATEURS WHERE pseudo=? or email=?";
 	private static final String SQL_SELECT_IDENTIFIANT = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=? and mot_de_passe=?";
 
+	private static final String SQL_INSERT_UTILISATEURS = "INSERT INTO UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?)";
 	/**
 	 * Methode permettant de recuperer un utilisateur selon son pseudo
 	 */
@@ -74,17 +76,67 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 
 	@Override
 	public String VerifIdentifiantExistant(String email, String pseudo) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String NomUtilisateur = null;
+		   
+		  try {
+			
+		  	//---  1- Obtenir une connexion
+			Connection connexion = ConnectionProvider.getConnection();
+			
+			//---  2- Contruire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_NOM);
+			
+			//--- 3- Exécuter la requête
+			ResultSet rs =ordre.executeQuery();
+			
+			//--- 4- Si la connexion est bien existante..
+			if (rs.next()) {
+				
+				NomUtilisateur = (rs.getString("nom"));
+			}
+			//--- 5- Fermer la connexion
+			connexion.close();
+			
+			//--- 6- Gérer l'exception
+		} catch (SQLException sqle){
+				//Levé de l'exception pas de Nom
+				throw new DALException("Pas de nom d'utilisateur !");
+		}
+		   //--- 7- Retour de Nom 
+	return NomUtilisateur;
+		
 	}
 
 	@Override
-	public void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException {
-		// TODO Auto-generated method stub
+	public void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException, SQLException {
+		
+		
+		//---  1- Obtenir une connexion
+		Connection connexion = ConnectionProvider.getConnection();
+		
+		
+		//---  2- Contruire la requete
+		PreparedStatement ordre = connexion.prepareStatement(SQL_INSERT_UTILISATEURS);
+		
+		ordre.setString(1,nouvelUtilisateur.getPseudo());
+		ordre.setString(2,nouvelUtilisateur.getNom());
+		ordre.setString(3,nouvelUtilisateur.getPrenom());
+		ordre.setString(4,nouvelUtilisateur.getEmail());
+		ordre.setString(5,nouvelUtilisateur.getRue());
+		ordre.setString(6,nouvelUtilisateur.getCodePostal());
+		ordre.setString(7,nouvelUtilisateur.getVille());
+		ordre.setString(8,nouvelUtilisateur.getMotDePasse());
+		ordre.setInt(9,nouvelUtilisateur.getCredit());
+		if(nouvelUtilisateur.isAdministrateur()) {
+			ordre.setInt(10, 1);
+		} else { 
+			ordre.setInt(10, 0);
+		}
+		
+		//--- 3- Exécuter la requête
+		ordre.executeQuery();
 		
 	}
 	
-	
-
-
 }
