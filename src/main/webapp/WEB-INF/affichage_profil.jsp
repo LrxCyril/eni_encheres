@@ -14,7 +14,7 @@
             <h1>ENI-Enchères</h1>
         </header>
         <main>
-				<ul>
+				<ul> 
                    <li><p>Pseudo : ${requestScope.pseudo}</p></li>
                    <li><p>nom : ${requestScope.nom}</p></li>
                    <li><p>prenom : ${requestScope.prenom}</p></li>
@@ -25,7 +25,7 @@
                    <li><p>ville : ${requestScope.ville}</p></li>
 				</ul>
 					<c:if test="${requestScope.modif}">
-						<a href="${pageContext.request.contextPath}/modifition/utilisateur">
+						<a href="${pageContext.request.contextPath}/creer/utilisateur">
 	                        <input type="submit" name="modifier" value="Modifier">
 	                    </a>
                     </c:if>
