@@ -1,0 +1,113 @@
+/* --- principal container --- */
+
+.container { font-family: 'Open Sans', sans-serif; }
+
+
+/* --- header --- */
+
+.header { 
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom: 40px;
+    padding: 40px;
+    align-items: center;
+    background-color: beige;
+}
+/*
+    .header__logo {}
+*/
+        .header__main-link { text-decoration: none; }
+
+            .header__main-title {
+                font-weight: 700;
+                color: tomato;
+            }
+/*
+                .header__nav {}
+*/
+                    .header__nav-list { display: flex; }
+
+                        .header__nav-item { margin: auto 20px; }
+
+                            .header__nav-link {
+                                text-decoration: none;
+                                font-weight: 700;
+                                color: tomato;
+                            }
+
+
+/* --- main --- */
+
+.main { margin: auto 80px; }
+/*
+    .main__name-page {}
+*/
+        .main__title {
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+            .main__form { margin-bottom: 40px; }
+/*
+                .main__announce {}
+*/
+
+/* --- form --- */
+/*
+.form__container {}
+    .form__label {}
+*/
+        .form__input { width: 200px; }
+/*
+            .form__categories-label {}
+                .form__select {}
+                    .form__option {}
+*/
+                        .form__filter {
+                            display: flex;
+                            justify-content: space-evenly;
+                            margin-top: 20px;
+
+                        }
+/*
+                            .form__achats-filter {}
+                                .form__ventes-filter {}
+                                    .form__radio {}
+                                        .form__radio-label {}
+                                            .form__list {}
+                                                .form__item {}
+                                                    .form__checkbox {}
+                                                        .form__link {}
+                                                            .form__submit {}
+*/
+
+/* --- announce --- */
+
+.announce {
+    display: flex;
+    justify-content: space-around;
+}
+
+    .announce__card {
+        display: flex;
+        margin: auto 40px;
+        background-color: beige;
+    }
+/*
+        .annouce__image {}
+*/
+            .announce__description { margin-right: 20px; }
+
+                .announce__link {
+                    text-decoration: none;
+                    font-weight: 700;
+                    color: tomato;
+                }
+/*
+                    .announce__title {}
+                        .announce__price {}
+                            .announce__deadline {}
+                                .announce__seller-label {}
+                                    .announce__seller-profile {}
+*/
