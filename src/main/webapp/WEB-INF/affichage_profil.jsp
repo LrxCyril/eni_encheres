@@ -26,10 +26,13 @@
                   
 				</ul>
 					<c:if test="${requestScope.modif}">
-						<form action="${pageContext.request.contextPath}/creer/utilisateur" method="get">
-							 <input type="hidden" name="modif" value="ok">
-							 <input type="submit" name="modifier" value="Modifier">
-						</form>
+						<a href="${pageContext.request.contextPath}/modifier/utilisateur">
+						<button type="submit" >Modifier</button>
+						</a>
+						<a href="${pageContext.request.contextPath}/supprimer/utilisateur">
+						<button type="submit" >Supprimer</button>
+						</a>
+
                     </c:if>
         </main>
     </body>
