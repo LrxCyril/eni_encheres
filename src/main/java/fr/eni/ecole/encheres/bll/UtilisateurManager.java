@@ -46,10 +46,8 @@ public class UtilisateurManager {
  * @return
  * @throws BLLException
  */
-	public boolean verificationUtilisateur(String identifiant, String mdp) throws BLLException{
+	public Utilisateur verificationUtilisateur(String identifiant, String mdp) throws BLLException{
 		boolean cnx = false;
-		
-		// --- récupérer le résultat du travail de la DAL
 		// --- récupérer un utilisateur
 		try {
 			utilisateur = utilisateurDAO.VerifUtilisateurIdentifiant(identifiant, mdp);
@@ -58,7 +56,7 @@ public class UtilisateurManager {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
 			throw new BLLException("L'utilisateur n'existe pas !");
 		}
-		return cnx;	
+		return utilisateur;	
 	}
 	
 	
@@ -98,13 +96,14 @@ public class UtilisateurManager {
 	 * @param Credit
 	 * @throws BLLException
 	 */
-	public void insererUtilisateur(String pseudo, String nom, String prenom, String email, String motDePasse,
+	public void insererUtilisateur(String pseudo, String nom, String prenom, String telephone, String email, String motDePasse,
 		String rue, String codePostal, String ville, int Credit) throws BLLException {
 		Utilisateur nouvelUtilisateur = new Utilisateur();
 		// construire un utilisateur
 		nouvelUtilisateur.setPseudo(pseudo);
 		nouvelUtilisateur.setNom(nom);
 		nouvelUtilisateur.setPrenom(prenom);
+		nouvelUtilisateur.setTelephone(telephone);
 		nouvelUtilisateur.setEmail(email);
 		nouvelUtilisateur.setMotDePasse(motDePasse);
 		nouvelUtilisateur.setRue(rue);
@@ -118,6 +117,29 @@ public class UtilisateurManager {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
 			throw new BLLException("Erreur lors de l'insertion!");
 		}
+	}
+
+	public void insererUtilisateur(Utilisateur utilisateur) throws BLLException {
+		// construire un utilisateur
+		utilisateur.setCredit(utilisateur.getCredit() + 100);
+		// inserer l'utilisateur en base
+		try {
+			utilisateurDAO.InsertUtilisateur(utilisateur);
+		} catch (DALException e) {
+			// --- Levée d'une exception quand l'email n'est pas reconnu
+			throw new BLLException("Erreur lors de l'insertion!");
+		}
+		
+	}
+
+	public void majUtilisateur(Utilisateur utilisateurConnecte) throws BLLException {
+		try {
+			utilisateurDAO.MajUtilisateur(utilisateurConnecte);
+		} catch (DALException e) {
+			// --- Levée d'une exception quand l'email n'est pas reconnu
+			throw new BLLException("Erreur lors de l'insertion!");
+		}
+		
 	}
 }
 	

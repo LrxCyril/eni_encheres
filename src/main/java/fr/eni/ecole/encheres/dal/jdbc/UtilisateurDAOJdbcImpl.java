@@ -19,6 +19,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	private static final String SQL_SELECT_IDENTIFIANT = "SELECT no_utilisateur,pseudo,nom,prenom,telephone,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=? and mot_de_passe=?";
 	private static final String SQL_SELECT_PSEUDO = "SELECT no_utilisateur,pseudo,nom,prenom,telephone,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=?";
 	private static final String SQL_INSERT_UTILISATEURS = "INSERT INTO UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur,telephone) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo=?,nom=?,prenom=?,email=?,rue=?,code_postal=?,ville=?,mot_de_passe=?,credit=?,administrateur=?,telephone=?  WHERE  no_utilisateur=?";
 
 	
 	/**
@@ -39,6 +40,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			ordre.setString(3,motdepasse.trim());
 			//Appel de la methode constuisant l'utilisateur
 			utilisateurConnecte=lireEtCreerUtilisateur(utilisateurConnecte, connexion, ordre);
+			connexion.close();
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de lire la connexion");
@@ -74,7 +76,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			utilisateurConnecte.setAdministrateur(true);
 			break;
 		}
-		connexion.close();
+		
 		return utilisateurConnecte;
 	}
 
@@ -127,13 +129,33 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			ordre.setInt(10, 0);
 		}
 		ordre.setString(11,nouvelUtilisateur.getTelephone());
-		//--- 3- Exécuter la requête
 		ordre.executeUpdate();
+		//--- 5- Fermer la connexion
+		connexion.close();
 		} catch (SQLException sqle){
 			//Levé de l'exception pas de Nom
 			throw new DALException("Insert invalide !");
 	}
 	}
+/*
+	private void donneesAModifier(Utilisateur nouvelUtilisateur, PreparedStatement ordre) throws SQLException {
+		ordre.setString(1,nouvelUtilisateur.getPseudo());
+		ordre.setString(2,nouvelUtilisateur.getNom());
+		ordre.setString(3,nouvelUtilisateur.getPrenom());
+		ordre.setString(4,nouvelUtilisateur.getEmail());
+		ordre.setString(5,nouvelUtilisateur.getRue());
+		ordre.setString(6,nouvelUtilisateur.getCodePostal());
+		ordre.setString(7,nouvelUtilisateur.getVille());
+		ordre.setString(8,nouvelUtilisateur.getMotDePasse());
+		ordre.setInt(9,nouvelUtilisateur.getCredit());
+		if(nouvelUtilisateur.isAdministrateur()) {
+			ordre.setInt(10, 1);
+		} else { 
+			ordre.setInt(10, 0);
+		}
+		ordre.setString(11,nouvelUtilisateur.getTelephone());
+		//--- 3- Exécuter la requête
+	}*/
 
 	@Override
 	public Utilisateur lireUtilisateurPseudo(String pseudo) throws DALException {
@@ -149,6 +171,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			ordre.setString(2,pseudo.trim());
 			//Appel de la methode constuisant l'utilisateur
 			utilisateurConnecte=lireEtCreerUtilisateur(utilisateurConnecte, connexion, ordre);
+			connexion.close();
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de lire la connexion");
@@ -156,6 +179,41 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		return utilisateurConnecte;
 
 
+	}
+
+	@Override
+	public void MajUtilisateur(Utilisateur utilisateur) throws DALException {
+		//Recherche de l'utilisateur selon son identifiant dans la Base de donnée
+		try {
+			// 1- Obtenir une connexion
+			Connection connexion = ConnectionProvider.getConnection();
+			// 2- Contruire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_UPDATE_UTILISATEUR);
+			ordre.setString(1,utilisateur.getPseudo());
+			ordre.setString(2,utilisateur.getNom());
+			ordre.setString(3,utilisateur.getPrenom());
+			ordre.setString(4,utilisateur.getEmail());
+			ordre.setString(5,utilisateur.getRue());
+			ordre.setString(6,utilisateur.getCodePostal());
+			ordre.setString(7,utilisateur.getVille());
+			ordre.setString(8,utilisateur.getMotDePasse());
+			ordre.setInt(9,utilisateur.getCredit());
+			if(utilisateur.isAdministrateur()) {
+				ordre.setInt(10, 1);
+			} else { 
+				ordre.setInt(10, 0);
+			}
+			ordre.setString(11,utilisateur.getTelephone());
+			//--- 3- Exécuter la requête
+			ordre.setInt(12,utilisateur.getNo_utilisateur());	
+			ordre.executeUpdate();
+
+			connexion.close();
+
+		}catch  (SQLException sqle){
+			//Levé de l'exception l'utilisateur n'existe pas
+			throw new DALException("Impossible de mettre à jour la ligne");
+		}
 	}
 	
 }
