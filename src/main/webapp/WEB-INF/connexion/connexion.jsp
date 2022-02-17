@@ -4,35 +4,63 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
     
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
+
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		
+		<!-- liens avec le CSS -->
+		<link rel="stylesheet" href="../css/reset.css">
+	    <link rel="stylesheet" href="../css/style.css">
+	    <link rel="stylesheet" href="../fontawesome-free-5.15.4-web/css/all.css">
+	    
+	    <!-- import ddes fonts depuis Google fonts -->
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+	    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
+		
+		<title>ENi | Enchères | Accueil</title>
+	</head>
 	<body>
-		<header>
-			<h1>ENI-Enchères</h1>
-		</header>
-
-
-		<form action="./connect" method="post">
-			<input type="text" name="identifiant" value="" placeholder="Email ici..">
-			<input type="text" name="mdp" value="" placeholder="Mot de passe ici..">
-			<br>
-			<br>
-			<input type="submit" value="Connexion">
-			<br>
-				<c:if test="${requestScope.La_connexion == false }">
-					<p>La connexion est invalide </p>
-				</c:if>
-				
-			<br>
-			<br>
-			<a href="#" >Mot de passe oublié ?</a>
-		</form>
-			<br>
-			<br>
-		<a href="${pageContext.request.contextPath}/creer/utilisateur">
-			<input type="submit" name="creercompte" value="Créer un compte">
-		</a>
+		<div class="container">
+	            <header class="header">
+	                <div class="header__logo">
+	                    <a class="header__main-link" href="${pageContext.request.contextPath}/home" target="_blank">
+	                        <h1 class="header__main-title">ENI - Enchères</h1>
+	                    </a>
+	                </div>
+	            </header>
+	            <main class="main">
+                <div class="main__name-page">
+                    <h2 class="main__title">Connexion</h2>
+                </div>
+                <div class="main__form">
+                    <form class="form__container" action="${pageContext.request.contextPath}/connect" method="post">
+                        <div>
+                            <label class="form__label" for="recherche-article">Identifiant</label>
+                            <input class="form__input" type="text" name="identifiant" id="identifiant" value="" placeholder="identifiant">       
+                        </div>
+                        <div>
+                            <label class="form__label" for="mot-de-passe">Mot de passe</label>
+                            <input class="form__input" type="password" name="mdp" value="" id="mdp" placeholder="mot de passe">
+                        </div>
+                        <div>
+                            <input type="submit" value="Connexion">
+                            <c:if test="${requestScope.La_connexion == false }">
+								<p>La connexion est invalide</p>
+							</c:if>
+                            <div>
+                                <input class="form__checkbox" type="checkbox" name="se-souvenir-de-moi" id="se-souvenir-de-moi">
+                                <label for="se-souvenir-de-moi">Se souvenir de moi</label>
+                                <a href="#">Mot de passe oublié</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <a href="${pageContext.request.contextPath}/creer/utilisateur">
+					<input type="submit" name="creercompte" value="Créer un compte">
+				</a>
+            </main>
+        </div>
 	</body>
 </html>
