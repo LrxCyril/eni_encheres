@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bll.UtilisateurManager;
+import fr.eni.ecole.encheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class SeConnecterServlet
@@ -19,12 +20,12 @@ import fr.eni.ecole.encheres.bll.UtilisateurManager;
 @WebServlet("/connect")
 public class SeConnecterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	Utilisateur utilisateurConnecte;
     /**
      * Default constructor. 
      */
     public SeConnecterServlet() {
-        
+
     }
 
 	/**
@@ -54,25 +55,21 @@ public class SeConnecterServlet extends HttpServlet {
 		}
 		//verification de l'existance de l'utilisateur
 		try {
-			connecte = manager.verificationUtilisateur(identifiant, mdp);
-		
+			utilisateurConnecte = manager.verificationUtilisateur(identifiant, mdp);
 		} catch (BLLException e) {
-		// --- Si la connexion échoue, redirige vers la page de connexion
-			if(!connecte ) {
-				
+		// --- Si la connexion échoue, l'utilisateur n'a pas été trouve
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 				rd.forward(request, response);
-				}
 		}
 		// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
-		if(connecte) {
-			HttpSession session = request.getSession();
+		  	HttpSession session = request.getSession();
+			session.setAttribute("utilisateurActif", utilisateurConnecte);
 			session.setAttribute("session_active", true);
 			session.setAttribute("profilRecherche",identifiant);
 			session.setAttribute("login",identifiant);
 			request.setAttribute("La_connexion", connecte);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
 			rd.forward(request, response);
-		}
+
 	}
 }

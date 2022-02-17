@@ -17,4 +17,5 @@ public interface UtilisateurDAO {
 	String VerifIdentifiantExistant(String email,String pseudo) throws DALException ;
 	void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException;
 	Utilisateur lireUtilisateurPseudo(String pseudo) throws DALException;
+	void MajUtilisateur(Utilisateur utilisateur)throws DALException;
 }

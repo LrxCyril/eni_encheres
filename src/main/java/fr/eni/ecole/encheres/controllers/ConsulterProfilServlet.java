@@ -38,7 +38,8 @@ public class ConsulterProfilServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String loginConnecte=(String) session.getAttribute("login");
 		String profilRecherche=(String)session.getAttribute("profilRecherche");
-
+		System.out.println((String)session.getAttribute("profilRecherche"));
+		System.out.println((String)session.getAttribute("login"));
 		try {
 			profilUtilisateur=manager.lectureUtilisateur(profilRecherche);
 		} catch (BLLException e) {
@@ -60,7 +61,7 @@ public class ConsulterProfilServlet extends HttpServlet {
 			request.setAttribute("modif", true);
 		};
 		//RAZ profil Recherche
-		session.setAttribute("profilRecherche","");
+		//session.setAttribute("profilRecherche","");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/affichage_profil.jsp");
 		rd.forward(request, response);
 	}

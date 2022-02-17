@@ -39,17 +39,8 @@ public class CreerUtilisateurServlet extends HttpServlet {
 	
 		if(modif!=null) {
 			HttpSession session = request.getSession();
-			String loginConnecte=(String) session.getAttribute("login");
-			try {
-//todo 
-//fonctionner avec l'instance utilisateur de session pour ne pas refaire la requete en base
-				//Lecture des informations utilisateurs en base
-				profilUtilisateur=manager.lectureUtilisateur(loginConnecte);
-				System.out.println(profilUtilisateur.toString());
-			} catch (BLLException e) {
-				request.setAttribute("erreurIhm", true);
-				e.printStackTrace();
-			}
+		
+			profilUtilisateur=(Utilisateur) session.getAttribute("utilisateurActif");
 			//Alimentation des attributs de la page profil
 			request.setAttribute("pseudoLu", profilUtilisateur.getPseudo());
 			request.setAttribute("nomLu",  profilUtilisateur.getNom());
@@ -78,57 +69,62 @@ public class CreerUtilisateurServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
+		//creation d'un utilisateur avec les données mise à jour
+		profilUtilisateur=new Utilisateur();
+		profilUtilisateur.setPseudo(request.getParameter("pseudo"));
+		profilUtilisateur.setNom(request.getParameter("nom"));
+		profilUtilisateur.setPrenom(request.getParameter("prenom"));
+		profilUtilisateur.setEmail(request.getParameter("email"));
+		profilUtilisateur.setTelephone(request.getParameter("telephone"));
+		profilUtilisateur.setVille(request.getParameter("ville"));
+		profilUtilisateur.setRue(request.getParameter("rue"));
+		profilUtilisateur.setCodePostal(request.getParameter("codePostal"));
+		profilUtilisateur.setNo_utilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNo_utilisateur());
+		profilUtilisateur.setCredit(((Utilisateur) session.getAttribute("utilisateurActif")).getCredit());
+		profilUtilisateur.setAdministrateur(((Utilisateur) session.getAttribute("utilisateurActif")).isAdministrateur());
+		profilUtilisateur.setMotDePasse(((Utilisateur) session.getAttribute("utilisateurActif")).getMotDePasse());
+		//mise à jour de l'utilisateur de session
+		session.setAttribute("utilisateurActif",profilUtilisateur);
 
-		//récupérer les paramètres de requêtes
-		String pseudo = request.getParameter("pseudo");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		String email = request.getParameter("email");
-		String telephone = request.getParameter("telephone");
-		String rue = request.getParameter("rue");
-		String codePostal = request.getParameter("codePostal");
-		String ville = request.getParameter("ville");
 		String motDePasse = request.getParameter("motDePasse");
 		String confirmMotDePasse = request.getParameter("confirmMotDePasse");
 		String creation = request.getParameter("creer");
 		String modification = request.getParameter("modifier");
-		
-		System.out.println(creation);
-		System.out.println(modification);
 
-		//TODO gérer un objet erreur
 		//vérfier si les champs sont vides 
-		if (pseudo.isEmpty()) {
+		if (profilUtilisateur.getPseudo().isEmpty()) {
 			request.setAttribute("pseudo", "vide");
 			doGet(request, response);
 		}
 		
-		if (nom.isEmpty()) {
+		if (profilUtilisateur.getNom().isEmpty()) {
 			request.setAttribute("nom", "vide");
 			doGet(request, response);
 		}
 		
-		if (prenom.isEmpty()) {
+		if (profilUtilisateur.getPrenom().isEmpty()) {
 			request.setAttribute("prenom", "vide");
 			doGet(request, response);
 		}
 		
-		if (email.isEmpty()) {
+		if (profilUtilisateur.getEmail().isEmpty()) {
 			request.setAttribute("email", "vide");
 			doGet(request, response);
 		}
 		
-		if (rue.isEmpty()) {
+		if (profilUtilisateur.getRue().isEmpty()) {
 			request.setAttribute("rue", "vide");
 			doGet(request, response);
 		}
 		
-		if (codePostal.isEmpty()) {
+		if (profilUtilisateur.getCodePostal().isEmpty()) {
 			request.setAttribute("codePostal", "vide");
 			doGet(request, response);
 		}
 		
-		if (ville.isEmpty()) {
+		if (profilUtilisateur.getVille().isEmpty()) {
 			request.setAttribute("ville", "vide");
 			doGet(request, response);
 		}
@@ -149,16 +145,18 @@ public class CreerUtilisateurServlet extends HttpServlet {
 			doGet(request, response);
 		}
 		
+		
 		if (creation!=null) {
 			try {
-				manager.insererUtilisateur(pseudo, nom, prenom, email, motDePasse, rue, codePostal, ville, 0);
+				manager.insererUtilisateur((Utilisateur) session.getAttribute("utilisateurActif"));
+				//manager.insererUtilisateur(pseudo, nom, prenom,telephone, email, motDePasse, rue, codePostal, ville, 0);
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}
 		}
 		if (modification!=null) {
 			try {
-				manager.majUtilisateur(pseudo, nom, prenom, email, motDePasse, rue, codePostal, ville, 0);
+				manager.majUtilisateur((Utilisateur) session.getAttribute("utilisateurActif"));
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}
