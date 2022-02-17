@@ -25,7 +25,7 @@
 		<div class="container">
 	            <header class="header">
 	                <div class="header__logo">
-	                    <a class="header__main-link" href="${pageContext.request.contextPath}/home" target="_blank">
+	                    <a class="header__main-link" href="${pageContext.request.contextPath}/home">
 	                        <h1 class="header__main-title">ENI - Enchères</h1>
 	                    </a>
 	                </div>

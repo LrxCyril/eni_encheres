@@ -21,7 +21,7 @@
         <div class="container">
             <header class="header">
                 <div class="header__logo">
-                    <a class="header__main-link" href="#"> <!-- TODO : Retour à l'accueil | doit rester dans l'espace connecté quand l'utilisateur est identifié -->
+                    <a class="header__main-link" href="${pageContext.request.contextPath}/home"> <!-- TODO : Retour à l'accueil | doit rester dans l'espace connecté quand l'utilisateur est identifié -->
                         <h1 class="header__main-title">ENI - Enchères</h1>
                     </a>
                 </div>
