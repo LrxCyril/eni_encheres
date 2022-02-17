@@ -34,49 +34,49 @@
                 	</c:if>
                     <legend class="form__legend">Mon profil</legend>
                     <label class="form__label" for="pseudo">Pseudo :</label>
-                    <input class="form__input" type="text" name="pseudo" id="pseudo" placeholder="pseudo" value="${requestScope.pseudoLu}" >
+                    <input class="form__input" type="text" name="pseudo" id="pseudo" placeholder="pseudo" value="${pseudoLu}" >
                     <c:if test="${not empty requestScope.pseudo}">
                     	<p class="form__error">champs obligatoire</p>
                     </c:if>
                     <label for="nom">Nom :</label>
-                    <input class="form__input" type="text" name="nom" id="nom" placeholder="nom" value="${requestScope.nomLu}">
+                    <input class="form__input" type="text" name="nom" id="nom" placeholder="nom" value="${nomLu}">
                     <c:if test="${not empty requestScope.nom}">
                     	<p class="form__error">champs obligatoire</p>
                     </c:if>
                     <label for="prenom">Prénom :</label>
-                    <input class="form__input" type="text" name="prenom" id="prenom" placeholder="prénom" value="${requestScope.prenomLu}">
+                    <input class="form__input" type="text" name="prenom" id="prenom" placeholder="prénom" value="${prenomLu}">
                     <c:if test="${not empty requestScope.prenom}">
                     	<p class="form__error">champs obligatoire</p>
                     </c:if>
                     <label for="email">Email :</label>
-                    <input class="form__input" type="text" name="email" id="email" placeholder="email" value="${requestScope.emailLu}">
+                    <input class="form__input" type="text" name="email" id="email" placeholder="email" value="${emailLu}">
                     <c:if test="${not empty requestScope.email}">
                     	<p class="form__error">champs obligatoire</p>
                     </c:if>
                     <label for="telephone">Téléphone :</label>
-                    <input class="form__input" type="text" name="telephone" id="telephone" placeholder="numéro de téléphone" value="${requestScope.telLu}">
+                    <input class="form__input" type="text" name="telephone" id="telephone" placeholder="numéro de téléphone" value="${telLu}">
                     <label for="rue">Rue :</label>
                     <input class="form__input" type="text" name="rue" id="rue" placeholder="N°, rue" value="${requestScope.rueLu}">
                     <c:if test="${not empty requestScope.rue}">
                     	<p class="form__error">champs obligatoire</p>
                     </c:if>
                     <label for="code_postal">Code postal :</label>
-                    <input class="form__input" type="text" name="codePostal" id="codePostal" placeholder="code postal" value="${requestScope.cPLu}">
+                    <input class="form__input" type="text" name="codePostal" id="codePostal" placeholder="code postal" value="${cPLu}">
 					<c:if test="">
 						<p class="form__error">champs obligatoire</p>
 					</c:if>                    
                     <label for="ville">Ville :</label>
-                    <input class="form__input" type="text" name="ville" id="ville" placeholder="ville" value="${requestScope.villeLu}">
+                    <input class="form__input" type="text" name="ville" id="ville" placeholder="ville" value="${villeLu}">
                    	<c:if test="${not empty requestScope.ville}">
                    		<p class="form__error">champs oboligatoire</p>
                    	</c:if>
                     <label for="motDePasse">Mot de passe :</label>
-                    <input class="form__input" type="password" name="motDePasse" id="motDePasse" placeholder="mot de passe" value="${requestScope.mdpLu}">
+                    <input class="form__input" type="password" name="motDePasse" id="motDePasse" placeholder="mot de passe" value="${mdpLu}">
                     <c:if test="${not empty requestScope.motDePasse}">
                     	<p class="form__error">champs obligatoire</p>
                     </c:if>
                     <label for="ConfirmMotDePasse">Confirmation du mot de passe :</label>
-                    <input class="form__input" type="password" name="confirmMotDePasse" id="confirmMotDePasse" value="${requestScope.mdpLu}" >
+                    <input class="form__input" type="password" name="confirmMotDePasse" id="confirmMotDePasse" value="${mdpLu}" >
                     <c:if test="${not empty requestScope.confirMotDePasse}">
                     	<p class="form__error">champs obligatoire</p>
                     </c:if>

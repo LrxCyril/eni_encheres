@@ -1,4 +1,4 @@
-package fr.eni.ecole.encheres.controllers;
+ package fr.eni.ecole.encheres.controllers;
 
 import java.io.IOException;
 
@@ -34,31 +34,13 @@ public class CreerUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//Alimentation de la page mon_profil en mode modification
-		String modif = (String)request.getParameter("modif");
-	
-		if(modif!=null) {
-			HttpSession session = request.getSession();
-		
-			profilUtilisateur=(Utilisateur) session.getAttribute("utilisateurActif");
-			//Alimentation des attributs de la page profil
-			request.setAttribute("pseudoLu", profilUtilisateur.getPseudo());
-			request.setAttribute("nomLu",  profilUtilisateur.getNom());
-			request.setAttribute("prenomLu",  profilUtilisateur.getPrenom());
-			request.setAttribute("emailLu",  profilUtilisateur.getEmail());
-			request.setAttribute("telLu",  profilUtilisateur.getTelephone());
-			request.setAttribute("rueLu",  profilUtilisateur.getRue());
-			request.setAttribute("cPLu",  profilUtilisateur.getCodePostal());
-			request.setAttribute("villeLu",  profilUtilisateur.getVille());
-			request.setAttribute("mdpLu",  profilUtilisateur.getMotDePasse());
-			//modification du bouton creer profil en modifier profil
+		String modif = (String)request.getAttribute("modif");
+		if (modif!=null) {
 			request.setAttribute("creer",  (boolean) false);
-		}else {
-			//modification du bouton modifier profil en creer profil
-			request.setAttribute("creer",  (boolean) true);
+		}else {		request.setAttribute("creer",  (boolean) true);
 		}
 
-		//Appel de la page profil
+		//Appel de la page mon-profil
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/mon_profil.jsp");
 		if (rd != null) {
 			rd.forward(request, response);
@@ -81,11 +63,12 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		profilUtilisateur.setVille(request.getParameter("ville"));
 		profilUtilisateur.setRue(request.getParameter("rue"));
 		profilUtilisateur.setCodePostal(request.getParameter("codePostal"));
+		profilUtilisateur.setMotDePasse(request.getParameter("motDePasse"));
 		if(session.getAttribute("utilisateurActif")!=null) {
 			profilUtilisateur.setNo_utilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNo_utilisateur());
 			profilUtilisateur.setCredit(((Utilisateur) session.getAttribute("utilisateurActif")).getCredit());
 			profilUtilisateur.setAdministrateur(((Utilisateur) session.getAttribute("utilisateurActif")).isAdministrateur());
-			profilUtilisateur.setMotDePasse(((Utilisateur) session.getAttribute("utilisateurActif")).getMotDePasse());
+			
 		}
 		//mise à jour de l'utilisateur de session
 		session.setAttribute("utilisateurActif",profilUtilisateur);
