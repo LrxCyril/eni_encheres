@@ -23,11 +23,13 @@
                    <li><p>rue : ${requestScope.rue}</p></li>
                    <li><p>codepostal : ${requestScope.codepostal}</p></li>
                    <li><p>ville : ${requestScope.ville}</p></li>
+                  
 				</ul>
 					<c:if test="${requestScope.modif}">
-						<a href="${pageContext.request.contextPath}/creer/utilisateur">
-	                        <input type="submit" name="modifier" value="Modifier">
-	                    </a>
+						<form action="${pageContext.request.contextPath}/creer/utilisateur" method="get">
+							 <input type="hidden" name="modif" value="ok">
+							 <input type="submit" name="modifier" value="Modifier">
+						</form>
                     </c:if>
         </main>
     </body>

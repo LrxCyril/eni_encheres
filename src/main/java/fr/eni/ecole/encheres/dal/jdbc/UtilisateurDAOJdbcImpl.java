@@ -16,9 +16,9 @@ import fr.eni.ecole.encheres.dal.UtilisateurDAO;
  */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	private static final String SQL_SELECT_NOM = "SELECT nom FROM UTILISATEURS WHERE pseudo=? or email=?";
-	private static final String SQL_SELECT_IDENTIFIANT = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=? and mot_de_passe=?";
-	private static final String SQL_SELECT_PSEUDO = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=?";
-	private static final String SQL_INSERT_UTILISATEURS = "INSERT INTO UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?)";
+	private static final String SQL_SELECT_IDENTIFIANT = "SELECT no_utilisateur,pseudo,nom,prenom,telephone,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=? and mot_de_passe=?";
+	private static final String SQL_SELECT_PSEUDO = "SELECT no_utilisateur,pseudo,nom,prenom,telephone,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=?";
+	private static final String SQL_INSERT_UTILISATEURS = "INSERT INTO UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur,telephone) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	
 	/**
@@ -60,6 +60,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		utilisateurConnecte.setEmail(rs.getString("email"));
 		utilisateurConnecte.setMotDePasse(rs.getString("mot_de_passe"));
 		utilisateurConnecte.setRue(rs.getString("rue"));
+		utilisateurConnecte.setTelephone(rs.getString("telephone"));
 		utilisateurConnecte.setCodePostal(rs.getString("code_postal"));
 		utilisateurConnecte.setVille(rs.getString("ville"));
 		utilisateurConnecte.setCredit(rs.getInt("credit"));
@@ -125,6 +126,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		} else { 
 			ordre.setInt(10, 0);
 		}
+		ordre.setString(11,nouvelUtilisateur.getTelephone());
 		//--- 3- Exécuter la requête
 		ordre.executeUpdate();
 		} catch (SQLException sqle){

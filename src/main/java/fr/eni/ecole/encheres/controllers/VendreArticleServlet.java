@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AfficherListesEncheresServlet
+ * Servlet implementation class VendreArticleServlet
  */
-@WebServlet("/afficher/encheres")
-public class AfficherListesEncheresServlet extends HttpServlet {
+@WebServlet("/vendre/article")
+public class VendreArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AfficherListesEncheresServlet() {
+    public VendreArticleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class AfficherListesEncheresServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vendre_article.jsp");
 		rd.forward(request, response);
 	}
 
