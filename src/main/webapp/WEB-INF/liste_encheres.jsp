@@ -20,7 +20,7 @@
 						
 						<c:if test="${sessionScope.session_active}">
 							<a href="./afficher/encheres">Enchères</a>
-							<a href="./#">Vendre un article</a>
+							<a href="./vendre/article">Vendre un article</a>
 							<a href="./consulter/profil">Mon profil</a>
 			            	<a href="./deconnect">Déconnexion</a>	
 			            </c:if>
