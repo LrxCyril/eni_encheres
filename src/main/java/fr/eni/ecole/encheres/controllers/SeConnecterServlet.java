@@ -31,9 +31,8 @@ public class SeConnecterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
+		HttpSession session = request.getSession();
+		session.setAttribute("session_active", false);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 		rd.forward(request, response);
 		
@@ -43,9 +42,6 @@ public class SeConnecterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
 		UtilisateurManager manager= new UtilisateurManager();
 		boolean connecte = false;
 		request.setAttribute("La_connexion", connecte);
@@ -72,7 +68,8 @@ public class SeConnecterServlet extends HttpServlet {
 		if(connecte) {
 			HttpSession session = request.getSession();
 			session.setAttribute("session_active", true);
-			//TODO
+			session.setAttribute("profilRecherche",identifiant);
+			session.setAttribute("login",identifiant);
 			request.setAttribute("La_connexion", connecte);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
 			rd.forward(request, response);

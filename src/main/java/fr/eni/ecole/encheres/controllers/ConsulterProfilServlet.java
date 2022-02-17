@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bll.UtilisateurManager;
@@ -33,10 +34,13 @@ public class ConsulterProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String pseudo="slo";
+		//recuperation de la session
+		HttpSession session = request.getSession();
+		String loginConnecte=(String) session.getAttribute("login");
+		String profilRecherche=(String)session.getAttribute("profilRecherche");
+
 		try {
-			profilUtilisateur=manager.lectureUtilisateur(pseudo);
+			profilUtilisateur=manager.lectureUtilisateur(profilRecherche);
 		} catch (BLLException e) {
 			request.setAttribute("erreurIhm", true);
 			e.printStackTrace();
@@ -50,6 +54,13 @@ public class ConsulterProfilServlet extends HttpServlet {
 		request.setAttribute("rue",  profilUtilisateur.getRue());
 		request.setAttribute("codepostal",  profilUtilisateur.getCodePostal());
 		request.setAttribute("ville",  profilUtilisateur.getVille());
+
+		//Afficher le bouton modif si on est connecté et qu'on souhaite afficher notre propre profil
+		if ((boolean) session.getAttribute("session_active")&&(loginConnecte.equals(profilRecherche))) {
+			request.setAttribute("modif", true);
+		};
+		//RAZ profil Recherche
+		session.setAttribute("profilRecherche","");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/affichage_profil.jsp");
 		rd.forward(request, response);
 	}
