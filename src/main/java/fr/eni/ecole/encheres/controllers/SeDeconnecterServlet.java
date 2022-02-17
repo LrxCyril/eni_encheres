@@ -14,13 +14,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class SeDeconnecter
  */
 @WebServlet("/deconnect")
-public class SeDeconnecter extends HttpServlet {
+public class SeDeconnecterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SeDeconnecter() {
+    public SeDeconnecterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
