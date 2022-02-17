@@ -17,20 +17,11 @@
 				 		<c:if test="${ not sessionScope.session_active}">
 							<a href="./connect">S'inscrire / Se connecter</a>
 						</c:if>
-					
-						<c:if test="${sessionScope.session_active}">
-							<a href="./#">Enchères</a>
-						</c:if>
 						
 						<c:if test="${sessionScope.session_active}">
-							<a href="./#">Vendre un article</a>
-						</c:if>
-					
-						<c:if test="${sessionScope.session_active}">
+							<a href="./afficher/encheres">Enchères</a>
+							<a href="./vendre/article">Vendre un article</a>
 							<a href="./consulter/profil">Mon profil</a>
-						</c:if>  
-						
-						<c:if test="${sessionScope.session_active}">
 			            	<a href="./deconnect">Déconnexion</a>	
 			            </c:if>
 					</li>	
