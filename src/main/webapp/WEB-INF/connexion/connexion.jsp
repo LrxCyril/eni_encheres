@@ -10,9 +10,8 @@
 		<meta charset="UTF-8">
 		
 		<!-- liens avec le CSS -->
-		<link rel="stylesheet" href="../css/reset.css">
-	    <link rel="stylesheet" href="../css/style.css">
-	    <link rel="stylesheet" href="../fontawesome-free-5.15.4-web/css/all.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/reset.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
 	    
 	    <!-- import ddes fonts depuis Google fonts -->
 	    <link rel="preconnect" href="https://fonts.googleapis.com">

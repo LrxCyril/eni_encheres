@@ -7,9 +7,8 @@
     <head>
         <meta charset="UTF-8">
 
-        <link rel="stylesheet" href="../css/reset.css">
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../fontawesome-free-5.15.4-web/css/all.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/reset.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,13 +30,21 @@
                             <c:if test="${ not sessionScope.session_active}">
                                 <a class="header__nav-link" href="${pageContext.request.contextPath}/connect">Se connecter | S'inscrire</a>
                             </c:if>
-                            <c:if test="${sessionScope.session_active}">
-                                <a class="header__nav-link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
-                                <a class="header__nav-link" href="${pageContext.request.contextPath}/vendre/article">Vendre un article</a>
-                                <a class="header__nav-link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
-                                <a class="header__nav-link" href="${pageContext.request.contextPath}/deconnect">Déconnexion</a>	
-                            </c:if>
-                        </li>	
+                        </li>
+                        <c:if test="${sessionScope.session_active}">
+	                        <li>
+	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
+	                        </li>
+	                        <li>
+	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/vendre/article">Vendre un article</a>
+	                        </li>
+	                        <li>
+	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
+	                        </li>
+	                        <li>
+	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/deconnect">Déconnexion</a>
+	                        </li>	
+                        </c:if>
                     </ul>
                 </nav>
             </header>
