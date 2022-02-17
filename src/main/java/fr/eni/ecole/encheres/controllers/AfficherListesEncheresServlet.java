@@ -29,7 +29,7 @@ public class AfficherListesEncheresServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/liste_encheres");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
 		rd.forward(request, response);
 	}
 
