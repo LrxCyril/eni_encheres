@@ -61,7 +61,6 @@ public class ConsulterProfilServlet extends HttpServlet {
 			request.setAttribute("modif", true);
 		};
 		//RAZ profil Recherche
-		//session.setAttribute("profilRecherche","");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/affichage_profil.jsp");
 		rd.forward(request, response);
 	}

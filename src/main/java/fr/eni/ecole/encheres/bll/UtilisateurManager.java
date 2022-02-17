@@ -67,7 +67,11 @@ public class UtilisateurManager {
 	 * @return
 	 * @throws BLLException
 	 */
-	public boolean existanceIdentifiant(String pseudo, String email) throws BLLException {
+	
+	/*
+	 * public boolean existanceIdentifiant(String pseudo, String email) throws BLLException {
+	 */
+	/*
 		// verifier si l'identifiant ou pseudo existe en base
 		boolean exist = false;
 		try {
@@ -81,43 +85,7 @@ public class UtilisateurManager {
 		}
 		return exist;
 	}
-
-	/**
-	 * Construire un utilisateur et l'inserer en base
-	 * 
-	 * @param pseudo
-	 * @param nom
-	 * @param prenom
-	 * @param email
-	 * @param motDePasse
-	 * @param rue
-	 * @param codePostal
-	 * @param ville
-	 * @param Credit
-	 * @throws BLLException
-	 */
-	public void insererUtilisateur(String pseudo, String nom, String prenom, String telephone, String email, String motDePasse,
-		String rue, String codePostal, String ville, int Credit) throws BLLException {
-		Utilisateur nouvelUtilisateur = new Utilisateur();
-		// construire un utilisateur
-		nouvelUtilisateur.setPseudo(pseudo);
-		nouvelUtilisateur.setNom(nom);
-		nouvelUtilisateur.setPrenom(prenom);
-		nouvelUtilisateur.setTelephone(telephone);
-		nouvelUtilisateur.setEmail(email);
-		nouvelUtilisateur.setMotDePasse(motDePasse);
-		nouvelUtilisateur.setRue(rue);
-		nouvelUtilisateur.setCodePostal(codePostal);
-		nouvelUtilisateur.setVille(ville);
-		nouvelUtilisateur.setCredit(Credit + 100);
-		// inserer l'utilisateur en base
-		try {
-			utilisateurDAO.InsertUtilisateur(nouvelUtilisateur);
-		} catch (DALException e) {
-			// --- Levée d'une exception quand l'email n'est pas reconnu
-			throw new BLLException("Erreur lors de l'insertion!");
-		}
-	}
+*/
 
 	public void insererUtilisateur(Utilisateur utilisateur) throws BLLException {
 		// construire un utilisateur
@@ -127,7 +95,7 @@ public class UtilisateurManager {
 			utilisateurDAO.InsertUtilisateur(utilisateur);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
-			throw new BLLException("Erreur lors de l'insertion!");
+			throw new BLLException("Erreur lors de l'insertion utilisateur existant!");
 		}
 		
 	}

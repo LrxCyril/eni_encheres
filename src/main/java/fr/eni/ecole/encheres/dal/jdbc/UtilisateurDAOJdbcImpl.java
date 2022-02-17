@@ -137,25 +137,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			throw new DALException("Insert invalide !");
 	}
 	}
-/*
-	private void donneesAModifier(Utilisateur nouvelUtilisateur, PreparedStatement ordre) throws SQLException {
-		ordre.setString(1,nouvelUtilisateur.getPseudo());
-		ordre.setString(2,nouvelUtilisateur.getNom());
-		ordre.setString(3,nouvelUtilisateur.getPrenom());
-		ordre.setString(4,nouvelUtilisateur.getEmail());
-		ordre.setString(5,nouvelUtilisateur.getRue());
-		ordre.setString(6,nouvelUtilisateur.getCodePostal());
-		ordre.setString(7,nouvelUtilisateur.getVille());
-		ordre.setString(8,nouvelUtilisateur.getMotDePasse());
-		ordre.setInt(9,nouvelUtilisateur.getCredit());
-		if(nouvelUtilisateur.isAdministrateur()) {
-			ordre.setInt(10, 1);
-		} else { 
-			ordre.setInt(10, 0);
-		}
-		ordre.setString(11,nouvelUtilisateur.getTelephone());
-		//--- 3- Exécuter la requête
-	}*/
+
 
 	@Override
 	public Utilisateur lireUtilisateurPseudo(String pseudo) throws DALException {
@@ -177,10 +159,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			throw new DALException("Impossible de lire la connexion");
 		}
 		return utilisateurConnecte;
-
-
 	}
-
 	@Override
 	public void MajUtilisateur(Utilisateur utilisateur) throws DALException {
 		//Recherche de l'utilisateur selon son identifiant dans la Base de donnée
@@ -215,5 +194,4 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			throw new DALException("Impossible de mettre à jour la ligne");
 		}
 	}
-	
 }

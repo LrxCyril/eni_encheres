@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="../css/reset.css">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../fontawesome-free-5.15.4-web/css/all.css">
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
@@ -30,6 +29,9 @@
             <h2 class="main__title">Mon profil</h2>
             <form class="form__container" action="${pageContext.request.contextPath}/creer/utilisateur" method="post">
                 <fieldset class="form__fieldset">
+                	<c:if test="${requestScope.userExist}">
+                	<h3>Cet utilisateur existe déja</h3>
+                	</c:if>
                     <legend class="form__legend">Mon profil</legend>
                     <label class="form__label" for="pseudo">Pseudo :</label>
                     <input class="form__input" type="text" name="pseudo" id="pseudo" placeholder="pseudo" value="${requestScope.pseudoLu}" >

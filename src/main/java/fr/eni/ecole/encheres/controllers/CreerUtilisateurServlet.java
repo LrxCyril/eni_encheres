@@ -81,10 +81,12 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		profilUtilisateur.setVille(request.getParameter("ville"));
 		profilUtilisateur.setRue(request.getParameter("rue"));
 		profilUtilisateur.setCodePostal(request.getParameter("codePostal"));
-		profilUtilisateur.setNo_utilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNo_utilisateur());
-		profilUtilisateur.setCredit(((Utilisateur) session.getAttribute("utilisateurActif")).getCredit());
-		profilUtilisateur.setAdministrateur(((Utilisateur) session.getAttribute("utilisateurActif")).isAdministrateur());
-		profilUtilisateur.setMotDePasse(((Utilisateur) session.getAttribute("utilisateurActif")).getMotDePasse());
+		if(session.getAttribute("utilisateurActif")!=null) {
+			profilUtilisateur.setNo_utilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNo_utilisateur());
+			profilUtilisateur.setCredit(((Utilisateur) session.getAttribute("utilisateurActif")).getCredit());
+			profilUtilisateur.setAdministrateur(((Utilisateur) session.getAttribute("utilisateurActif")).isAdministrateur());
+			profilUtilisateur.setMotDePasse(((Utilisateur) session.getAttribute("utilisateurActif")).getMotDePasse());
+		}
 		//mise à jour de l'utilisateur de session
 		session.setAttribute("utilisateurActif",profilUtilisateur);
 
@@ -151,6 +153,10 @@ public class CreerUtilisateurServlet extends HttpServlet {
 				manager.insererUtilisateur((Utilisateur) session.getAttribute("utilisateurActif"));
 				//manager.insererUtilisateur(pseudo, nom, prenom,telephone, email, motDePasse, rue, codePostal, ville, 0);
 			} catch (BLLException e) {
+				//l'utilsateur existe le mentionner et rediriger
+				request.setAttribute("userExist", true);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/mon_profil.jsp");
+				rd.forward(request, response);
 				e.printStackTrace();
 			}
 		}
