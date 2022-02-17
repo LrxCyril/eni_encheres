@@ -1,5 +1,6 @@
 package fr.eni.ecole.encheres.dal;
 
+import fr.eni.ecole.encheres.dal.jdbc.ArticleDAOJdbcImpl;
 import fr.eni.ecole.encheres.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 /**
@@ -16,6 +17,10 @@ public class DAOFactory {
 	 */
 	public static UtilisateurDAO getUtilisateurDAO() throws DALException {
 		return new UtilisateurDAOJdbcImpl();
+	}
+	
+	public static ArticleDAO getArticleDAO() throws DALException {
+		return new ArticleDAOJdbcImpl();
 	}
 	
 }
