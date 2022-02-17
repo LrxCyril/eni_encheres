@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bll.UtilisateurManager;
@@ -23,7 +24,7 @@ public class SeConnecterServlet extends HttpServlet {
      * Default constructor. 
      */
     public SeConnecterServlet() {
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -31,6 +32,8 @@ public class SeConnecterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 		rd.forward(request, response);
 		
@@ -60,12 +63,16 @@ public class SeConnecterServlet extends HttpServlet {
 		} catch (BLLException e) {
 		// --- Si la connexion échoue, redirige vers la page de connexion
 			if(!connecte ) {
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 				rd.forward(request, response);
 				}
 		}
 		// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
 		if(connecte) {
+			HttpSession session = request.getSession();
+			session.setAttribute("session_active", true);
+			//TODO
 			request.setAttribute("La_connexion", connecte);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
 			rd.forward(request, response);
