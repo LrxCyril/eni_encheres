@@ -15,14 +15,14 @@
 				<ul>
 					<li>
 				 		<c:if test="${ not sessionScope.session_active}">
-							<a href="./connect">S'inscrire / Se connecter</a>
+							<a href="${pageContext.request.contextPath}/connect">S'inscrire / Se connecter</a>
 						</c:if>
 						
 						<c:if test="${sessionScope.session_active}">
-							<a href="./afficher/encheres">Enchères</a>
-							<a href="./vendre/article">Vendre un article</a>
-							<a href="./consulter/profil">Mon profil</a>
-			            	<a href="./deconnect">Déconnexion</a>	
+							<a href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
+							<a href="${pageContext.request.contextPath}/vendre/article">Vendre un article</a>
+							<a href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
+			            	<a href="${pageContext.request.contextPath}/deconnect">Déconnexion</a>	
 			            </c:if>
 					</li>	
 				</ul>
