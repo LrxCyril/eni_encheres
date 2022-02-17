@@ -27,7 +27,10 @@
 */
                     .header__nav-list { display: flex; }
 
-                        .header__nav-item { margin: auto 20px; }
+                        .header__nav-item {
+                        	margin: auto 20px;
+                        	list-style: none; 
+                        }
 
                             .header__nav-link {
                                 text-decoration: none;
