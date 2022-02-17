@@ -17,7 +17,7 @@ import fr.eni.ecole.encheres.dal.UtilisateurDAO;
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	private static final String SQL_SELECT_NOM = "SELECT nom FROM UTILISATEURS WHERE pseudo=? or email=?";
 	private static final String SQL_SELECT_IDENTIFIANT = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=? and mot_de_passe=?";
-	private static final String SQL_SELECT_PSEUDO = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=?";
+	private static final String SQL_SELECT_PSEUDO = "SELECT no_utilisateur,pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=?";
 	private static final String SQL_INSERT_UTILISATEURS = "INSERT INTO UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 	
@@ -144,6 +144,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_PSEUDO);
 			// ajout du paramètre à la requete(Where pseudo)
 			ordre.setString(1,pseudo.trim());
+			ordre.setString(2,pseudo.trim());
 			//Appel de la methode constuisant l'utilisateur
 			utilisateurConnecte=lireEtCreerUtilisateur(utilisateurConnecte, connexion, ordre);
 		}catch  (SQLException sqle){
