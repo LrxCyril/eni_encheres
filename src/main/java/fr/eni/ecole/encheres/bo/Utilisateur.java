@@ -219,8 +219,4 @@ public class Utilisateur {
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
-	
-	
-	
-	
 }
