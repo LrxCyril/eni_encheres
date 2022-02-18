@@ -1,6 +1,7 @@
  package fr.eni.ecole.encheres.controllers;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bll.UtilisateurManager;
 import fr.eni.ecole.encheres.bo.Utilisateur;
+import fr.eni.ecole.encheres.dal.jdbc.ConnectionProvider;
 
 /**
  * Servlet implementation class CreerUtilisateurServlet
@@ -77,59 +79,62 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		String confirmMotDePasse = request.getParameter("confirmMotDePasse");
 		String creation = request.getParameter("creer");
 		String modification = request.getParameter("modifier");
-
+		Boolean vide = false;
 		//vérfier si les champs sont vides 
 		if (profilUtilisateur.getPseudo().isEmpty()) {
 			request.setAttribute("pseudo", "vide");
-			doGet(request, response);
+			vide=true;
 		}
 		
 		if (profilUtilisateur.getNom().isEmpty()) {
 			request.setAttribute("nom", "vide");
-			doGet(request, response);
+			vide=true;
 		}
 		
 		if (profilUtilisateur.getPrenom().isEmpty()) {
 			request.setAttribute("prenom", "vide");
-			doGet(request, response);
+			vide=true;
 		}
 		
 		if (profilUtilisateur.getEmail().isEmpty()) {
 			request.setAttribute("email", "vide");
-			doGet(request, response);
+			vide=true;
 		}
 		
 		if (profilUtilisateur.getRue().isEmpty()) {
 			request.setAttribute("rue", "vide");
-			doGet(request, response);
+			vide=true;
 		}
 		
 		if (profilUtilisateur.getCodePostal().isEmpty()) {
 			request.setAttribute("codePostal", "vide");
-			doGet(request, response);
+			vide=true;
 		}
 		
 		if (profilUtilisateur.getVille().isEmpty()) {
 			request.setAttribute("ville", "vide");
-			doGet(request, response);
+			vide=true;
 		}
 		
 		if (motDePasse.isEmpty()) {
 			request.setAttribute("motDePasse", "vide");
-			doGet(request, response);
+			vide=true;
 		}
  
 		if (confirmMotDePasse.isEmpty()) {
 			request.setAttribute("confirmMotDePasse", "vide");
-			doGet(request, response);
+			vide=true;
 		}
-		
 		//comparer motDePasse et confirmMotDePasse
 		if (!motDePasse.equals(confirmMotDePasse)) {
 			request.setAttribute("motDePasseInvalide", "invalide");
-			doGet(request, response);
+			vide=true;
 		}
-		
+		//si champ vide ou erreur retourner sur la page, avertir et sortir de la fonction
+		if (vide) {
+		doGet(request, response);
+		return;
+		}
 		
 		if (creation!=null) {
 			try {

@@ -6,13 +6,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Mon Profil</title>
-</head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
+        
+        <title>ENi | Enchères | Mon profil</title>
+    </head>
     <body>
-        <header>
-            <h1>ENI-Enchères</h1>
-        </header>
+    	<div>
+    		<header class="header">
+                <div class="header__logo">
+                    <a class="header__main-link" href="index.html">
+                        <h1 class="header__main-title">ENI - Enchères</h1>
+                    </a>
+                </div>
+            </header>
         <main>
 				<ul> 
                    <li><p>Pseudo : ${requestScope.pseudo}</p></li>
@@ -35,5 +48,6 @@
 
                     </c:if>
         </main>
+    	</div>
     </body>
 </html>
