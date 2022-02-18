@@ -56,7 +56,7 @@
                     <label for="telephone">Téléphone :</label>
                     <input class="form__input" type="text" name="telephone" id="telephone" placeholder="numéro de téléphone" value="${telLu}">
                     <label for="rue">Rue :</label>
-                    <input class="form__input" type="text" name="rue" id="rue" placeholder="N°, rue" value="${requestScope.rueLu}">
+                    <input class="form__input" type="text" name="rue" id="rue" placeholder="N°, rue" value="${rueLu}">
                     <c:if test="${not empty requestScope.rue}">
                     	<p class="form__error">champs obligatoire</p>
                     </c:if>
