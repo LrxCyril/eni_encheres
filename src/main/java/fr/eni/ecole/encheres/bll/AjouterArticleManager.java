@@ -1,14 +1,17 @@
 package fr.eni.ecole.encheres.bll;
 
+import fr.eni.ecole.encheres.bo.Article;
+
 public class AjouterArticleManager {
 	
-inserartcile(artcile)
+	//creer constructeur
+		//Appeler la DAO pour construire l'instance d'ArticleJDBC
 	
-method jdbc insert article 
-
+	
+	
+	void inserartcile(Article article) {
+	
+		// Appel method jdbc insert (article) 
+		// Idem inserer utilisateur utilisateurmanager
+	}
 }
-
-faire inserer utilisateur  utilisateurmanager
-
-
-meme chose jdbc 

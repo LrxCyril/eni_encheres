@@ -5,10 +5,10 @@ import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
 
 public class AjouterArticleDAOJdbcImpl implements ArticleDAO {
-
+	//creer constate de requete d'insertion d'un article
 	@Override
 	public void InsertArticles(Article nouvelArticle) throws DALException {
-		// TODO Auto-generated method stub
+		//creer commande SQL inserer article (idem inserer utilisateur dans Utilisateur DAO JdBC Impl
 		
 	}
 
