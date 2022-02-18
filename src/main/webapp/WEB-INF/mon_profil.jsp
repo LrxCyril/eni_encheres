@@ -84,7 +84,7 @@
                    		 <input type="submit" name="creer" value="Créer">
                     </c:if>
                      <c:if test="${not requestScope.creer}">
-                   		 <input type="submit" name="modifier" value="Modifier">
+                   		 <input type="submit" name="modifier" value="Enregistrer">
                     </c:if>
                     <a href="${pageContext.request.contextPath}/connect">
                         <input type="button" name="annuler" value="Annuler">

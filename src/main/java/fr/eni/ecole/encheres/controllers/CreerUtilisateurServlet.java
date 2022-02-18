@@ -79,6 +79,7 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		String confirmMotDePasse = request.getParameter("confirmMotDePasse");
 		String creation = request.getParameter("creer");
 		String modification = request.getParameter("modifier");
+		String modification2 = (String) request.getAttribute("modif");
 		Boolean vide = false;
 		//vérfier si les champs sont vides 
 		if (profilUtilisateur.getPseudo().isEmpty()) {
@@ -132,6 +133,7 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		}
 		//si champ vide ou erreur retourner sur la page, avertir et sortir de la fonction
 		if (vide) {
+		request.setAttribute("modif","oui");
 		doGet(request, response);
 		return;
 		}
@@ -146,9 +148,11 @@ public class CreerUtilisateurServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/mon_profil.jsp");
 				rd.forward(request, response);
 				e.printStackTrace();
+				//sortie de la methode
+				return;
 			}
 		}
-		if (modification!=null) {
+		if (modification!=null ) {
 			try {
 				manager.majUtilisateur((Utilisateur) session.getAttribute("utilisateurActif"));
 			} catch (BLLException e) {
