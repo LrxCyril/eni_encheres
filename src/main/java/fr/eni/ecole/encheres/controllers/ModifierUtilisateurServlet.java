@@ -46,8 +46,12 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		//modification du bouton creer profil en modifier profil
 		session.setAttribute("creer",  (boolean) false);
 		request.setAttribute("modif","oui");
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/creer/utilisateur");
 		rd.forward(request, response);
+		//redirect fonctionne pas pbm parametre?
+		//response.sendRedirect(request.getContextPath()+"/creer/utilisateur");
+		
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
