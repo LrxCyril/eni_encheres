@@ -14,7 +14,7 @@
 			<main>
 				<h2>Nouvelle vente</h2>
 				
-					 <form action="${pageContext.request.contextPath}/creer/utilisateur" method="post">
+					 <form action="${pageContext.request.contextPath}/ajout/article" method="post">
 		                <fieldset>
 		                 
 		                    <label for="nom_article">Article :</label>
