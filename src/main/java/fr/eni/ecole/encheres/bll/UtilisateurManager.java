@@ -109,6 +109,16 @@ public class UtilisateurManager {
 		}
 		
 	}
+
+	public void supprimerUtilisateur(int noUtilisateur) throws BLLException {
+		try {
+			utilisateurDAO.SupprimerUtilisateur(noUtilisateur);
+		} catch (DALException e) {
+			// --- Levée d'une exception quand l'email n'est pas reconnu
+			throw new BLLException("Erreur lors de l'insertion!");
+		}
+		
+	}
 }
 	
 

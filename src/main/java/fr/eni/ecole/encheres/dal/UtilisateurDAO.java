@@ -18,4 +18,5 @@ public interface UtilisateurDAO {
 	void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException;
 	Utilisateur lireUtilisateurPseudo(String pseudo) throws DALException;
 	void MajUtilisateur(Utilisateur utilisateur)throws DALException;
+	void SupprimerUtilisateur(int noUtilisateur) throws DALException;
 }

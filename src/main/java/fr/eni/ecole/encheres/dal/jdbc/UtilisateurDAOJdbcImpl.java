@@ -20,7 +20,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	private static final String SQL_SELECT_PSEUDO = "SELECT no_utilisateur,pseudo,nom,prenom,telephone,email,rue,code_postal,ville,mot_de_passe,credit,administrateur FROM UTILISATEURS WHERE pseudo=? or email=?";
 	private static final String SQL_INSERT_UTILISATEURS = "INSERT INTO UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur,telephone) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo=?,nom=?,prenom=?,email=?,rue=?,code_postal=?,ville=?,mot_de_passe=?,credit=?,administrateur=?,telephone=?  WHERE  no_utilisateur=?";
-
+	private static final String SQL_DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?";
 	
 	/**
 	 * Methode permettant de recuperer un utilisateur selon son pseudo
@@ -40,6 +40,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			ordre.setString(3,motdepasse.trim());
 			//Appel de la methode constuisant l'utilisateur
 			utilisateurConnecte=lireEtCreerUtilisateur(utilisateurConnecte, connexion, ordre);
+			//5-fermeture de la connexion
 			connexion.close();
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
@@ -123,13 +124,17 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		ordre.setString(7,nouvelUtilisateur.getVille());
 		ordre.setString(8,nouvelUtilisateur.getMotDePasse());
 		ordre.setInt(9,nouvelUtilisateur.getCredit());
+
 		if(nouvelUtilisateur.isAdministrateur()) {
 			ordre.setInt(10, 1);
 		} else { 
 			ordre.setInt(10, 0);
 		}
+		System.out.println(2);
 		ordre.setString(11,nouvelUtilisateur.getTelephone());
+		System.out.println(3);
 		ordre.executeUpdate();
+		System.out.println(4);
 		//--- 5- Fermer la connexion
 		connexion.close();
 		} catch (SQLException sqle){
@@ -153,6 +158,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			ordre.setString(2,pseudo.trim());
 			//Appel de la methode constuisant l'utilisateur
 			utilisateurConnecte=lireEtCreerUtilisateur(utilisateurConnecte, connexion, ordre);
+			//5-fermeture de la connexion
 			connexion.close();
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
@@ -186,12 +192,31 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			//--- 3- Exécuter la requête
 			ordre.setInt(12,utilisateur.getNo_utilisateur());	
 			ordre.executeUpdate();
-
+			//5-fermeture de la connexion
 			connexion.close();
 
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de mettre à jour la ligne");
+		}
+	}
+
+	@Override
+	public void SupprimerUtilisateur(int noUtilisateur) throws DALException {
+		try {
+			// 1- Obtenir une connexion
+			Connection connexion = ConnectionProvider.getConnection();
+			// 2- Contruire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_DELETE_UTILISATEUR);
+			// 3- Preparation de l'ordre
+			ordre.setInt(1,noUtilisateur);
+			// 4- Execution de la requete
+			ordre.executeUpdate();
+			//5-fermeture de la connexion
+			connexion.close();
+			}catch  (SQLException sqle){
+			//Levé de l'exception l'utilisateur n'existe pas
+			throw new DALException("Impossible de supprimer la ligne");
 		}
 	}
 }
