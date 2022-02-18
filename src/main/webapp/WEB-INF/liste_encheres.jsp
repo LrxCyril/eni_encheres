@@ -32,16 +32,16 @@
                             </c:if>
                         </li>
                         <c:if test="${sessionScope.session_active}">
-	                        <li>
+	                        <li class="header__nav-item">
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
 	                        </li>
-	                        <li>
+	                        <li class="header__nav-item">
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/vendre/article">Vendre un article</a>
 	                        </li>
-	                        <li>
+	                        <li class="header__nav-item">
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
 	                        </li>
-	                        <li>
+	                        <li class="header__nav-item">
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/deconnect">Déconnexion</a>
 	                        </li>	
                         </c:if>
@@ -144,6 +144,7 @@
                     </div>
                 </div> 
             </main>
+            <%@ include file="/WEB-INF/fragments/footer.jspf"%>
         </div>
     </body>
 </html>

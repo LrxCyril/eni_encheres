@@ -43,9 +43,9 @@
                             <input class="form__input" type="password" name="mdp" value="" id="mdp" placeholder="mot de passe">
                         </div>
                         <div>
-                            <input type="submit" value="Connexion">
+                            <input class="form__submit" type="submit" value="Connexion">
                             <c:if test="${requestScope.La_connexion == false }">
-								<p>La connexion est invalide</p>
+								<p class="form__message">La connexion est invalide</p>
 							</c:if>
                             <div>
                                 <input class="form__checkbox" type="checkbox" name="se-souvenir-de-moi" id="se-souvenir-de-moi">
@@ -56,9 +56,10 @@
                     </form>
                 </div>
                 <a href="${pageContext.request.contextPath}/creer/utilisateur">
-					<input type="submit" name="creercompte" value="Créer un compte">
+					<input class="form__submit" type="submit" name="creercompte" value="Créer un compte">
 				</a>
             </main>
+            <%@ include file="/WEB-INF/fragments/footer.jspf"%>
         </div>
 	</body>
 </html>
