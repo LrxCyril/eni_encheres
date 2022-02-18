@@ -18,4 +18,6 @@ public class DAOFactory {
 		return new UtilisateurDAOJdbcImpl();
 	}
 	
+	//ajouter la factory permettant de creer l'instance de ArticleDAOJdbcImpl
+	
 }

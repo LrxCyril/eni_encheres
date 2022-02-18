@@ -1,6 +1,7 @@
 package fr.eni.ecole.encheres.controllers;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,8 +19,7 @@ import fr.eni.ecole.encheres.bo.Article;
 @WebServlet("/ajout/article")
 public class AjouterArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	private Article ajoutArticle;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,12 +42,13 @@ public class AjouterArticleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Création d'un article avec les données mise à jour
-			ajoutArticle = new Article();
+			Article ajoutArticle = new Article();
 			
 			ajoutArticle.setNom_article(request.getParameter("nom_article"));
-			ajoutArticle.setNo_article(request.getParameter("no_article"));
+			ajoutArticle.setNo_article(Integer.parseInt(request.getParameter("no_article")));
 			ajoutArticle.setDescription(request.getParameter("description"));
-			ajoutArticle.setDate_debut_encheres(request.getParameter())
+			// pour convertire une date: LocalDate.of(0, null, 0)
+			//ajoutArticle.setDate_debut_encheres( request.getParameter("date_debut_encheres"));
 		//récupérer les paramètres de requêtes
 			
 			String nomArticle = request.getParameter("nom_article");
