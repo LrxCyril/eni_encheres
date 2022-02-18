@@ -29,9 +29,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	public Utilisateur VerifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException {
 		Utilisateur utilisateurConnecte= new Utilisateur();
 		//Recherche de l'utilisateur selon son identifiant dans la Base de donnée
-		try {
-			// 1- Obtenir une connexion
-			Connection connexion = ConnectionProvider.getConnection();
+		// 1- Obtenir une connexion
+		try(Connection connexion = ConnectionProvider.getConnection();){
 			// 2- Contruire la requete
 			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_IDENTIFIANT);
 			// ajout du paramètre à la requete(Where identifiant)
@@ -40,8 +39,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			ordre.setString(3,motdepasse.trim());
 			//Appel de la methode constuisant l'utilisateur
 			utilisateurConnecte=lireEtCreerUtilisateur(utilisateurConnecte, connexion, ordre);
-			//5-fermeture de la connexion
-			connexion.close();
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de lire la connexion");
@@ -84,9 +81,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	@Override
 	public String VerifIdentifiantExistant(String email, String pseudo) throws DALException {
 		String NomUtilisateur = null;
-		  try {
-		  	//---  1- Obtenir une connexion
-			Connection connexion = ConnectionProvider.getConnection();
+			//---  1- Obtenir une connexion
+		try(Connection connexion = ConnectionProvider.getConnection();){
 			//---  2- Contruire la requete
 			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_NOM);
 			//--- 3- Exécuter la requête
@@ -95,8 +91,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			if (rs.next()) {
 				NomUtilisateur = (rs.getString("nom"));
 			}
-			//--- 5- Fermer la connexion
-			connexion.close();
 			//--- 6- Gérer l'exception
 		} catch (SQLException sqle){
 				//Levé de l'exception pas de Nom
@@ -109,10 +103,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 
 	@Override
 	public void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException {
-		
-		try {
 		//---  1- Obtenir une connexion
-		Connection connexion = ConnectionProvider.getConnection();
+		try(Connection connexion = ConnectionProvider.getConnection();){
+		
 		//---  2- Contruire la requete
 		PreparedStatement ordre = connexion.prepareStatement(SQL_INSERT_UTILISATEURS);
 		ordre.setString(1,nouvelUtilisateur.getPseudo());
@@ -136,7 +129,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		ordre.executeUpdate();
 		System.out.println(4);
 		//--- 5- Fermer la connexion
-		connexion.close();
 		} catch (SQLException sqle){
 			//Levé de l'exception pas de Nom
 			throw new DALException("Insert invalide !");
@@ -148,9 +140,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	public Utilisateur lireUtilisateurPseudo(String pseudo) throws DALException {
 		Utilisateur utilisateurConnecte= new Utilisateur();
 		//Recherche de l'utilisateur selon son identifiant dans la Base de donnée
-		try {
-			// 1- Obtenir une connexion
-			Connection connexion = ConnectionProvider.getConnection();
+		// 1- Obtenir une connexion
+		try(Connection connexion = ConnectionProvider.getConnection();) {
 			// 2- Contruire la requete
 			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_PSEUDO);
 			// ajout du paramètre à la requete(Where pseudo)
@@ -159,7 +150,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			//Appel de la methode constuisant l'utilisateur
 			utilisateurConnecte=lireEtCreerUtilisateur(utilisateurConnecte, connexion, ordre);
 			//5-fermeture de la connexion
-			connexion.close();
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de lire la connexion");
@@ -169,9 +159,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	@Override
 	public void MajUtilisateur(Utilisateur utilisateur) throws DALException {
 		//Recherche de l'utilisateur selon son identifiant dans la Base de donnée
-		try {
-			// 1- Obtenir une connexion
-			Connection connexion = ConnectionProvider.getConnection();
+		// 1- Obtenir une connexion
+		try(Connection connexion = ConnectionProvider.getConnection();) {
 			// 2- Contruire la requete
 			PreparedStatement ordre = connexion.prepareStatement(SQL_UPDATE_UTILISATEUR);
 			ordre.setString(1,utilisateur.getPseudo());
@@ -192,8 +181,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			//--- 3- Exécuter la requête
 			ordre.setInt(12,utilisateur.getNo_utilisateur());	
 			ordre.executeUpdate();
-			//5-fermeture de la connexion
-			connexion.close();
+	
 
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
@@ -203,17 +191,14 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 
 	@Override
 	public void SupprimerUtilisateur(int noUtilisateur) throws DALException {
-		try {
-			// 1- Obtenir une connexion
-			Connection connexion = ConnectionProvider.getConnection();
+		try(Connection connexion = ConnectionProvider.getConnection();) {
 			// 2- Contruire la requete
 			PreparedStatement ordre = connexion.prepareStatement(SQL_DELETE_UTILISATEUR);
 			// 3- Preparation de l'ordre
 			ordre.setInt(1,noUtilisateur);
 			// 4- Execution de la requete
 			ordre.executeUpdate();
-			//5-fermeture de la connexion
-			connexion.close();
+
 			}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de supprimer la ligne");
