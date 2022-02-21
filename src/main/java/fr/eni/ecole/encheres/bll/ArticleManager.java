@@ -25,9 +25,14 @@ public class ArticleManager {
 		}
 	}
 
-	void inserArticle(Article article) {
-		// Appel method jdbc insert (article) 
-		// Idem inserer utilisateur utilisateurmanager
+	public void insertArticles(Article article) throws DALException, BLLException {
+		//--- Insérer l'article en base
+		try {
+			articleDAO.insertArticles(article);
+		} catch(DALException e){
+		//--- Levée d'une exception quand l'article n'est pa inséré
+			throw new BLLException("Erreur lors de l'insertion de l'article !");
+		}
 	}
 	
 	public List<ArticleVendu> selectArticle() throws BLLException {
