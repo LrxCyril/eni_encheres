@@ -9,7 +9,7 @@ public class ArticleManager {
 	
 	
 	
-	void inserartcile(Article article) {
+	void inserArtcile(Article article) {
 	
 		// Appel method jdbc insert (article) 
 		// Idem inserer utilisateur utilisateurmanager
