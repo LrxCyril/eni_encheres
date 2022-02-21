@@ -32,9 +32,9 @@ public class ArticleManager {
 		// Idem inserer utilisateur utilisateurmanager
 	}
 	
-	public List<ArticleVendu> selectArticle(LocalDate date) throws BLLException {
+	public List<ArticleVendu> selectArticle() throws BLLException {
 		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();;
-		
+		LocalDate date=LocalDate.now();
 		// --- récupérer la liste des articles en vente
 		try {
 			articles = articleDAO.selectArticle(date);
