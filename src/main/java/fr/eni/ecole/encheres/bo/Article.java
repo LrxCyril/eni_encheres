@@ -5,27 +5,27 @@ import java.util.Date;
 
 public class Article {
 
-	private int no_article;
-	private String nom_article;
+	private int noArticle;
+	private String nomArticle;
 	private String description;
-	private LocalDate date_debut_encheres;
-	private LocalDate date_fin_encheres;
-	private int prix_initial;
-	private int prix_vente;
-	private int no_utilisateur;
-	private int no_categorie;
+	private LocalDate dateDebutEncheres;
+	private LocalDate dateFinEncheres;
+	private int prixInitial;
+	private int prixVente;
+	private int noUtilisateur;
+	private int noCategorie;
 	
 	/**
 	 * Constructeur d'article avec numéro d'article et nom d'article
-	 * @param no_article
-	 * @param nom_article
+	 * @param noArticle
+	 * @param nomArticle
 	 */
 
 	
-	public Article(int no_article, String nom_article) {
+	public Article(int noArticle, String nomArticle) {
 		super();
-		this.no_article = no_article;
-		this.nom_article = nom_article;
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
 	}
 	
 	/**
@@ -38,35 +38,35 @@ public class Article {
 
 	/**
 	 * Numéro d'article getter
-	 * @return nno_article int
+	 * @return noArticle int
 	 */
-	public int getNo_article() {
-		return no_article;
+	public int getNoArticle() {
+		return noArticle;
 	}
 
 	
 	/**
 	 * Numéro d'article setter
-	 * @param no_article int
+	 * @param noArticle int
 	 */
-	public void setNo_article(int no_article) {
-		this.no_article = no_article;
+	public void setNoArticle(int noArticle) {
+		this.noArticle = noArticle;
 	}
 
 	/**
 	 * Nom d'article getter
-	 * @return nom_article String
+	 * @return nomArticle String
 	 */
-	public String getNom_article() {
-		return nom_article;
+	public String getNomArticle() {
+		return nomArticle;
 	}
 
 	/**
 	 * Nom d'article setter
-	 * @param nom_article String
+	 * @param nomArticle String
 	 */
-	public void setNom_article(String nom_article) {
-		this.nom_article = nom_article;
+	public void setNomArticle(String nomArticle) {
+		this.nomArticle = nomArticle;
 	}
 
 	/**
@@ -88,99 +88,99 @@ public class Article {
 	
 	/**
 	 * Date début d'enchères Date getter
-	 * @return date_debut_encheres Date
+	 * @return dateDebutEncheres Date
 	 */
-	public LocalDate getDate_debut_encheres() {
-		return date_debut_encheres;
+	public LocalDate getDateDebutEncheres() {
+		return dateDebutEncheres;
 	}
 
 	/**
 	 * Date début enchères Date setter 
 	 * @param localDate Date
 	 */
-	public void setDate_debut_encheres(LocalDate localDate) {
-		this.date_debut_encheres = localDate;
+	public void setDateDebutEncheres(LocalDate localDate) {
+		this.dateDebutEncheres = localDate;
 	}
 
 	/**
 	 * Date fin d'enchères Date getter
-	 * @return date_fin_encheres Date
+	 * @return dateFinEncheres Date
 	 */
-	public LocalDate getDate_fin_encheres() {
-		return date_fin_encheres;
+	public LocalDate getDateFinEncheres() {
+		return dateFinEncheres;
 	}
 
 	/**
 	 *Date fin d'enchères Date  setter
-	 * @param date_fin_encheres Date
+	 * @param dateFinEncheres Date
 	 */
-	public void setDate_fin_encheres(LocalDate date_fin_encheres) {
-		this.date_fin_encheres = date_fin_encheres;
+	public void setDateFinEncheres(LocalDate dateFinEncheres) {
+		this.dateFinEncheres = dateFinEncheres;
 	}
 
 	/**
 	 * Prix initial int getter
-	 * @return prix_initial int
+	 * @return prixInitial int
 	 */
-	public int getPrix_initial() {
-		return prix_initial;
+	public int getPrixInitial() {
+		return prixInitial;
 	}
 
 	/**
 	 * Prix initial int setter
-	 * @param prix_initial
+	 * @param prixInitial
 	 */
-	public void setPrix_initial(int prix_initial) {
-		this.prix_initial = prix_initial;
+	public void setPrixInitial(int prixInitial) {
+		this.prixInitial = prixInitial;
 	}
 
 	/**
 	 * Prix ventre int getter
-	 * @return prix_vente int
+	 * @return prixVente int
 	 */
-	public int getPrix_vente() {
-		return prix_vente;
+	public int getPrixVente() {
+		return prixVente;
 	}
 
 	
 	/**
 	 * Prix vente int setter
-	 * @param prix_vente int
+	 * @param prixVente int
 	 */
-	public void setPrix_vente(int prix_vente) {
-		this.prix_vente = prix_vente;
+	public void setPrixVente(int prixVente) {
+		this.prixVente = prixVente;
 	}
 
 	/**
 	 * Numéro utilisateur getter
-	 * @return no_tulisateur int
+	 * @return noUtilisateur int
 	 */
-	public int getNo_utilisateur() {
-		return no_utilisateur;
+	public int getNoUtilisateur() {
+		return noUtilisateur;
 	}
 	
 	/**
 	 * Numéro utilisateur setter
-	 * @param no_utilisateur int
+	 * @param noUtilisateur int
 	 */
-	public void setNo_utilisateur(int no_utilisateur) {
-		this.no_utilisateur = no_utilisateur;
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	/**
 	 * Numéro de catégorie getter
-	 * @return no_categorie int
+	 * @return noCategorie int
 	 */
-	public int getNo_categorie() {
-		return no_categorie;
+	public int getNoCategorie() {
+		return noCategorie;
 	}
 
 	/**
 	 * Numéro de catégoerie setter
-	 * @param no_categorie int
+	 * @param noCategorie int
 	 */
-	public void setNo_categorie(int no_categorie) {
-		this.no_categorie = no_categorie;
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
 	}
 	
 }
