@@ -3,8 +3,11 @@ package fr.eni.ecole.encheres.dal.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 
 import fr.eni.ecole.encheres.bo.Article;
+import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
 
@@ -42,6 +45,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			// Levée de l'exception pas d'article
 			throw new DALException("Insert invalide !");
 		}
+	}
+
+	@Override
+	public List<ArticleVendu> SelectArticle(LocalDate date) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
