@@ -31,10 +31,11 @@ public class ArticleManager {
 	}
 	
 	public List<ArticleVendu> selectArticle() throws BLLException {
-		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();;
+		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		LocalDate date=LocalDate.now();
-		// --- récupérer la liste des articles en vente
+			// --- récupérer la liste des articles en vente
 		try {
+			System.out.println(1);
 			articles = articleDAO.selectArticle(date);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu

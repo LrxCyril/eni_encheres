@@ -36,13 +36,7 @@ public class AfficherListesEncheresServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Appel de mafonction recuperanant la liste d'enchere du moment
-		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();;
-		try {
-			articles=manager.selectArticle();
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
 		rd.forward(request, response);
 	}

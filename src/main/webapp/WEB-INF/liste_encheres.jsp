@@ -116,32 +116,48 @@
                     </form>
                 </div>
                 <div class="announce">
-                    <div class="announce__card">
+        
+                	<c:forEach items="${listeArticles}" var="article" >
+    					<div class="announce__card">
                         <img class="announce__image" src="#" alt="photo de l'annonce">
                         <div class="announce__description">
                             <a class="announce__link" href="#">
-                                <h3 class="announce__title">PC Gamer pour travailler</h3>
+                                <h3 class="announce__title">${article.getNomArticle()}</h3>
                             </a>
-                            <p class="announce__price">Prix : 210 Points</p>
-                            <p class="announce__deadline">Fin de l'enchère : 10/08/2018</p>
+                            <p class="announce__price">Prix : ${article.getMiseAPrix()}</p>
+                            <p class="announce__deadline">Fin de l'enchère : ${article.getDateFinEncheres()}</p>
                             <p class="announce__seller-label">Vendeur : </p>
                             <!-- TODO : renvoi vers la page profil de l'annonceur, consultation -->
-                            <a class="announce__seller-profile" href="#">jojo44</a>
+                            <a class="announce__seller-profile" href="${pageContext.request.contextPath}/consulter/profil">${article.getUtilisateur().getPseudo()}</a>
                         </div>
                     </div>
-                    <div class="announce__card">
-                        <img class="announce__image" src="#" alt="photo de l'annonce">
-                        <div class="announce__description">
-                            <a class="announce__link" href="#">
-                                <h3 class="announce__title">Rocket stove pour riz et pâtes</h3>
-                            </a>
-                            <p class="announce__price">Prix : 185 Points</p>
-                            <p class="announce__deadline">Fin de l'enchère : 09/10/2018</p>
-                            <p class="announce__seller-label">Vendeur : </p>
-                            <!-- TODO : renvoi vers la page profil de l'annonceur, consultation -->
-                            <a class="announce__seller-profile" href="#">jiji56</a>
-                        </div>
-                    </div>
+					</c:forEach>
+<!--                     <div class="announce__card"> -->
+<!--                         <img class="announce__image" src="#" alt="photo de l'annonce"> -->
+<!--                         <div class="announce__description"> -->
+<!--                             <a class="announce__link" href="#"> -->
+<!--                                 <h3 class="announce__title">PC Gamer pour travailler</h3> -->
+<!--                             </a> -->
+<!--                             <p class="announce__price">Prix : 210 Points</p> -->
+<!--                             <p class="announce__deadline">Fin de l'enchère : 10/08/2018</p> -->
+<!--                             <p class="announce__seller-label">Vendeur : </p> -->
+<!--                             TODO : renvoi vers la page profil de l'annonceur, consultation -->
+<!--                             <a class="announce__seller-profile" href="#">jojo44</a> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                     <div class="announce__card"> -->
+<!--                         <img class="announce__image" src="#" alt="photo de l'annonce"> -->
+<!--                         <div class="announce__description"> -->
+<!--                             <a class="announce__link" href="#"> -->
+<!--                                 <h3 class="announce__title">Rocket stove pour riz et pâtes</h3> -->
+<!--                             </a> -->
+<!--                             <p class="announce__price">Prix : 185 Points</p> -->
+<!--                             <p class="announce__deadline">Fin de l'enchère : 09/10/2018</p> -->
+<!--                             <p class="announce__seller-label">Vendeur : </p> -->
+<!--                             TODO : renvoi vers la page profil de l'annonceur, consultation -->
+<!--                             <a class="announce__seller-profile" href="#">jiji56</a> -->
+<!--                         </div> -->
+<!--                     </div> -->
                 </div> 
             </main>
             <%@ include file="/WEB-INF/fragments/footer.jspf"%>
