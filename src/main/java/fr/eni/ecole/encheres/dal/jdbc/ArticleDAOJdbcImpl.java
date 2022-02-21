@@ -4,7 +4,7 @@ import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
 
-public class AjouterArticleDAOJdbcImpl implements ArticleDAO {
+public class ArticleDAOJdbcImpl implements ArticleDAO {
 	//creer constate de requete d'insertion d'un article
 	@Override
 	public void InsertArticles(Article nouvelArticle) throws DALException {
