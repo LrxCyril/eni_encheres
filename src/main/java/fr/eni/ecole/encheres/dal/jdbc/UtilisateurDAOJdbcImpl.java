@@ -77,29 +77,29 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		
 		return utilisateurConnecte;
 	}
-
-	@Override
-	public String VerifIdentifiantExistant(String email, String pseudo) throws DALException {
-		String NomUtilisateur = null;
-			//---  1- Obtenir une connexion
-		try(Connection connexion = ConnectionProvider.getConnection();){
-			//---  2- Contruire la requete
-			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_NOM);
-			//--- 3- Exécuter la requête
-			ResultSet rs =ordre.executeQuery();
-			//--- 4- Si la connexion est bien existante..
-			if (rs.next()) {
-				NomUtilisateur = (rs.getString("nom"));
-			}
-			//--- 6- Gérer l'exception
-		} catch (SQLException sqle){
-				//Levé de l'exception pas de Nom
-				throw new DALException("Pas de nom d'utilisateur !");
-		}
-		   //--- 7- Retour de Nom 
-	return NomUtilisateur;
-		
-	}
+//
+//	@Override
+//	public String VerifIdentifiantExistant(String email, String pseudo) throws DALException {
+//		String NomUtilisateur = null;
+//			//---  1- Obtenir une connexion
+//		try(Connection connexion = ConnectionProvider.getConnection();){
+//			//---  2- Contruire la requete
+//			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_NOM);
+//			//--- 3- Exécuter la requête
+//			ResultSet rs =ordre.executeQuery();
+//			//--- 4- Si la connexion est bien existante..
+//			if (rs.next()) {
+//				NomUtilisateur = (rs.getString("nom"));
+//			}
+//			//--- 6- Gérer l'exception
+//		} catch (SQLException sqle){
+//				//Levé de l'exception pas de Nom
+//				throw new DALException("Pas de nom d'utilisateur !");
+//		}
+//		   //--- 7- Retour de Nom 
+//	return NomUtilisateur;
+//		
+//	}
 
 	@Override
 	public void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException {
@@ -117,17 +117,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		ordre.setString(7,nouvelUtilisateur.getVille());
 		ordre.setString(8,nouvelUtilisateur.getMotDePasse());
 		ordre.setInt(9,nouvelUtilisateur.getCredit());
-
 		if(nouvelUtilisateur.isAdministrateur()) {
 			ordre.setInt(10, 1);
 		} else { 
 			ordre.setInt(10, 0);
 		}
-		System.out.println(2);
 		ordre.setString(11,nouvelUtilisateur.getTelephone());
-		System.out.println(3);
 		ordre.executeUpdate();
-		System.out.println(4);
 		//--- 5- Fermer la connexion
 		} catch (SQLException sqle){
 			//Levé de l'exception pas de Nom
