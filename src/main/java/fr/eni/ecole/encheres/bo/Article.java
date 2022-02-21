@@ -8,8 +8,8 @@ public class Article {
 	private int noArticle;
 	private String nomArticle;
 	private String description;
-	private LocalDateTime dateDebutEncheres;
-	private LocalDateTime dateFinEncheres;
+	private LocalDate dateDebutEncheres;
+	private LocalDate dateFinEncheres;
 	private int prixInitial;
 	private int prixVente;
 	private int noUtilisateur;
@@ -90,7 +90,7 @@ public class Article {
 	 * Date début d'enchères Date getter
 	 * @return dateDebutEncheres Date
 	 */
-	public LocalDateTime getDateDebutEncheres() {
+	public LocalDate getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 
@@ -98,24 +98,24 @@ public class Article {
 	 * Date début enchères Date setter 
 	 * @param localDate Date
 	 */
-	public void setDateDebutEncheres(LocalDateTime localDateTime) {
-		this.dateDebutEncheres = localDateTime;
+	public void setDateDebutEncheres(LocalDate localDate) {
+		this.dateDebutEncheres = localDate;
 	}
 
 	/**
 	 * Date fin d'enchères Date getter
 	 * @return dateFinEncheres Date
 	 */
-	public LocalDateTime getDateFinEncheres() {
+	public LocalDate getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
 	/**
 	 *Date fin d'enchères Date  setter
-	 * @param dateFinEncheres Date
+	 * @param localDate Date
 	 */
-	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
-		this.dateFinEncheres = dateFinEncheres;
+	public void setDateFinEncheres(LocalDate localDate) {
+		this.dateFinEncheres = localDate;
 	}
 
 	/**
