@@ -53,7 +53,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		//si il y'a un resultat de requete
 		if (rs.next()) {
 		//Alimentation de l'instance d'utilisateur depuis les champs récupérés de la  requette
-		utilisateurConnecte.setNo_utilisateur(rs.getInt("noUtilisateur"));
+		utilisateurConnecte.setNoUtilisateur(rs.getInt("noUtilisateur"));
 		utilisateurConnecte.setPseudo(rs.getString("pseudo"));
 		utilisateurConnecte.setNom(rs.getString("nom"));
 		utilisateurConnecte.setPrenom(rs.getString("prenom"));
@@ -175,7 +175,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			}
 			ordre.setString(11,utilisateur.getTelephone());
 			//--- 3- Exécuter la requête
-			ordre.setInt(12,utilisateur.getNo_utilisateur());	
+			ordre.setInt(12,utilisateur.getNoUtilisateur());	
 			ordre.executeUpdate();
 	
 
