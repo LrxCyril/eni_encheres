@@ -82,13 +82,18 @@
                     </c:if>
                     <c:if test="${requestScope.creer}">
                    		 <input type="submit" name="creer" value="Créer">
+                   		<a href="${pageContext.request.contextPath}/connect">
+                        	<input type="button" name="annuler" value="Annuler">
+                   		 </a>
                     </c:if>
                      <c:if test="${not requestScope.creer}">
                    		 <input type="submit" name="modifier" value="Enregistrer">
+                   		     <a href="${pageContext.request.contextPath}/home">
+                        		<input type="button" name="annuler" value="Annuler">
+                   		 	</a>
                     </c:if>
-                    <a href="${pageContext.request.contextPath}/connect">
-                        <input type="button" name="annuler" value="Annuler">
-                    </a>
+                    
+
                 </fieldset>
             </form>
         </main>
