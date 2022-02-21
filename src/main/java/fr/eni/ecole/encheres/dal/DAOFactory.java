@@ -1,5 +1,6 @@
 package fr.eni.ecole.encheres.dal;
 
+import fr.eni.ecole.encheres.dal.jdbc.ArticleDAOJdbcImpl;
 import fr.eni.ecole.encheres.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 /**
@@ -17,7 +18,11 @@ public class DAOFactory {
 	public static UtilisateurDAO getUtilisateurDAO() throws DALException {
 		return new UtilisateurDAOJdbcImpl();
 	}
+
+	public static ArticleDAO getArticleDAO() throws DALException {
+		// TODO Auto-generated method stub
+		return new ArticleDAOJdbcImpl();
+	}
 	
-	//ajouter la factory permettant de creer l'instance de ArticleDAOJdbcImpl
-	
+
 }

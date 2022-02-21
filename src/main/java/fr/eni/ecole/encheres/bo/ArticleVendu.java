@@ -12,7 +12,6 @@ public class ArticleVendu {
 	private int miseAPrix;
 	private int prixVente;
 	private int etatVente;
-	private int no_categorie;
 	private Categorie categorieArticle;
 	private Retrait lieuRetrait;
 	private Utilisateur utilisateur;
@@ -84,13 +83,6 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 	
-	// --- numéro catégorie
-	public int getNo_categorie() {
-		return no_categorie;
-	}
-	public void setNo_categorie(int no_categorie) {
-		this.no_categorie = no_categorie;
-	}
 	
 	// --- categorie de l'article
 	public Categorie getCategorieArticle() {

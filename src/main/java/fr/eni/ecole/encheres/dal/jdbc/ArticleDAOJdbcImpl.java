@@ -20,6 +20,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SQL_DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
 
 
+	@SuppressWarnings("null")
 	@Override
 	public List<ArticleVendu> SelectArticle(LocalDate date) throws DALException {
 	
@@ -38,13 +39,13 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			//si il y'a un resultat de requete
 			if (rs.next()) {
 			//Alimentation de l'instance d'utilisateur depuis les champs récupérés de la  requette
-				articleLu.noArticle(rs.getInt("no_article"));
-				articleLu.setnomArticle(rs.getInt("no_utilisateur"));
-				articleLu.setdescription(rs.getString("pseudo"));
-				articleLu.setmiseAPrix(rs.getString("nom"));
-				articleLu.setdateFinEncheres(rs.getString("prenom"));
-				articleLu.Utilisateur.setPseudo(rs.getString("email"));
-				if (articleLu != null) { // TODO Tester si la prise en compte de null est nécessaire
+				articleLu.setNoArticle(rs.getInt("no_article"));
+				articleLu.setNomArticle(rs.getString("nom_article"));
+				articleLu.setDescription(rs.getString("description"));
+				articleLu.setMiseAPrix(rs.getInt("prix_initial"));
+				articleLu.setDateFinEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articleLu.getUtilisateur().setPseudo(rs.getString("email"));
+				if (articleLu != null) { // Verifiaction que l'utilisateur n'est pas vide
 					articles.add(articleLu);
 				}
 
