@@ -12,10 +12,6 @@ public class ArticleVendu {
 	private int miseAPrix;
 	private int prixVente;
 	private int etatVente;
-<<<<<<< HEAD
-=======
-	private int noCategorie;
->>>>>>> branch 'main' of https://github.com/LrxCyril/eni_encheres.git
 	private Categorie categorieArticle;
 	private Retrait lieuRetrait;
 	private Utilisateur utilisateur;
@@ -86,17 +82,6 @@ public class ArticleVendu {
 	public void setEtatVente(int etatVente) {
 		this.etatVente = etatVente;
 	}
-	
-<<<<<<< HEAD
-=======
-	// --- numéro catégorie
-	public int getNoCategorie() {
-		return noCategorie;
-	}
-	public void setNoCategorie(int noCategorie) {
-		this.noCategorie = noCategorie;
-	}
->>>>>>> branch 'main' of https://github.com/LrxCyril/eni_encheres.git
 	
 	// --- categorie de l'article
 	public Categorie getCategorieArticle() {
