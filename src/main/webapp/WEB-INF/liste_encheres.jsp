@@ -36,7 +36,7 @@
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
 	                        </li>
 	                        <li class="header__nav-item">
-	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/vendre/article">Vendre un article</a>
+	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/ajout/article">Vendre un article</a>
 	                        </li>
 	                        <li class="header__nav-item">
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
