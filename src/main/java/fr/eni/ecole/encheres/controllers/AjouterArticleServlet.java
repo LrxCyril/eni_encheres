@@ -53,17 +53,17 @@ public class AjouterArticleServlet extends HttpServlet {
 			Article ajoutArticle = new Article();
 			Boolean vide = false;
 			
-			ajoutArticle.setNomArticle(request.getParameter("nomArticle"));
-			ajoutArticle.setNoArticle(Integer.parseInt(request.getParameter("noArticle")));
+			ajoutArticle.setNomArticle(request.getParameter("nom_article"));
+			ajoutArticle.setNoArticle(Integer.parseInt(request.getParameter("no_article")));
 			ajoutArticle.setDescription(request.getParameter("description"));
-			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("noCategorie")));
+			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("no_categorie")));
 			//Photo article
 			//TODO
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("dateDebutEncheres"),dtf));
-			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("dateFinEncheres"),dtf));
-			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prixInitial")));
-			ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prixVente")));
+			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("date_debut_encheres"),dtf));
+			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
+			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
+			ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prix_vente")));
 			
 		//récupérer les paramètres de requêtes
 			
@@ -83,7 +83,7 @@ public class AjouterArticleServlet extends HttpServlet {
 			//TODO gérer un objet erreur
 			//vérfier si les champs sont vides 
 			if (ajoutArticle.getNomArticle().isEmpty()) {
-				request.setAttribute("nomArticle", "vide");
+				request.setAttribute("nom_article", "vide");
 				vide = true;
 			}
 			
@@ -93,18 +93,18 @@ public class AjouterArticleServlet extends HttpServlet {
 			}
 			
 			if (ajoutArticle.getNoCategorie().isEmpty()) {
-				request.setAttribute("noCategorie", "vide");
+				request.setAttribute("no_categorie", "vide");
 				vide = true;
 			}
 			
 			
 			if (ajoutArticle.getDateDebutEncheres().isEmpty()) {
-				request.setAttribute("dateDebutEncheres", "vide");
+				request.setAttribute("date_debut_encheres", "vide");
 				vide = true;
 			}
 			
 			if (ajoutArticle.getDateFinEncheres().isEmpty()) {
-				request.setAttribute("dateFinEncheres", "vide");
+				request.setAttribute("date_fin_encheres", "vide");
 				vide = true;
 			}
 			
@@ -114,7 +114,7 @@ public class AjouterArticleServlet extends HttpServlet {
 			}
 			
 			if (ajoutArticle.getCodePostal.isEmpty()) {
-				request.setAttribute("codePostal", "vide");
+				request.setAttribute("code_postal", "vide");
 				vide = true;
 			}
 	 
