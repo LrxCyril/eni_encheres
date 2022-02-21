@@ -67,7 +67,7 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		profilUtilisateur.setCodePostal(request.getParameter("codePostal"));
 		profilUtilisateur.setMotDePasse(request.getParameter("motDePasse"));
 		if(session.getAttribute("utilisateurActif")!=null) {
-			profilUtilisateur.setNo_utilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNo_utilisateur());
+			profilUtilisateur.setNoUtilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur());
 			profilUtilisateur.setCredit(((Utilisateur) session.getAttribute("utilisateurActif")).getCredit());
 			profilUtilisateur.setAdministrateur(((Utilisateur) session.getAttribute("utilisateurActif")).isAdministrateur());
 			

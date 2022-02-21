@@ -57,5 +57,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		return articles;
 	}
 
+
+	@Override
+	public void InsertArticles(Article nouvelArticle) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

@@ -34,7 +34,7 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		int noUtilisateur=((Utilisateur) session.getAttribute("utilisateurActif")).getNo_utilisateur();
+		int noUtilisateur=((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur();
 		try {
 		//appel de la fonction supprimer utilisateur
 			manager.supprimerUtilisateur(noUtilisateur);
