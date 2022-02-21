@@ -14,7 +14,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
         
-        <title>ENi | Enchères</title>
+        <title>ENI | Enchères</title>
     </head>
     <body>
         <div class="container">
@@ -36,7 +36,7 @@
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
 	                        </li>
 	                        <li class="header__nav-item">
-	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/vendre/article">Vendre un article</a>
+	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/ajout/article">Vendre un article</a>
 	                        </li>
 	                        <li class="header__nav-item">
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>

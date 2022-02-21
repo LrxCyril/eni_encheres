@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Vendre un article</title>
 </head>
 	<body>
 		
@@ -17,8 +17,8 @@
 					 <form action="${pageContext.request.contextPath}/ajout/article" method="post">
 		                <fieldset>
 		                 
-		                    <label for="nomArticle">Article :</label>
-		                    <input type="text" name="nomArticle" id="nomArticle" placeholder="Nom de l'article">
+		                    <label for="nom_article">Article :</label>
+		                    <input type="text" name="nom_article" id="nom_article" placeholder="Nom de l'article">
 		                    <c:if test="${not empty requestScope.article}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
@@ -27,23 +27,30 @@
 		                    <c:if test="${not empty requestScope.description}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="noCategorie">Catégorie :</label>
-		                    <input type="text" name="noCategorie" id="noCategorie" placeholder="Catégorie">
+		                    <label for="no_categorie">Catégorie :</label>
+		                    <select name="no_categorie" id="no_categorie" placeholder="Catégorie">
+		                    	<option value="">--Choisissez une catégorie--</option>
+							    <option class="form__option" value="toutes">Toutes</option>
+                                <option class="form__option" value="chambre">Chambre</option>
+                                <option class="form__option" value="equipement-cuisine">Equipement Cuisine</option>
+                                <option class="form__option" value="equipement">Equipement</option>
+                                <option class="form__option" value="salle-de-bain">Salle de bain</option>
+                                <option class="form__option" value="salon">Salon</option>
 		                    <c:if test="${not empty requestScope.categorie}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="photoArticle">Photo de l'article :</label>
-		                    <input type="submit" name="photoArticle" id="photoArticle" value="UPLOADER">
+		                    <label for="photo_article">Photo de l'article :</label>
+		                    <input type="file" name="photo_article" id="photo_article" accept="image/png, image/jpeg">
 		                    <c:if test="${not empty requestScope.photo_article}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="dateDebutEncheres">Début de l'enchère :</label>
-		                    <input type="date" name="dateDebutEncheres" id="dateDebutEncheres">
+		                    <label for="date_debut_encheres">Début de l'enchère :</label>
+		                    <input type="date" name="date_debut_encheres" id="date_debut_encheres">
 		                    <c:if test="${not empty requestScope.date_debut_encheres}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="dateFinEncheres">Fin de l'enchère :</label>
-		                    <input type="date" name="dateFinEncheres" id="dateFinEncheres">
+		                    <label for="date_fin_encheres">Fin de l'enchère :</label>
+		                    <input type="date" name="date_fin_encheres" id="date_fin_encheres">
 		                    <c:if test="${not empty requestScope.date_fin_encheres}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
@@ -51,17 +58,17 @@
               <!--  --------------------------------------------------------------------------------------  -->    
 		                    
 		                    <label for="rue">Rue :</label>
-		                    <input type="text" name="rue" id="rue" placeholder="Rue">
+		                    <input type="text" name="rue" id="rue" placeholder="${rueLu}">
 		                    <c:if test="${not empty requestScope.rue}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="codePostal">Code postal :</label>
-		                    <input type="text" name="codePostal" id="codePostal" placeholder="Code postal">
+		                    <label for="code_postal">Code postal :</label>
+		                    <input type="text" name="code_postal" id="code_postal" placeholder="${cPLu}">
 		                    <c:if test="${not empty requestScope.code_postal}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
 		                    <label for="ville">Ville :</label>
-		                    <input type="text" name="ville" id="ville" placeholder="Ville">
+		                    <input type="text" name="ville" id="ville" placeholder="${villeLu}">
 		                    <c:if test="${not empty requestScope.ville}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>

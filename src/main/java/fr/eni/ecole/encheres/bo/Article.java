@@ -1,6 +1,7 @@
 package fr.eni.ecole.encheres.bo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 //Hello
 public class Article {
 
@@ -111,10 +112,10 @@ public class Article {
 
 	/**
 	 *Date fin d'enchères Date  setter
-	 * @param dateFinEncheres Date
+	 * @param localDate Date
 	 */
-	public void setDateFinEncheres(LocalDate dateFinEncheres) {
-		this.dateFinEncheres = dateFinEncheres;
+	public void setDateFinEncheres(LocalDate localDate) {
+		this.dateFinEncheres = localDate;
 	}
 
 	/**

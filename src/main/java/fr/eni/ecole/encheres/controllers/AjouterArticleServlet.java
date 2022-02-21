@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.ecole.encheres.bll.ArticleManager;
 import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bo.Article;
+import fr.eni.ecole.encheres.dal.DALException;
 
 /**
  * Servlet implementation class VendreArticleServlet
@@ -22,11 +24,14 @@ import fr.eni.ecole.encheres.bo.Article;
 public class AjouterArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private ArticleManager mgr;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AjouterArticleServlet() {
         super();
+        mgr = new ArticleManager();
        
     }
 
@@ -46,79 +51,79 @@ public class AjouterArticleServlet extends HttpServlet {
 		//Création d'un article avec les données mise à jour
 		
 			Article ajoutArticle = new Article();
+			Boolean vide = false;
 			
-			ajoutArticle.setNomArticle(request.getParameter("nomArticle"));
-			ajoutArticle.setNoArticle(Integer.parseInt(request.getParameter("noArticle")));
+			ajoutArticle.setNomArticle(request.getParameter("nom_article"));
+			ajoutArticle.setNoArticle(Integer.parseInt(request.getParameter("no_article")));
 			ajoutArticle.setDescription(request.getParameter("description"));
-			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("noCategorie")));
+			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("no_categorie")));
 			//Photo article
 			//TODO
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("dateDebutEncheres"),dtf));
-			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("dateFinEncheres"),dtf));
-			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prixInitial")));
-			ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prixVente")));
+			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("date_debut_encheres"),dtf));
+			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
+			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
+			ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prix_vente")));
 			
 		//récupérer les paramètres de requêtes
 			
-			String nomArticle = request.getParameter("nomArticle");
-			String laDescription = request.getParameter("description");
-			String laCategorie = request.getParameter("noCategorie");
-			String laPhotoDeArticle = request.getParameter("photoArticle");
-			String dateDebutEncheres = request.getParameter("dateDebutEncheres");
-			String dateFinEncheres = request.getParameter("dateFinEncheres");
-			String laRue = request.getParameter("rue");
-			String leCodePostal = request.getParameter("codePostal");
-			String laVille = request.getParameter("ville");
+			//envoyer article fonctionBLL
+			try {
+				mgr.insertArticles(ajoutArticle);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (BLLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
 			
 			//TODO gérer un objet erreur
 			//vérfier si les champs sont vides 
-			if (nomArticle.isEmpty()) {
-				request.setAttribute("nomArticle", "Article");
-				
+			if (ajoutArticle.getNomArticle().isEmpty()) {
+				request.setAttribute("nom_article", "vide");
+				vide = true;
 			}
 			
-			if (laDescription.isEmpty()) {
-				request.setAttribute("description", "Description");
-				
+			if (ajoutArticle.getDescription().isEmpty()) {
+				request.setAttribute("description", "vide");
+				vide = true;
 			}
 			
-			if (laCategorie.isEmpty()) {
-				request.setAttribute("noCategorie", "Catégorie");
-				
-			}
+		//	if (ajoutArticle.getNoCategorie().isEmpty()) {
+		//		request.setAttribute("no_categorie", "vide");
+		//		vide = true;
+		//	}
 			
-			if (laPhotoDeArticle.isEmpty()) {
-				request.setAttribute("photoArticle", "");
-				
-			}
 			
-			if (dateDebutEncheres.isEmpty()) {
-				request.setAttribute("dateDebutEncheres", "");
-				
-			}
+		//	if (ajoutArticle.getDateDebutEncheres().isEmpty()) {
+		//		request.setAttribute("date_debut_encheres", "vide");
+		//		vide = true;
+		//	}
 			
-			if (dateFinEncheres.isEmpty()) {
-				request.setAttribute("dateFinEncheres", "");
-				
-			}
+		//	if (ajoutArticle.getDateFinEncheres().isEmpty()) {
+		//		request.setAttribute("date_fin_encheres", "vide");
+		//		vide = true;
+		//	}
 			
-			if (laRue.isEmpty()) {
-				request.setAttribute("rue", "Rue");
-				
-			}
+		//	if (ajoutArticle.getRue().isEmpty()) {
+		//		request.setAttribute("rue", "vide");
+		//		vide = true;
+		//	}
 			
-			if (leCodePostal.isEmpty()) {
-				request.setAttribute("codePostal", "Code postal");
-				
-			}
+		//	if (ajoutArticle.getCodePostal.isEmpty()) {
+		//		request.setAttribute("code_postal", "vide");
+		//		vide = true;
+		//	}
 	 
-			if (laVille.isEmpty()) {
-				request.setAttribute("ville", "Ville");
-				
-			}
+		//	if (ajoutArticle.getVille.isEmpty()) {
+		//		request.setAttribute("ville", "vide");
+		//		vide = true;
+		//	}
 			
-			doGet(request, response);
+		
 			
 			//appeler liste des enchères
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
