@@ -1,7 +1,7 @@
 package fr.eni.ecole.encheres.bo;
 
 public class Utilisateur {
-	private int no_utilisateur;
+	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
 	private String prenom;
@@ -37,15 +37,15 @@ public class Utilisateur {
 	 * Numero d'utilisateur getter
 	 * @return numero utilisateur int
 	 */
-	public int getNo_utilisateur() {
-		return no_utilisateur;
+	public int getNoUtilisateur() {
+		return noUtilisateur;
 	}
 	/**
 	 * Numero d'utilisateur setter
 	 * param utilisateur int
 	 */
-	public void setNo_utilisateur(int no_utilisateur) {
-		this.no_utilisateur = no_utilisateur;
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	/**
