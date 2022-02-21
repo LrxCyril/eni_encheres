@@ -33,7 +33,7 @@
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
 		                    <label for="photoArticle">Photo de l'article :</label>
-		                    <input type="submit" name="photoArticle" id="photoArticle" value="UPLOADER">
+		                    <input type="file" name="photoArticle" id="photoArticle" accept="image/png, image/jpeg" value="UPLOADER">
 		                    <c:if test="${not empty requestScope.photo_article}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
