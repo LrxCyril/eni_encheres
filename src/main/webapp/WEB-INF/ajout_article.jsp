@@ -17,8 +17,8 @@
 					 <form action="${pageContext.request.contextPath}/ajout/article" method="post">
 		                <fieldset>
 		                 
-		                    <label for="nom_article">Article :</label>
-		                    <input type="text" name="nom_article" id="nom_article" placeholder="Nom de l'article">
+		                    <label for="nomArticle">Article :</label>
+		                    <input type="text" name="nomArticle" id="nomArticle" placeholder="Nom de l'article">
 		                    <c:if test="${not empty requestScope.article}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
@@ -27,23 +27,23 @@
 		                    <c:if test="${not empty requestScope.description}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="categorie">Catégorie :</label>
-		                    <input type="text" name="no_categorie" id="no_categorie" placeholder="Catégorie">
+		                    <label for="noCategorie">Catégorie :</label>
+		                    <input type="text" name="noCategorie" id="noCategorie" placeholder="Catégorie">
 		                    <c:if test="${not empty requestScope.categorie}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="photo_article">Photo de l'article :</label>
-		                    <input type="submit" name="photo_article" id="photo_article" value="UPLOADER">
+		                    <label for="photoArticle">Photo de l'article :</label>
+		                    <input type="submit" name="photoArticle" id="photoArticle" value="UPLOADER">
 		                    <c:if test="${not empty requestScope.photo_article}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="date_debut_encheres">Début de l'enchère :</label>
-		                    <input type="date" name="date_debut_encheres" id="date_debut_encheres">
+		                    <label for="dateDebutEncheres">Début de l'enchère :</label>
+		                    <input type="date" name="dateDebutEncheres" id="dateDebutEncheres">
 		                    <c:if test="${not empty requestScope.date_debut_encheres}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="date_fin_encheres">Fin de l'enchère :</label>
-		                    <input type="date" name="date_fin_encheres" id="date_fin_encheres">
+		                    <label for="dateFinEncheres">Fin de l'enchère :</label>
+		                    <input type="date" name="dateFinEncheres" id="dateFinEncheres">
 		                    <c:if test="${not empty requestScope.date_fin_encheres}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
@@ -55,8 +55,8 @@
 		                    <c:if test="${not empty requestScope.rue}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="code_postal">Code postal :</label>
-		                    <input type="text" name="code_postal" id="code_postal" placeholder="Code postal">
+		                    <label for="codePostal">Code postal :</label>
+		                    <input type="text" name="codePostal" id="codePostal" placeholder="Code postal">
 		                    <c:if test="${not empty requestScope.code_postal}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>

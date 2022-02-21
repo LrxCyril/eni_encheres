@@ -47,34 +47,34 @@ public class AjouterArticleServlet extends HttpServlet {
 		
 			Article ajoutArticle = new Article();
 			
-			ajoutArticle.setNom_article(request.getParameter("nom_article"));
-			ajoutArticle.setNo_article(Integer.parseInt(request.getParameter("no_article")));
+			ajoutArticle.setNomArticle(request.getParameter("nomArticle"));
+			ajoutArticle.setNoArticle(Integer.parseInt(request.getParameter("noArticle")));
 			ajoutArticle.setDescription(request.getParameter("description"));
-			ajoutArticle.setNo_categorie(Integer.parseInt(request.getParameter("no_categorie")));
+			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("noCategorie")));
 			//Photo article
 			//TODO
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			ajoutArticle.setDate_debut_encheres(LocalDate.parse(request.getParameter("date_debut_encheres"),dtf));
-			ajoutArticle.setDate_fin_encheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
-			ajoutArticle.setPrix_initial(Integer.parseInt(request.getParameter("prix_initial")));
-			ajoutArticle.setPrix_vente(Integer.parseInt(request.getParameter("prix_vente")));
+			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("dateDebutEncheres"),dtf));
+			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("dateFinEncheres"),dtf));
+			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prixInitial")));
+			ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prixVente")));
 			
 		//récupérer les paramètres de requêtes
 			
-			String nomArticle = request.getParameter("nom_article");
+			String nomArticle = request.getParameter("nomArticle");
 			String laDescription = request.getParameter("description");
-			String laCategorie = request.getParameter("no_categorie");
-			String laPhotoDeArticle = request.getParameter("photo_article");
-			String dateDebutEncheres = request.getParameter("date_debut_encheres");
-			String dateFinEncheres = request.getParameter("date_fin_encheres");
+			String laCategorie = request.getParameter("noCategorie");
+			String laPhotoDeArticle = request.getParameter("photoArticle");
+			String dateDebutEncheres = request.getParameter("dateDebutEncheres");
+			String dateFinEncheres = request.getParameter("dateFinEncheres");
 			String laRue = request.getParameter("rue");
-			String leCodePostal = request.getParameter("code_postal");
+			String leCodePostal = request.getParameter("codePostal");
 			String laVille = request.getParameter("ville");
 			
 			//TODO gérer un objet erreur
 			//vérfier si les champs sont vides 
 			if (nomArticle.isEmpty()) {
-				request.setAttribute("nom_article", "Article");
+				request.setAttribute("nomArticle", "Article");
 				
 			}
 			
@@ -84,22 +84,22 @@ public class AjouterArticleServlet extends HttpServlet {
 			}
 			
 			if (laCategorie.isEmpty()) {
-				request.setAttribute("categorie", "Catégorie");
+				request.setAttribute("noCategorie", "Catégorie");
 				
 			}
 			
 			if (laPhotoDeArticle.isEmpty()) {
-				request.setAttribute("photo_article", "");
+				request.setAttribute("photoArticle", "");
 				
 			}
 			
 			if (dateDebutEncheres.isEmpty()) {
-				request.setAttribute("date_debut_encheres", "");
+				request.setAttribute("dateDebutEncheres", "");
 				
 			}
 			
 			if (dateFinEncheres.isEmpty()) {
-				request.setAttribute("date_fin_encheres", "");
+				request.setAttribute("dateFinEncheres", "");
 				
 			}
 			
@@ -109,7 +109,7 @@ public class AjouterArticleServlet extends HttpServlet {
 			}
 			
 			if (leCodePostal.isEmpty()) {
-				request.setAttribute("code_postal", "Code postal");
+				request.setAttribute("codePostal", "Code postal");
 				
 			}
 	 
