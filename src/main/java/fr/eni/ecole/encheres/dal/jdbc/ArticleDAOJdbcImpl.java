@@ -1,5 +1,9 @@
 package fr.eni.ecole.encheres.dal.jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
@@ -12,7 +16,32 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	@Override
 	public void InsertArticles(Article nouvelArticle) throws DALException {
 		//creer commande SQL inserer article (idem inserer utilisateur dans Utilisateur DAO JdBC Impl
-		
+		String date = null;
+		//--- Obtenir la requête
+		try(Connection connexion = ConnectionProvider.getConnection();){
+			
+		//--- Construire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_INSERT_ARTICLE);
+			ordre.setInt(1,nouvelArticle.getNoArticle());
+			ordre.setString(2,nouvelArticle.getNomArticle());
+			ordre.setString(3,nouvelArticle.getDescription());
+			
+			ordre.setDate(4,java.sql.Date.valueOf(date));
+			ordre.setDate(5,java.sql.Date.valueOf(date));
+			ordre.setInt(6,nouvelArticle.getPrixInitial());
+			ordre.setInt(7,nouvelArticle.getPrixVente());
+			ordre.setInt(8,nouvelArticle.getNoUtilisateur());
+			ordre.setInt(9,nouvelArticle.getNoCategorie());
+			
+		//--- Exécuter la requête
+			ordre.executeUpdate();
+			
+		//--- Fermer la connexion
+			connexion.close();
+		} catch (SQLException sqle) {
+			// Levée de l'exception pas d'article
+			throw new DALException("Insert invalide !");
+		}
 	}
 
 	
