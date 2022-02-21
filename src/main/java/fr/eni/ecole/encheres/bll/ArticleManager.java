@@ -6,11 +6,9 @@ import java.util.List;
 
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
-import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
-import fr.eni.ecole.encheres.dal.UtilisateurDAO;
 
 
 public class ArticleManager {
