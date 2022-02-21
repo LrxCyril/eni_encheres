@@ -123,7 +123,7 @@ public class AjouterArticleServlet extends HttpServlet {
 		//		vide = true;
 		//	}
 			
-			doGet(request, response);
+		
 			
 			//appeler liste des enchères
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
