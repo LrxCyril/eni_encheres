@@ -29,13 +29,13 @@
 		                    </c:if>
 		                    <label for="no_categorie">Catégorie :</label>
 		                    <select name="no_categorie" id="no_categorie" placeholder="Catégorie">
-		                    	<option value="">--Choisissez un animal--</option>
-							    <option value="dog">Dog</option>
-							    <option value="cat">Cat</option>
-							    <option value="hamster">Hamster</option>
-							    <option value="parrot">Parrot</option>
-							    <option value="spider">Spider</option>
-							    <option value="goldfish">Goldfish</option>
+		                    	<option value="">--Choisissez une catégorie--</option>
+							    <option class="form__option" value="toutes">Toutes</option>
+                                <option class="form__option" value="chambre">Chambre</option>
+                                <option class="form__option" value="equipement-cuisine">Equipement Cuisine</option>
+                                <option class="form__option" value="equipement">Equipement</option>
+                                <option class="form__option" value="salle-de-bain">Salle de bain</option>
+                                <option class="form__option" value="salon">Salon</option>
 		                    <c:if test="${not empty requestScope.categorie}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
