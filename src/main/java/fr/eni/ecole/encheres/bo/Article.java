@@ -1,8 +1,7 @@
 package fr.eni.ecole.encheres.bo;
 
 import java.time.LocalDate;
-import java.util.Date;
-
+//Hello
 public class Article {
 
 	private int noArticle;
