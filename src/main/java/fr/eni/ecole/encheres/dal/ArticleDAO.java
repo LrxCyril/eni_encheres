@@ -8,7 +8,7 @@ import fr.eni.ecole.encheres.bo.ArticleVendu;
 
 public interface ArticleDAO {
 
-	void InsertArticles(Article nouvelArticle) throws DALException;
-	List<ArticleVendu> SelectArticle(LocalDate date) throws DALException;
+	void insertArticles(Article nouvelArticle) throws DALException;
+	List<ArticleVendu> selectArticle(LocalDate date) throws DALException;
 	
 }
