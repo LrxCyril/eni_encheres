@@ -1,7 +1,9 @@
 package fr.eni.ecole.encheres.controllers;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,18 +44,26 @@ public class AjouterArticleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Création d'un article avec les données mise à jour
+		
 			Article ajoutArticle = new Article();
 			
 			ajoutArticle.setNom_article(request.getParameter("nom_article"));
 			ajoutArticle.setNo_article(Integer.parseInt(request.getParameter("no_article")));
 			ajoutArticle.setDescription(request.getParameter("description"));
-			// pour convertire une date: LocalDate.of(0, null, 0)
-			//ajoutArticle.setDate_debut_encheres( request.getParameter("date_debut_encheres"));
+			ajoutArticle.setNo_categorie(Integer.parseInt(request.getParameter("no_categorie")));
+			//Photo article
+			//TODO
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			ajoutArticle.setDate_debut_encheres(LocalDate.parse(request.getParameter("date_debut_encheres"),dtf));
+			ajoutArticle.setDate_fin_encheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
+			ajoutArticle.setPrix_initial(Integer.parseInt(request.getParameter("prix_initial")));
+			ajoutArticle.setPrix_vente(Integer.parseInt(request.getParameter("prix_vente")));
+			
 		//récupérer les paramètres de requêtes
 			
 			String nomArticle = request.getParameter("nom_article");
 			String laDescription = request.getParameter("description");
-			String laCategorie = request.getParameter("categorie");
+			String laCategorie = request.getParameter("no_categorie");
 			String laPhotoDeArticle = request.getParameter("photo_article");
 			String dateDebutEncheres = request.getParameter("date_debut_encheres");
 			String dateFinEncheres = request.getParameter("date_fin_encheres");
