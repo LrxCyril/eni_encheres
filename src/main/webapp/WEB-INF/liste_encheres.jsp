@@ -128,7 +128,7 @@
                             <p class="announce__deadline">Fin de l'enchère : ${article.getDateFinEncheres()}</p>
                             <p class="announce__seller-label">Vendeur : </p>
                             <!-- TODO : renvoi vers la page profil de l'annonceur, consultation -->
-                            <a class="announce__seller-profile" href="${pageContext.request.contextPath}/consulter/profil">${article.getUtilisateur().getPseudo()}</a>
+                            <a class="announce__seller-profile" href="${pageContext.request.contextPath}/consulter/profil?utilisateur=${article.getUtilisateur().getPseudo()}">${article.getUtilisateur().getPseudo()}</a>
                         </div>
                     </div>
 					</c:forEach>

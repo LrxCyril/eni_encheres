@@ -51,6 +51,7 @@ public class SeConnecterServlet extends HttpServlet {
 		if(identifiant.isBlank() || mdp.isBlank()) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 			rd.forward(request, response);
+			return;
 		}
 		//verification de l'existance de l'utilisateur
 		try {
@@ -59,6 +60,7 @@ public class SeConnecterServlet extends HttpServlet {
 		// --- Si la connexion échoue, l'utilisateur n'a pas été trouve
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 				rd.forward(request, response);
+				return;
 		}
 		// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
 		  	HttpSession session = request.getSession();
@@ -67,7 +69,7 @@ public class SeConnecterServlet extends HttpServlet {
 			session.setAttribute("profilRecherche",identifiant);
 			session.setAttribute("login",identifiant);
 			request.setAttribute("La_connexion", connecte);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/home");
 			rd.forward(request, response);
 
 	}
