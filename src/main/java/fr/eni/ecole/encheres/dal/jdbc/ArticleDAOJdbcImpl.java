@@ -87,8 +87,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			// --- Exécuter la requête
 			ordre.executeUpdate();
 
-			// --- Fermer la connexion
-			connexion.close();
 		} catch (SQLException sqle) {
 			// Levée de l'exception pas d'article
 			throw new DALException("Insert invalide !");
