@@ -40,16 +40,69 @@ public class ArticleManager {
 		LocalDate date=LocalDate.now();
 			// --- récupérer la liste des articles en vente
 		try {
-			System.out.println(1);
 			articles = articleDAO.selectArticle(date);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
 			throw new BLLException("L'utilisateur n'existe pas !");
 		}
 		return articles;
+	}
 		
+		public List<String> selectCategorie() throws BLLException {
+			List<String> categorieArticle =new ArrayList<String>();
+				// --- récupérer la liste des articles en vente
+			try {
+				categorieArticle = articleDAO.selectLibelle();
+			} catch (DALException e) {
+				// --- Levée d'une exception quand l'email n'est pas reconnu
+				throw new BLLException("L'utilisateur n'existe pas !");
+			}
+			return categorieArticle;
 		
 	}
+
+		public List<ArticleVendu> selectArticlebyCateNom(String filtreCategorie, String recherche) throws BLLException {
+			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+			LocalDate date=LocalDate.now();
+				// --- récupérer la liste des articles en vente
+			try {
+				articles = articleDAO.selectArticlebyCateNom(date, filtreCategorie, recherche);
+			} catch (DALException e) {
+				// --- Levée d'une exception quand l'email n'est pas reconnu
+				throw new BLLException("L'utilisateur n'existe pas !");
+			}
+			return articles;
+		}
+
+		public List<ArticleVendu> selectArticlebyCate(String filtreCategorie) throws BLLException {
+			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+			LocalDate date=LocalDate.now();
+				// --- récupérer la liste des articles en vente
+			try {
+				
+				articles = articleDAO.selectArticlebyCate(date, filtreCategorie);
+			} catch (DALException e) {
+				// --- Levée d'une exception quand l'email n'est pas reconnu
+				throw new BLLException("L'utilisateur n'existe pas !");
+			}
+			return articles;
+		}
+		
+
+		public List<ArticleVendu> selectArticlebyNom(String recherche) throws BLLException {
+			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+			LocalDate date=LocalDate.now();
+				// --- récupérer la liste des articles en vente
+			try {
+				articles = articleDAO.selectArticlebyNom(date, recherche);
+			} catch (DALException e) {
+				// --- Levée d'une exception quand l'email n'est pas reconnu
+				throw new BLLException("L'utilisateur n'existe pas !");
+			}
+			return articles;
+		}
+	
+	
 	
 	
 }
