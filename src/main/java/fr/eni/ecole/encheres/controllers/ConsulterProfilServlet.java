@@ -38,8 +38,10 @@ public class ConsulterProfilServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String loginConnecte=(String) session.getAttribute("login");
 		String profilRecherche=(String)session.getAttribute("profilRecherche");
-		System.out.println((String)session.getAttribute("profilRecherche"));
-		System.out.println((String)session.getAttribute("login"));
+		System.out.println(request.getParameter("utilisateur"));
+		if (request.getParameter("utilisateur")!=null) {
+			profilRecherche=request.getParameter("utilisateur");
+		}
 		try {
 			profilUtilisateur=manager.lectureUtilisateur(profilRecherche);
 		} catch (BLLException e) {
@@ -57,8 +59,10 @@ public class ConsulterProfilServlet extends HttpServlet {
 		request.setAttribute("ville",  profilUtilisateur.getVille());
 
 		//Afficher le bouton modif si on est connecté et qu'on souhaite afficher notre propre profil
+		try {
 		if ((boolean) session.getAttribute("session_active")&&(loginConnecte.equals(profilRecherche))) {
 			request.setAttribute("modif", true);
+		}}catch (NullPointerException e){
 		};
 		//RAZ profil Recherche
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/affichage_profil.jsp");

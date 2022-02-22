@@ -51,6 +51,7 @@ public class SeConnecterServlet extends HttpServlet {
 		if(identifiant.isBlank() || mdp.isBlank()) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 			rd.forward(request, response);
+			return;
 		}
 		//verification de l'existance de l'utilisateur
 		try {
@@ -59,16 +60,28 @@ public class SeConnecterServlet extends HttpServlet {
 		// --- Si la connexion échoue, l'utilisateur n'a pas été trouve
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 				rd.forward(request, response);
+				return;
 		}
 		// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
 		  	HttpSession session = request.getSession();
-			session.setAttribute("utilisateurActif", utilisateurConnecte);
+			//Alimentation des attributs de la page profil
+			session.setAttribute("pseudoLu", utilisateurConnecte.getPseudo());
+			session.setAttribute("nomLu",  utilisateurConnecte.getNom());
+			session.setAttribute("prenomLu",  utilisateurConnecte.getPrenom());
+			session.setAttribute("emailLu",  utilisateurConnecte.getEmail());
+			session.setAttribute("telLu",  utilisateurConnecte.getTelephone());
+			session.setAttribute("rueLu",  utilisateurConnecte.getRue());
+			session.setAttribute("cPLu",  utilisateurConnecte.getCodePostal());
+			session.setAttribute("villeLu",  utilisateurConnecte.getVille());
+			session.setAttribute("mdpLu",  utilisateurConnecte.getMotDePasse());
+		  	session.setAttribute("utilisateurActif", utilisateurConnecte);
 			session.setAttribute("session_active", true);
 			session.setAttribute("profilRecherche",identifiant);
 			session.setAttribute("login",identifiant);
 			request.setAttribute("La_connexion", connecte);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/home");
 			rd.forward(request, response);
 
 	}
 }
+

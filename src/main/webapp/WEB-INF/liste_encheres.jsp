@@ -14,7 +14,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
         
-        <title>ENi | Enchères</title>
+        <title>ENI | Enchères</title>
     </head>
     <body>
       <a class="header__nav-link" href="${pageContext.request.contextPath}/test">Test</a>
@@ -37,7 +37,7 @@
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
 	                        </li>
 	                        <li class="header__nav-item">
-	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/vendre/article">Vendre un article</a>
+	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/ajout/article">Vendre un article</a>
 	                        </li>
 	                        <li class="header__nav-item">
 	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
@@ -54,27 +54,25 @@
                     <h2 class="main__title">Liste des enchères</h2>
                 </div>
                 <div class="main__form">
-                    <form class="form__container" action="#">
+                    <form class="form__container" method="post" action="${pageContext.request.contextPath}/home">
                         <div>
-                            <label class="form__label" for="recherche-article">Recherche</label>
-                            <input class="form__input" type="search" name="recherche-article" id="recherche-article" placeholder="Le nom de l'article contient">        
+                            <label class="form__label" for="rechercheArticle">Recherche</label>
+                            <input class="form__input" type="search" name="rechercheArticle" id="rechercheArticle" placeholder="Le nom de l'article contient">        
                         </div>
                         <div>
                             <label class="form__categories-label" for="categories">Categories</label>
                             <select class="form__select" name="categories" id="categories">
-                                <option class="form__option" value="toutes">Toutes</option>
-                                <option class="form__option" value="chambre">Chambre</option>
-                                <option class="form__option" value="equipement-cuisine">Equipement Cuisine</option>
-                                <option class="form__option" value="equipement">Equipement</option>
-                                <option class="form__option" value="salle-de-bain">Salle de bain</option>
-                                <option class="form__option" value="salon">Salon</option>
+                                <c:forEach items="${listeCategories}" var="categorie" >
+	                                <option class="form__option" value="${categorie.getNoCategorie()}">${categorie.getLibelle()}</option>
+                                </c:forEach>
                             </select>
-                        </div>
+                        </div> 
                         <!-- TODO : afficher les boutons radios et checkbox liés aux enchères quand je suis redirigé  sur mon espace utilisateur-->
-<!-- 
-                        		<div class="form__filter">
+						
+                      <div class="form__filter">
+                            <c:if test="${session_active}">
                             <div class="form__achats-filter">
-                                <input class="form__radio" type="radio" name="achats" id="achats" checked>
+                                <input class="form__radio" type="radio" name="achats" id="achats" value="achats">
                                 <label class="form__radio-label" for="achats">Achats</label>
                                 <ul class="form__list">
                                     <li class="form__item">
@@ -92,7 +90,7 @@
                                 </ul>
                             </div>
                             <div class="form__ventes-filter">
-                                <input class="form__radio" type="radio" name="mes-ventes" id="mes-ventes">
+                                <input class="form__radio" type="radio" name="mes-ventes" id="mes-ventes" value="mes-ventes">
                                 <label class="form__radio-label" for="mes-ventes">Mes ventes</label>
                                 <ul class="form__list">
                                     <li class="form__item">
@@ -108,41 +106,61 @@
                                         <label class="form__checkbox-label" for="ventes-terminees">ventes terminées</label>
                                     </li>
                                 </ul>
-                            </div>
-                            <a class="form__link" href="#">
+                          </div>
+                           </c:if>	
+                           
+                            
+                             <a class="form__link" href="#">
                                 <input class="form__submit" type="submit" value="Rechercher">
                             </a>
+
                         </div>
--->
+						
                     </form>
-                </div>
+              	</div>
                 <div class="announce">
-                    <div class="announce__card">
+        
+                	<c:forEach items="${listeArticles}" var="article" >
+    					<div class="announce__card">
                         <img class="announce__image" src="#" alt="photo de l'annonce">
                         <div class="announce__description">
                             <a class="announce__link" href="#">
-                                <h3 class="announce__title">PC Gamer pour travailler</h3>
+                                <h3 class="announce__title">${article.getNomArticle()}</h3>
                             </a>
-                            <p class="announce__price">Prix : 210 Points</p>
-                            <p class="announce__deadline">Fin de l'enchère : 10/08/2018</p>
+                            <p class="announce__price">Prix : ${article.getMiseAPrix()}</p>
+                            <p class="announce__deadline">Fin de l'enchère : ${article.getDateFinEncheres()}</p>
                             <p class="announce__seller-label">Vendeur : </p>
                             <!-- TODO : renvoi vers la page profil de l'annonceur, consultation -->
-                            <a class="announce__seller-profile" href="#">jojo44</a>
+                            <a class="announce__seller-profile" href="${pageContext.request.contextPath}/consulter/profil?utilisateur=${article.getUtilisateur().getPseudo()}">${article.getUtilisateur().getPseudo()}</a>
                         </div>
                     </div>
-                    <div class="announce__card">
-                        <img class="announce__image" src="#" alt="photo de l'annonce">
-                        <div class="announce__description">
-                            <a class="announce__link" href="#">
-                                <h3 class="announce__title">Rocket stove pour riz et pâtes</h3>
-                            </a>
-                            <p class="announce__price">Prix : 185 Points</p>
-                            <p class="announce__deadline">Fin de l'enchère : 09/10/2018</p>
-                            <p class="announce__seller-label">Vendeur : </p>
-                            <!-- TODO : renvoi vers la page profil de l'annonceur, consultation -->
-                            <a class="announce__seller-profile" href="#">jiji56</a>
-                        </div>
-                    </div>
+					</c:forEach>
+<!--                     <div class="announce__card"> -->
+<!--                         <img class="announce__image" src="#" alt="photo de l'annonce"> -->
+<!--                         <div class="announce__description"> -->
+<!--                             <a class="announce__link" href="#"> -->
+<!--                                 <h3 class="announce__title">PC Gamer pour travailler</h3> -->
+<!--                             </a> -->
+<!--                             <p class="announce__price">Prix : 210 Points</p> -->
+<!--                             <p class="announce__deadline">Fin de l'enchère : 10/08/2018</p> -->
+<!--                             <p class="announce__seller-label">Vendeur : </p> -->
+<!--                             TODO : renvoi vers la page profil de l'annonceur, consultation -->
+<!--                             <a class="announce__seller-profile" href="#">jojo44</a> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                     <div class="announce__card"> -->
+<!--                         <img class="announce__image" src="#" alt="photo de l'annonce"> -->
+<!--                         <div class="announce__description"> -->
+<!--                             <a class="announce__link" href="#"> -->
+<!--                                 <h3 class="announce__title">Rocket stove pour riz et pâtes</h3> -->
+<!--                             </a> -->
+<!--                             <p class="announce__price">Prix : 185 Points</p> -->
+<!--                             <p class="announce__deadline">Fin de l'enchère : 09/10/2018</p> -->
+<!--                             <p class="announce__seller-label">Vendeur : </p> -->
+<!--                             TODO : renvoi vers la page profil de l'annonceur, consultation -->
+<!--                             <a class="announce__seller-profile" href="#">jiji56</a> -->
+<!--                         </div> -->
+<!--                     </div> -->
                 </div> 
             </main>
             <%@ include file="/WEB-INF/fragments/footer.jspf"%>

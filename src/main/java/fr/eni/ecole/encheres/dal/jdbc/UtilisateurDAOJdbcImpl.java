@@ -53,15 +53,15 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		//si il y'a un resultat de requete
 		if (rs.next()) {
 		//Alimentation de l'instance d'utilisateur depuis les champs récupérés de la  requette
-		utilisateurConnecte.setNoUtilisateur(rs.getInt("noUtilisateur"));
+		utilisateurConnecte.setNoUtilisateur(rs.getInt("no_utilisateur"));
 		utilisateurConnecte.setPseudo(rs.getString("pseudo"));
 		utilisateurConnecte.setNom(rs.getString("nom"));
 		utilisateurConnecte.setPrenom(rs.getString("prenom"));
 		utilisateurConnecte.setEmail(rs.getString("email"));
-		utilisateurConnecte.setMotDePasse(rs.getString("motDePasse"));
+		utilisateurConnecte.setMotDePasse(rs.getString("mot_de_passe"));
 		utilisateurConnecte.setRue(rs.getString("rue"));
 		utilisateurConnecte.setTelephone(rs.getString("telephone"));
-		utilisateurConnecte.setCodePostal(rs.getString("codePostal"));
+		utilisateurConnecte.setCodePostal(rs.getString("code_postal"));
 		utilisateurConnecte.setVille(rs.getString("ville"));
 		utilisateurConnecte.setCredit(rs.getInt("credit"));
 		}

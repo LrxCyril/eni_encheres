@@ -3,7 +3,7 @@ package fr.eni.ecole.encheres.bo;
 public class Retrait {
 	
 	String rue;
-	String code_postal;
+	String codePostal;
 	String ville;
 	
 	
@@ -20,12 +20,12 @@ public class Retrait {
 	}
 	
 	// --- code postal
-	public String getCode_postal() {
-		return code_postal;
+	public String getCodePostal() {
+		return codePostal;
 	}
 	
-	public void setCode_postal(String code_postal) {
-		this.code_postal = code_postal;
+	public void setCodePostal(String code_postal) {
+		this.codePostal = code_postal;
 	}
 	
 	// --- ville

@@ -58,6 +58,9 @@
                 <a href="${pageContext.request.contextPath}/creer/utilisateur">
 					<input class="form__submit" type="submit" name="creercompte" value="Créer un compte">
 				</a>
+				<a href="${pageContext.request.contextPath}/home">
+                  		<input type="button" name="annuler" value="Annuler">
+                </a>
             </main>
             <%@ include file="/WEB-INF/fragments/footer.jspf"%>
         </div>
