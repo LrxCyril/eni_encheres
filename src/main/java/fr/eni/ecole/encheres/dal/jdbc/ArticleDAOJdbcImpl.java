@@ -19,7 +19,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SQL_SELECT_ARTICLE_BY_CATE = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE (date_debut_encheres>? AND Categories.no_categorie=?)";
 	private static final String SQL_SELECT_ARTICLE_BY_NOM = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE (date_debut_encheres>? AND nom_article=?)";
 	private static final String SQL_SELECT_ARTICLE_BY_CATE_NOM = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE (date_debut_encheres>? AND nom_article=? AND Categories.no_categorie=?)";
-	private static final String SQL_INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie VALUES (?,?,?,?,?,?,?,?)";
+	private static final String SQL_INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?)";
 	private static final String SQL_DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
 	private static final String SQL_SELECT_LIBELLE = "Select no_categorie, libelle from CATEGORIES";
 	
@@ -77,20 +77,21 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 			// --- Construire la requete
 			PreparedStatement ordre = connexion.prepareStatement(SQL_INSERT_ARTICLE);
-			ordre.setInt(1, nouvelArticle.getNoArticle());
-			ordre.setString(2, nouvelArticle.getNomArticle());
-			ordre.setString(3, nouvelArticle.getDescription());
-			ordre.setDate(4, java.sql.Date.valueOf(nouvelArticle.getDateDebutEncheres()));
-			ordre.setDate(5, java.sql.Date.valueOf(nouvelArticle.getDateFinEncheres()));
-			ordre.setInt(6, nouvelArticle.getPrixInitial());
-			ordre.setInt(8, nouvelArticle.getNoUtilisateur());
-			ordre.setInt(9, nouvelArticle.getNoCategorie());
+			ordre.setString(1, nouvelArticle.getNomArticle());
+			ordre.setString(2, nouvelArticle.getDescription());
+			ordre.setDate(3, java.sql.Date.valueOf(nouvelArticle.getDateDebutEncheres()));
+			ordre.setDate(4, java.sql.Date.valueOf(nouvelArticle.getDateFinEncheres()));
+			ordre.setInt(5, nouvelArticle.getPrixInitial());
+			ordre.setInt(6, nouvelArticle.getNoUtilisateur());
+			ordre.setInt(7, nouvelArticle.getNoCategorie());
+			System.out.println(nouvelArticle.getNoUtilisateur());
 
 			// --- Exécuter la requête
 			ordre.executeUpdate();
 
 		} catch (SQLException sqle) {
 			// Levée de l'exception pas d'article
+			sqle.printStackTrace();
 			throw new DALException("Insert invalide !");
 		}
 	}
