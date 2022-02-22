@@ -67,7 +67,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	public void insertArticles(Article nouvelArticle) throws DALException {
 		// creer commande SQL inserer article (idem inserer utilisateur dans Utilisateur
 		// DAO JdBC Impl
-		String date = null;
+		
 		// --- Obtenir la requête
 		try (Connection connexion = ConnectionProvider.getConnection();) {
 
@@ -76,9 +76,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			ordre.setInt(1, nouvelArticle.getNoArticle());
 			ordre.setString(2, nouvelArticle.getNomArticle());
 			ordre.setString(3, nouvelArticle.getDescription());
-
-			ordre.setDate(4, java.sql.Date.valueOf(date));
-			ordre.setDate(5, java.sql.Date.valueOf(date));
+			ordre.setDate(4, java.sql.Date.valueOf(nouvelArticle.getDateDebutEncheres()));
+			ordre.setDate(5, java.sql.Date.valueOf(nouvelArticle.getDateFinEncheres()));
 			ordre.setInt(6, nouvelArticle.getPrixInitial());
 			ordre.setInt(7, nouvelArticle.getPrixVente());
 			ordre.setInt(8, nouvelArticle.getNoUtilisateur());
