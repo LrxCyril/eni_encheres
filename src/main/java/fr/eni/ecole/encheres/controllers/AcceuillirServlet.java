@@ -36,9 +36,13 @@ public class AcceuillirServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();;
+		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+		List<String> categorieArticle =new ArrayList<String>();
 		try {
 			articles=manager.selectArticle();
+			categorieArticle= manager.selectCategorie();
+			categorieArticle.add(0, "");
+			request.setAttribute("listeCategories", categorieArticle);
 			request.setAttribute("listeArticles", articles);
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
@@ -51,8 +55,37 @@ public class AcceuillirServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+		List<String> categorieArticle =new ArrayList<String>();
+		String filtreCategorie=request.getParameter("categories");
+		String recherche= request.getParameter("rechercheArticle");
+		System.out.println(filtreCategorie);
+		System.out.println(recherche);
+		try {
+			//filtres
+			if (!filtreCategorie.isEmpty()) {
+				//filtre par recherche et categorie
+				if(!recherche.isBlank()) {
+					articles=manager.selectArticlebyCateNom(filtreCategorie,recherche);				
+				// filtre par Categorie
+				}else {
+					articles=manager.selectArticlebyCate(filtreCategorie);
+				}}
+			//filtre par recherche
+			if(!recherche.isBlank()&&filtreCategorie.isEmpty()) {
+				articles=manager.selectArticlebyNom(recherche);
+			}
+			
+			categorieArticle= manager.selectCategorie();
+			categorieArticle.add(0, "");
+			request.setAttribute("listeCategories", categorieArticle);
+			request.setAttribute("listeArticles", articles);
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
+		rd.forward(request, response);
 	}
 
 }

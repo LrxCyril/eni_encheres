@@ -33,16 +33,16 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		profilUtilisateur=(Utilisateur) session.getAttribute("utilisateurActif");
-		//Alimentation des attributs de la page profil
-		session.setAttribute("pseudoLu", profilUtilisateur.getPseudo());
-		session.setAttribute("nomLu",  profilUtilisateur.getNom());
-		session.setAttribute("prenomLu",  profilUtilisateur.getPrenom());
-		session.setAttribute("emailLu",  profilUtilisateur.getEmail());
-		session.setAttribute("telLu",  profilUtilisateur.getTelephone());
-		session.setAttribute("rueLu",  profilUtilisateur.getRue());
-		session.setAttribute("cPLu",  profilUtilisateur.getCodePostal());
-		session.setAttribute("villeLu",  profilUtilisateur.getVille());
-		session.setAttribute("mdpLu",  profilUtilisateur.getMotDePasse());
+//		//Alimentation des attributs de la page profil
+//		session.setAttribute("pseudoLu", profilUtilisateur.getPseudo());
+//		session.setAttribute("nomLu",  profilUtilisateur.getNom());
+//		session.setAttribute("prenomLu",  profilUtilisateur.getPrenom());
+//		session.setAttribute("emailLu",  profilUtilisateur.getEmail());
+//		session.setAttribute("telLu",  profilUtilisateur.getTelephone());
+//		session.setAttribute("rueLu",  profilUtilisateur.getRue());
+//		session.setAttribute("cPLu",  profilUtilisateur.getCodePostal());
+//		session.setAttribute("villeLu",  profilUtilisateur.getVille());
+//		session.setAttribute("mdpLu",  profilUtilisateur.getMotDePasse());
 		//modification du bouton creer profil en modifier profil
 		session.setAttribute("creer",  (boolean) false);
 		request.setAttribute("modif","oui");
