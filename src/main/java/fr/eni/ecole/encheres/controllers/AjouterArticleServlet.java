@@ -54,7 +54,7 @@ public class AjouterArticleServlet extends HttpServlet {
 			Boolean vide = false;
 			
 			ajoutArticle.setNomArticle(request.getParameter("nom_article"));
-			ajoutArticle.setNoArticle(Integer.parseInt(request.getParameter("no_article")));
+			
 			ajoutArticle.setDescription(request.getParameter("description"));
 			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("no_categorie")));
 			//Photo article
@@ -63,7 +63,7 @@ public class AjouterArticleServlet extends HttpServlet {
 			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("date_debut_encheres"),dtf));
 			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
 			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
-			ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prix_vente")));
+			//ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prix_vente")));
 			
 		//récupérer les paramètres de requêtes
 			

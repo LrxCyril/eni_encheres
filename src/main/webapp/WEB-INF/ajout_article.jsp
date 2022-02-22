@@ -44,6 +44,10 @@
 		                    <c:if test="${not empty requestScope.photo_article}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
+		                    
+		                    <label for="prix_initial">Mise à prix: </label>
+		                    <input type="number" min="2" max="5000" step="2" value="2">
+		                    
 		                    <label for="date_debut_encheres">Début de l'enchère :</label>
 		                    <input type="date" name="date_debut_encheres" id="date_debut_encheres">
 		                    <c:if test="${not empty requestScope.date_debut_encheres}">
@@ -58,17 +62,17 @@
               <!--  --------------------------------------------------------------------------------------  -->    
 		                    
 		                    <label for="rue">Rue :</label>
-		                    <input type="text" name="rue" id="rue" placeholder="${rueLu}">
+		                    <input type="text" name="rue" id="rue" value="${rueLu}">
 		                    <c:if test="${not empty requestScope.rue}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
 		                    <label for="code_postal">Code postal :</label>
-		                    <input type="text" name="code_postal" id="code_postal" placeholder="${cPLu}">
+		                    <input type="text" name="code_postal" id="code_postal" value="${cPLu}">
 		                    <c:if test="${not empty requestScope.code_postal}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
 		                    <label for="ville">Ville :</label>
-		                    <input type="text" name="ville" id="ville" placeholder="${villeLu}">
+		                    <input type="text" name="ville" id="ville" value="${villeLu}">
 		                    <c:if test="${not empty requestScope.ville}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
