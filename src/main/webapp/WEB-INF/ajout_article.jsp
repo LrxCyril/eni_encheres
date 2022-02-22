@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@
 		                    <label class="form__label" class="form__categories-label" for="categories">Categories</label>
                             <select class="form__select" name="categories" id="categories">
                                 <c:forEach items="${listeCategories}" var="categorie" >
-	                                <option class="form__option" value="${categorie}">${categorie}</option>
+	                                <option class="form__option" value="${categorie.getNoCategorie()}">${categorie.getLibelle()}</option>
                                 </c:forEach>
                             </select>
 		                    <label class="form__label" for="photo_article">Photo de l'article :</label>
@@ -43,7 +44,7 @@
 			                    </c:if>
 		                    
 		                    <label class="form__label" for="prix_initial">Mise à prix: </label>
-		                    <input class="form__input" type="number" min="2" max="5000" step="2" value="2">
+		                    <input class="form__input" type="number" name="prix_initial" min="2" max="5000" step="2" value="2">
 		                    
 		                    <label class="form__label" for="date_debut_encheres">Début de l'enchère :</label>
 		                    <input class="form__input" type="date" name="date_debut_encheres" id="date_debut_encheres">
