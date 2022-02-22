@@ -24,6 +24,7 @@ public class ConnectionProvider {
 			DataSource datasource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx_encheresBDD");
 			cnx = datasource.getConnection();
 		} catch (NamingException e) {
+			e.printStackTrace();
 			DALException exception = new DALException("Le pool de connexions est introuvable !");
 			throw exception;
 		} catch (SQLException e) {
