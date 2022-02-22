@@ -66,6 +66,7 @@ public class SeConnecterServlet extends HttpServlet {
 		  	HttpSession session = request.getSession();
 			//Alimentation des attributs de la page profil
 			session.setAttribute("pseudoLu", utilisateurConnecte.getPseudo());
+			session.setAttribute("idUtilisateur", utilisateurConnecte.getNoUtilisateur());
 			session.setAttribute("nomLu",  utilisateurConnecte.getNom());
 			session.setAttribute("prenomLu",  utilisateurConnecte.getPrenom());
 			session.setAttribute("emailLu",  utilisateurConnecte.getEmail());
