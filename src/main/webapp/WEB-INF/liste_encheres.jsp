@@ -17,6 +17,7 @@
         <title>ENi | Enchères</title>
     </head>
     <body>
+      <a class="header__nav-link" href="${pageContext.request.contextPath}/test">Test</a>
         <div class="container">
             <header class="header">
                 <div class="header__logo">
