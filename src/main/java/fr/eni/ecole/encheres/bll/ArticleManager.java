@@ -32,6 +32,7 @@ public class ArticleManager {
 			articleDAO.insertArticles(article);
 		} catch(DALException e){
 		//--- Levée d'une exception quand l'article n'est pa inséré
+			e.printStackTrace();
 			throw new BLLException("Erreur lors de l'insertion de l'article !");
 		}
 	}
