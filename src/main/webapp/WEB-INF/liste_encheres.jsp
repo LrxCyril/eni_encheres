@@ -71,7 +71,7 @@
                       <div class="form__filter">
                             <c:if test="${session_active}">
                             <div class="form__achats-filter">
-                                <input class="form__radio" type="radio" name="achats" id="achats" checked>
+                                <input class="form__radio" type="radio" name="achats" id="achats" value="achats">
                                 <label class="form__radio-label" for="achats">Achats</label>
                                 <ul class="form__list">
                                     <li class="form__item">
@@ -89,7 +89,7 @@
                                 </ul>
                             </div>
                             <div class="form__ventes-filter">
-                                <input class="form__radio" type="radio" name="mes-ventes" id="mes-ventes">
+                                <input class="form__radio" type="radio" name="mes-ventes" id="mes-ventes" value="mes-ventes">
                                 <label class="form__radio-label" for="mes-ventes">Mes ventes</label>
                                 <ul class="form__list">
                                     <li class="form__item">
