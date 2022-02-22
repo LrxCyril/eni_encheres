@@ -62,7 +62,7 @@
                             <label class="form__categories-label" for="categories">Categories</label>
                             <select class="form__select" name="categories" id="categories">
                                 <c:forEach items="${listeCategories}" var="categorie" >
-	                                <option class="form__option" value="${categorie}">${categorie}</option>
+	                                <option class="form__option" value="${categorie.getNoCategorie()}">${categorie.getLibelle()}</option>
                                 </c:forEach>
                             </select>
                         </div> 

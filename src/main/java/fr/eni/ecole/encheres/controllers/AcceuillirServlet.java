@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.ecole.encheres.bll.ArticleManager;
 import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
+import fr.eni.ecole.encheres.bo.Categorie;
 
 
 
@@ -37,11 +38,14 @@ public class AcceuillirServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
-		List<String> categorieArticle =new ArrayList<String>();
+		List<Categorie> categorieArticle =new ArrayList<Categorie>();
+		Categorie cateVide= new Categorie();
 		try {
 			articles=manager.selectArticle();
 			categorieArticle= manager.selectCategorie();
-			categorieArticle.add(0, "");
+			cateVide.setNoCategorie(0);
+			cateVide.setLibelle("");
+			categorieArticle.add(0,cateVide);
 			request.setAttribute("listeCategories", categorieArticle);
 			request.setAttribute("listeArticles", articles);
 		} catch (BLLException e) {
@@ -56,14 +60,13 @@ public class AcceuillirServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
-		List<String> categorieArticle =new ArrayList<String>();
-		String filtreCategorie=request.getParameter("categories");
+		List<Categorie> categorieArticle =new ArrayList<Categorie>();
+		int filtreCategorie=Integer.parseInt(request.getParameter("categories"));
 		String recherche= request.getParameter("rechercheArticle");
 		System.out.println(filtreCategorie);
-		System.out.println(recherche);
 		try {
 			//filtres
-			if (!filtreCategorie.isEmpty()) {
+			if (filtreCategorie !=0) {
 				//filtre par recherche et categorie
 				if(!recherche.isBlank()) {
 					articles=manager.selectArticlebyCateNom(filtreCategorie,recherche);				
@@ -72,12 +75,15 @@ public class AcceuillirServlet extends HttpServlet {
 					articles=manager.selectArticlebyCate(filtreCategorie);
 				}}
 			//filtre par recherche
-			if(!recherche.isBlank()&&filtreCategorie.isEmpty()) {
+			if(!recherche.isBlank()&&filtreCategorie !=0) {
 				articles=manager.selectArticlebyNom(recherche);
 			}
 			
 			categorieArticle= manager.selectCategorie();
-			categorieArticle.add(0, "");
+			Categorie cateVide= new Categorie();
+			cateVide.setNoCategorie(0);
+			cateVide.setLibelle("");
+			categorieArticle.add(0,cateVide);
 			request.setAttribute("listeCategories", categorieArticle);
 			request.setAttribute("listeArticles", articles);
 		} catch (BLLException e) {
