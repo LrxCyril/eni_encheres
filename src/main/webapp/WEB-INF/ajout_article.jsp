@@ -58,17 +58,17 @@
               <!--  --------------------------------------------------------------------------------------  -->    
 		                    
 		                    <label for="rue">Rue :</label>
-		                    <input type="text" name="rue" id="rue" placeholder="${rueLu}" values="${rueLu}">
+		                    <input type="text" name="rue" id="rue" value="${rueLu}">
 		                    <c:if test="${not empty requestScope.rue}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
 		                    <label for="code_postal">Code postal :</label>
-		                    <input type="text" name="code_postal" id="code_postal" placeholder="${cPLu}" values="${cPLu}">
+		                    <input type="text" name="code_postal" id="code_postal" value="${cPLu}">
 		                    <c:if test="${not empty requestScope.code_postal}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
 		                    <label for="ville">Ville :</label>
-		                    <input type="text" name="ville" id="ville" placeholder="${villeLu}" values="${villeLu}">
+		                    <input type="text" name="ville" id="ville" value="${villeLu}">
 		                    <c:if test="${not empty requestScope.ville}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
