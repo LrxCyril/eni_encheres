@@ -79,7 +79,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			ordre.setDate(4, java.sql.Date.valueOf(nouvelArticle.getDateDebutEncheres()));
 			ordre.setDate(5, java.sql.Date.valueOf(nouvelArticle.getDateFinEncheres()));
 			ordre.setInt(6, nouvelArticle.getPrixInitial());
-			ordre.setInt(7, nouvelArticle.getPrixVente());
 			ordre.setInt(8, nouvelArticle.getNoUtilisateur());
 			ordre.setInt(9, nouvelArticle.getNoCategorie());
 
