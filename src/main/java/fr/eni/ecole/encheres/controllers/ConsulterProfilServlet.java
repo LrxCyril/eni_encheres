@@ -38,7 +38,6 @@ public class ConsulterProfilServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String loginConnecte=(String) session.getAttribute("login");
 		String profilRecherche=(String)session.getAttribute("profilRecherche");
-		System.out.println(request.getParameter("utilisateur"));
 		if (request.getParameter("utilisateur")!=null) {
 			profilRecherche=request.getParameter("utilisateur");
 		}
@@ -49,6 +48,7 @@ public class ConsulterProfilServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		//Alimentation des attributs de la page profil
+		System.out.println(profilUtilisateur.getNoUtilisateur());
 		request.setAttribute("pseudo", profilUtilisateur.getPseudo());
 		request.setAttribute("nom",  profilUtilisateur.getNom());
 		request.setAttribute("prenom",  profilUtilisateur.getPrenom());

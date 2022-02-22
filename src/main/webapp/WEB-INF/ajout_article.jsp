@@ -57,20 +57,20 @@
 			                    	<p>Champs obligatoire</p>
 			                    </c:if>
 		                   
-              <!--  --------------------------------------------------------------------------------------  -->    
+  
 		                    
 		                    <label class="form__label" for="rue">Rue :</label>
-		                    <input class="form__input" type="text" name="rue" id="rue" value="${rueLu}">
+		                    <input class="form__input" type="text" name="rue" id="rue" value="${utilisateurActif.getRue()}">
 			                    <c:if test="${not empty requestScope.rue}">
 			                    	<p>Champs obligatoire</p>
 			                    </c:if>
 		                    <label class="form__label" for="code_postal">Code postal :</label>
-		                    <input class="form__input" type="text" name="code_postal" id="code_postal" value="${cPLu}">
+		                    <input class="form__input" type="text" name="code_postal" id="code_postal" value="${utilisateurActif.getCodePostal()}">
 			                    <c:if test="${not empty requestScope.code_postal}">
 			                    	<p>Champs obligatoire</p>
 			                    </c:if>
 		                    <label class="form__class" for="ville">Ville :</label>
-		                    <input class="form__input" type="text" name="ville" id="ville" value="${villeLu}">
+		                    <input class="form__input" type="text" name="ville" id="ville" value="${utilisateurActif.getVille()}">
 			                    <c:if test="${not empty requestScope.ville}">
 			                    	<p>Champs obligatoire</p>
 			                    </c:if>

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.ecole.encheres.bll.ArticleManager;
 import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bo.Article;
+import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.dal.DALException;
 
@@ -45,9 +46,7 @@ public class AjouterArticleServlet extends HttpServlet {
 		
 		List<Categorie> categorieArticle =new ArrayList<Categorie>();
 		try {
-			categorieArticle= manager.selectCategorie();
-			System.out.println(categorieArticle.get(0).getLibelle());
-			
+			categorieArticle= manager.selectCategorie();		
 			request.setAttribute("listeCategories", categorieArticle);
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
@@ -67,9 +66,8 @@ public class AjouterArticleServlet extends HttpServlet {
 			Article ajoutArticle = new Article();
 			Boolean vide = false;
 			HttpSession session = request.getSession();
-			ajoutArticle.setNoUtilisateur((int) session.getAttribute("idUtilisateur"));
+			ajoutArticle.setNoUtilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur());
 			ajoutArticle.setNomArticle(request.getParameter("nom_article"));
-			
 			ajoutArticle.setDescription(request.getParameter("description"));
 			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("categories")));
 			//Photo article
@@ -78,7 +76,6 @@ public class AjouterArticleServlet extends HttpServlet {
 			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("date_debut_encheres"),dtf));
 			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
 			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
-			//ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prix_vente")));
 			
 		//récupérer les paramètres de requêtes
 			

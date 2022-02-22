@@ -47,6 +47,9 @@
 						</a>
 
                     </c:if>
+                       <a href="${pageContext.request.contextPath}/home">
+                       	<input type="button" name="annuler" value="Annuler">
+                   	</a>
         </main>
     	</div>
     </body>

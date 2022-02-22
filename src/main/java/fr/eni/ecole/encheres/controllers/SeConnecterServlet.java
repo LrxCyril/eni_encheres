@@ -65,7 +65,11 @@ public class SeConnecterServlet extends HttpServlet {
 		// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
 		  	HttpSession session = request.getSession();
 			//Alimentation des attributs de la page profil
-			session.setAttribute("pseudoLu", utilisateurConnecte.getPseudo());
+		  	System.out.println( "mon numero"+utilisateurConnecte.getNoUtilisateur());
+
+			
+
+		  	/*session.setAttribute("pseudoLu", utilisateurConnecte.getPseudo());
 			session.setAttribute("idUtilisateur", utilisateurConnecte.getNoUtilisateur());
 			session.setAttribute("nomLu",  utilisateurConnecte.getNom());
 			session.setAttribute("prenomLu",  utilisateurConnecte.getPrenom());
@@ -74,7 +78,7 @@ public class SeConnecterServlet extends HttpServlet {
 			session.setAttribute("rueLu",  utilisateurConnecte.getRue());
 			session.setAttribute("cPLu",  utilisateurConnecte.getCodePostal());
 			session.setAttribute("villeLu",  utilisateurConnecte.getVille());
-			session.setAttribute("mdpLu",  utilisateurConnecte.getMotDePasse());
+			session.setAttribute("mdpLu",  utilisateurConnecte.getMotDePasse());*/
 		  	session.setAttribute("utilisateurActif", utilisateurConnecte);
 			session.setAttribute("session_active", true);
 			session.setAttribute("profilRecherche",identifiant);
