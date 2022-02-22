@@ -32,7 +32,7 @@ public class SeDeconnecterServlet extends HttpServlet {
 		
 		request.getSession().invalidate();
 	
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/home");
 		rd.forward(request, response);
 	}
 
