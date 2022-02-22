@@ -44,6 +44,10 @@
 		                    <c:if test="${not empty requestScope.photo_article}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
+		                    
+		                    <label for="prix_initial">Mise à prix: </label>
+		                    <input type="number" min="2" max="5000" step="2" value="2">
+		                    
 		                    <label for="date_debut_encheres">Début de l'enchère :</label>
 		                    <input type="date" name="date_debut_encheres" id="date_debut_encheres">
 		                    <c:if test="${not empty requestScope.date_debut_encheres}">
