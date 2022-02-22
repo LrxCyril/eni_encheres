@@ -6,6 +6,7 @@ import java.util.List;
 
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
+import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
@@ -48,8 +49,8 @@ public class ArticleManager {
 		return articles;
 	}
 		
-		public List<String> selectCategorie() throws BLLException {
-			List<String> categorieArticle =new ArrayList<String>();
+		public List<Categorie> selectCategorie() throws BLLException {
+			List<Categorie> categorieArticle =new ArrayList<Categorie>();
 				// --- récupérer la liste des articles en vente
 			try {
 				categorieArticle = articleDAO.selectLibelle();
@@ -61,7 +62,7 @@ public class ArticleManager {
 		
 	}
 
-		public List<ArticleVendu> selectArticlebyCateNom(String filtreCategorie, String recherche) throws BLLException {
+		public List<ArticleVendu> selectArticlebyCateNom(int filtreCategorie, String recherche) throws BLLException {
 			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			LocalDate date=LocalDate.now();
 				// --- récupérer la liste des articles en vente
@@ -74,7 +75,7 @@ public class ArticleManager {
 			return articles;
 		}
 
-		public List<ArticleVendu> selectArticlebyCate(String filtreCategorie) throws BLLException {
+		public List<ArticleVendu> selectArticlebyCate(int filtreCategorie) throws BLLException {
 			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			LocalDate date=LocalDate.now();
 				// --- récupérer la liste des articles en vente

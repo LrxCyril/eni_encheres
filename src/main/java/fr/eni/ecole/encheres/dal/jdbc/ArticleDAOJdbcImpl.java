@@ -7,6 +7,7 @@ import java.sql.*;
 
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
+import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
@@ -15,12 +16,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	// creer constante de requete d'insertion d'un article
 
 	private static final String SQL_SELECT_ARTICLE = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS  Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE (date_debut_encheres>?)";
-	private static final String SQL_SELECT_ARTICLE_BY_CATE = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE (date_debut_encheres>? AND libelle=?)";
+	private static final String SQL_SELECT_ARTICLE_BY_CATE = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE (date_debut_encheres>? AND Categories.no_categorie=?)";
 	private static final String SQL_SELECT_ARTICLE_BY_NOM = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE (date_debut_encheres>? AND nom_article=?)";
-	private static final String SQL_SELECT_ARTICLE_BY_CATE_NOM = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE (date_debut_encheres>? AND nom_article=? AND libelle=?)";
+	private static final String SQL_SELECT_ARTICLE_BY_CATE_NOM = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE (date_debut_encheres>? AND nom_article=? AND Categories.no_categorie=?)";
 	private static final String SQL_INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie VALUES (?,?,?,?,?,?,?,?)";
 	private static final String SQL_DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
-	private static final String SQL_SELECT_LIBELLE = "Select libelle from CATEGORIES";
+	private static final String SQL_SELECT_LIBELLE = "Select no_categorie, libelle from CATEGORIES";
 	
 	@SuppressWarnings("null")
 	@Override
@@ -96,10 +97,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public List<String> selectLibelle() throws DALException {
+	public List<Categorie> selectLibelle() throws DALException {
 		// creer commande SQL inserer article (idem inserer utilisateur dans Utilisateur
 		// DAO JdBC Impl
-		List<String> listeCategorie = new ArrayList<String>();
+		List<Categorie> listeCategorie = new ArrayList<Categorie>();
 		// --- Obtenir la requête
 		try (Connection connexion = ConnectionProvider.getConnection();) {
 
@@ -109,7 +110,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			// --- Exécuter la requête
 			ResultSet rs =ordre.executeQuery();
 			while (rs.next()) {
-				listeCategorie.add((rs.getString("libelle")));
+				Categorie categorie = new Categorie();
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
+				listeCategorie.add(categorie);
 			}
 
 		} catch (SQLException sqle) {
@@ -121,7 +125,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> selectArticlebyCateNom(LocalDate date, String filtreCategorie, String recherche) throws DALException {
+	public List<ArticleVendu> selectArticlebyCateNom(LocalDate date, int filtreCategorie, String recherche) throws DALException {
 		List<ArticleVendu> articles = new ArrayList<ArticleVendu>(); 
 		// Recherche de l'utilisateur selon son identifiant dans la Base de donnée
 				// 1- Obtenir une connexion
@@ -132,7 +136,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					ordre.setDate(1, java.sql.Date.valueOf(date));
 
 					ordre.setString(2,recherche);
-					ordre.setString(3,filtreCategorie);
+					ordre.setInt(3,filtreCategorie);
 					// Appel de la methode constuisant l'utilisateur
 					ResultSet rs = ordre.executeQuery();
 
@@ -165,7 +169,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> selectArticlebyCate(LocalDate date, String filtreCategorie) throws DALException {
+	public List<ArticleVendu> selectArticlebyCate(LocalDate date, int filtreCategorie) throws DALException {
 		List<ArticleVendu> articles = new ArrayList<ArticleVendu>(); 
 		// Recherche de l'utilisateur selon son identifiant dans la Base de donnée
 				// 1- Obtenir une connexion
@@ -174,7 +178,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_ARTICLE_BY_CATE);
 					// ajout du paramètre à la requete(Where pseudo)
 					ordre.setDate(1, java.sql.Date.valueOf(date));
-					ordre.setString(2,filtreCategorie);
+					ordre.setInt(2,filtreCategorie);
 					// Appel de la methode constuisant l'utilisateur
 					ResultSet rs = ordre.executeQuery();
 
