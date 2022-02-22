@@ -27,18 +27,12 @@
 		                    <c:if test="${not empty requestScope.description}">
 		                    	<p>Champs obligatoire</p>
 		                    </c:if>
-		                    <label for="no_categorie">Catégorie :</label>
-		                    <select name="no_categorie" id="no_categorie" placeholder="Catégorie">
-		                    	<option value="">--Choisissez une catégorie--</option>
-							    <option class="form__option" value="toutes">Toutes</option>
-                                <option class="form__option" value="chambre">Chambre</option>
-                                <option class="form__option" value="equipement-cuisine">Equipement Cuisine</option>
-                                <option class="form__option" value="equipement">Equipement</option>
-                                <option class="form__option" value="salle-de-bain">Salle de bain</option>
-                                <option class="form__option" value="salon">Salon</option>
-		                    <c:if test="${not empty requestScope.categorie}">
-		                    	<p>Champs obligatoire</p>
-		                    </c:if>
+		                    <label class="form__categories-label" for="categories">Categories</label>
+                            <select class="form__select" name="categories" id="categories">
+                                <c:forEach items="${listeCategories}" var="categorie" >
+	                                <option class="form__option" value="${categorie}">${categorie}</option>
+                                </c:forEach>
+                            </select>
 		                    <label for="photo_article">Photo de l'article :</label>
 		                    <input type="file" name="photo_article" id="photo_article" accept="image/png, image/jpeg">
 		                    <c:if test="${not empty requestScope.photo_article}">
