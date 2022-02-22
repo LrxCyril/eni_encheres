@@ -56,13 +56,13 @@ public class AjouterArticleServlet extends HttpServlet {
 			ajoutArticle.setNomArticle(request.getParameter("nom_article"));
 			
 			ajoutArticle.setDescription(request.getParameter("description"));
-			//ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("no_categorie")));
+			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("no_categorie")));
 			//Photo article
 			//TODO
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("date_debut_encheres"),dtf));
 			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
-			//ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
+			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
 			//ajoutArticle.setPrixVente(Integer.parseInt(request.getParameter("prix_vente")));
 			
 		//récupérer les paramètres de requêtes
