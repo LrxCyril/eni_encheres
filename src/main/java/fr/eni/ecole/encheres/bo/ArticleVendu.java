@@ -18,7 +18,6 @@ public class ArticleVendu {
 	
 	
 	// --- Getters and Setters ----------------------
-	
 	// --- numero de l'article
 	public int getNoArticle() {
 		return noArticle;

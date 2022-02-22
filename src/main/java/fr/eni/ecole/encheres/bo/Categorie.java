@@ -5,8 +5,7 @@ public class Categorie {
 	int noCategorie;
 	String libelle;
 	
-	// --- Getters and Setters
-	
+	// --- Getters and Setters ---------------------
 	// --- numero de categorie
 	public int getNoCategorie() {
 		return noCategorie;

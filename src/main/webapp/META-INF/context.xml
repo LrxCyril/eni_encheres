@@ -16,5 +16,7 @@
 		
 		removeAbandoned="true"
 		removeAbandonedTimeout="15"
+		
+		auth="Container"
 		/>
 </Context>
