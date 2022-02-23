@@ -1,5 +1,6 @@
 package fr.eni.ecole.encheres.bll;
 
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class ArticleManager {
 			articles = articleDAO.selectArticle(date);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
-			throw new BLLException("L'utilisateur n'existe pas !");
+			throw new BLLException("Erreur lors de la selection des articles");
 		}
 		return articles;
 	}
@@ -61,7 +62,7 @@ public class ArticleManager {
 				categorieArticle = articleDAO.selectLibelle();
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
-				throw new BLLException("L'utilisateur n'existe pas !");
+				throw new BLLException("Erreur lors de la selection des categories");
 			}
 			return categorieArticle;
 		
@@ -75,7 +76,7 @@ public class ArticleManager {
 				articles = articleDAO.selectArticlebyCateNom(date, filtreCategorie, recherche);
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
-				throw new BLLException("L'utilisateur n'existe pas !");
+				throw new BLLException("Erreur lors de la selection par nom");
 			}
 			return articles;
 		}
@@ -89,7 +90,7 @@ public class ArticleManager {
 				articles = articleDAO.selectArticlebyCate(date, filtreCategorie);
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
-				throw new BLLException("L'utilisateur n'existe pas !");
+				throw new BLLException("Erreur lors de la selection par categorie");
 			}
 			return articles;
 		}
@@ -103,9 +104,19 @@ public class ArticleManager {
 				articles = articleDAO.selectArticlebyNom(date, recherche);
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
-				throw new BLLException("L'utilisateur n'existe pas !");
+				throw new BLLException("Erreur lors de la selection des articles");
 			}
 			return articles;
+		}
+
+		public Connection MiseAJourArticle(Article article, Connection cnx) throws BLLException {
+			try {
+				articleDAO.MiseAJourArticle(article,cnx);
+			} catch (DALException e) {
+				// --- Levée d'une exception quand l'email n'est pas reconnu
+				throw new BLLException("Erreur lors de la mise à jour de l'article !");
+			}
+			return cnx;
 		}
 	
 	

@@ -22,9 +22,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SQL_SELECT_ARTICLE_BY_CATE_NOM = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE (date_debut_encheres>? AND nom_article=? AND Categories.no_categorie=?)";
 	private static final String SQL_INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?)";
 	private static final String SQL_DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
-	private static final String SQL_SELECT_LIBELLE = "SELECT no_categorie, libelle FROM CATEGORIES";
+	private static final String SQL_SELECT_LIBELLE = "Select no_categorie, libelle from CATEGORIES";
+	private static final String SQL_UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET prix_vente=? WHERE  no_article=?";
 	private static final String SQL_INSERT_ADRESSE_RETRAIT = "INSERT INTO RETRAITS (no_article,rue, code_postal,ville) VALUES (?,?,?,?)";
-	
+
+
 	@SuppressWarnings("null")
 	@Override
 	public List<ArticleVendu> selectArticle(LocalDate date) throws DALException {
@@ -255,18 +257,32 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
+	public void MiseAJourArticle(Article article, Connection cnx) throws DALException {
+		
+		try {
+			// 2- Contruire la requete
+			PreparedStatement ordre = cnx.prepareStatement(SQL_UPDATE_ARTICLE);
+			ordre.setInt(1,article.getPrixVente());
+			ordre.setInt(2,article.getNoArticle());
+			ordre.executeUpdate();
+		}catch  (SQLException sqle){
+			//Levé de l'exception l'utilisateur n'existe pas
+			throw new DALException("Impossible de mettre à jour la ligne");
+		}
+	}
+
+	@Override
 	public void insertRetrait(Retrait ajoutRetrait) throws DALException{
 		try(Connection connexion = ConnectionProvider.getConnection();){
-			
-		PreparedStatement ordre = connexion.prepareStatement(SQL_INSERT_ADRESSE_RETRAIT);
-		ordre.setString(1,ajoutRetrait.getRue());
-		ordre.setString(2,ajoutRetrait.getCodePostal());
-		ordre.setString(3,ajoutRetrait.getVille());
+			PreparedStatement ordre = connexion.prepareStatement(SQL_INSERT_ADRESSE_RETRAIT);
+			ordre.setString(1,ajoutRetrait.getRue());
+			ordre.setString(2,ajoutRetrait.getCodePostal());
+			ordre.setString(3,ajoutRetrait.getVille());
 		} catch (SQLException sqle) {
-			// TODO Auto-generated catch block
-			throw new DALException("Retrait invalide !");
-		}
-		
+		// TODO Auto-generated catch block
+		throw new DALException("Retrait invalide !");
+	}
+
 	}
 
 

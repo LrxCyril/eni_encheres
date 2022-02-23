@@ -21,7 +21,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	private static final String SQL_INSERT_UTILISATEURS = "INSERT INTO UTILISATEURS (pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur,telephone) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo=?,nom=?,prenom=?,email=?,rue=?,code_postal=?,ville=?,mot_de_passe=?,credit=?,administrateur=?,telephone=?  WHERE  no_utilisateur=?";
 	private static final String SQL_DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?";
-	
+	private static final String SQL_UPDATE_CREDIT_UTILISATEUR = "UPDATE UTILISATEURS SET credit=? WHERE  no_utilisateur=?";
 	/**
 	 * Methode permettant de recuperer un utilisateur selon son pseudo
 	 */
@@ -198,6 +198,22 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de supprimer la ligne");
+		}
+	}
+	
+
+	@Override
+	public void MiseAJourCreditUtilisateur (Utilisateur encherisseur, Connection cnx) throws DALException {
+		try{
+			// 2- Contruire la requete
+			PreparedStatement ordre = cnx.prepareStatement(SQL_UPDATE_CREDIT_UTILISATEUR);
+			ordre.setInt(1,encherisseur.getCredit());
+			ordre.setInt(2,encherisseur.getNoUtilisateur());
+			ordre.executeUpdate();
+		}catch  (SQLException sqle){
+			//Levé de l'exception l'utilisateur n'existe pas
+			sqle.printStackTrace();
+			throw new DALException("Impossible de mettre à jour l'utilisateur");
 		}
 	}
 }

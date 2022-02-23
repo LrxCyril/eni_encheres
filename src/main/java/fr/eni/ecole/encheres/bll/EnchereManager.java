@@ -1,9 +1,18 @@
 package fr.eni.ecole.encheres.bll;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.eni.ecole.encheres.bo.Enchere;
 import fr.eni.ecole.encheres.bo.ObjetEnchere;
+import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
-import fr.eni.ecole.encheres.dal.jdbc.EnchereDAO;
+import fr.eni.ecole.encheres.dal.EnchereDAO;
+import fr.eni.ecole.encheres.dal.jdbc.ConnectionProvider;
 
 public class EnchereManager {
 
@@ -12,53 +21,66 @@ public class EnchereManager {
 	public EnchereManager() {
 	}
 	
-	public void traiterEnchere(int noArticle, int montantEnchere, int noUtilisateur, int creditAcheteur) {
-	
+	public boolean traiterEnchere(int noArticle, int montantEnchere, int noEncherisseur, int creditEncherisseur) throws EnchereRefuseException {
+		boolean insertion =true;
 		try {
 			// --- 1 | Créer une instance d'enchère
+			
 			enchereDAO = DAOFactory.getEnchereDAO();
-			ObjetEnchere premiereEnchere = null;
-			
-			// --- 2 | Créer une instance de l'objet
-	
-			premiereEnchere = enchereDAO.premiereEnchere(noArticle);
-			
-			int idUtilisateurVendeur = premiereEnchere.getNoUtilisateur();
-			int miseAPrix = premiereEnchere.getMiseAPrix();
-			int prixArticle = premiereEnchere.getPrixVente();
-			int creditVendeur = premiereEnchere.getCredit();
-			int nouveauCreditAcheteur = creditAcheteur - montantEnchere;
-			int nouveauCreditVendeur = creditVendeur + montantEnchere;
-			
-			//éléments de test
-			System.out.println(idUtilisateurVendeur);
-			System.out.println(miseAPrix);
-			System.out.println(prixArticle);
-			System.out.println(creditVendeur);
-			
-			// --- 3 | Les vérifications à faire
-			// - vérifier la validité de la première enchère
-			if (montantEnchere > miseAPrix) {
-				// - Si le crédit de l'acheteur est supérieur au montant de l'enchère
-				if (creditAcheteur > montantEnchere) {
-					// - mettre à jour le prix de vente
-					enchereDAO.nouveauPrixVente(noArticle, montantEnchere);
-					
-					// - mettre à jour le crédit de l'acheteur
-					enchereDAO.debiterAcheteur(noUtilisateur, nouveauCreditAcheteur);
-					
-					// - mettre à jour le crédit du vendeur
-					enchereDAO.crediterAcheteur(noUtilisateur, nouveauCreditVendeur);
-					
-					// - mettre à jour la meilleure offre pour l'objet
-					enchereDAO.meilleureOffre(noUtilisateur, montantEnchere);
-					
-				}					
+			ArticleManager mgrArticle = new ArticleManager();
+			UtilisateurManager mgrUtilisateur = new UtilisateurManager();
+			Enchere derniereEnchere= enchereDAO.enchereExistante(noArticle);
+			Enchere	nouvelleEnchere= derniereEnchere;
+			//verifier que l'encherisseur peut encherir
+				if (creditEncherisseur>montantEnchere) {
+					if (montantEnchere>derniereEnchere.getMontantEnchere()) {
+						//inserer l'enchère
+
+						
+						try {
+							Connection cnx = ConnectionProvider.getConnection();
+							// Ouvrir une transaction
+							cnx.setAutoCommit(false);
+								nouvelleEnchere.setDateEnchere(LocalDateTime.now());
+								nouvelleEnchere.setMontantEnchere(montantEnchere);
+								enchereDAO.InsertEnchere(nouvelleEnchere, cnx);
+								//enregistrer nouvelle valeur de l'article
+								derniereEnchere.getArticle().setPrixVente(montantEnchere);
+								//Mettre à jour l'article en BDD				
+								mgrArticle.MiseAJourArticle(derniereEnchere.getArticle(),cnx);
+								//Mettre à jour le credit utilisateur en BDD
+								derniereEnchere.getUtilisateur().setCredit(creditEncherisseur);
+								//1-nouvel encherisseur	
+								Utilisateur encherisseur = new Utilisateur();
+								encherisseur.setNoUtilisateur(noEncherisseur);
+								encherisseur.setCredit(creditEncherisseur-montantEnchere);
+								mgrUtilisateur.MiseAJourCreditUtilisateur(encherisseur,cnx);
+								//2-ancien encherisseur si existe
+								if (derniereEnchere.getMontantEnchere()!=0) {
+									int creditAncienEncherisseur=creditEncherisseur+derniereEnchere.getMontantEnchere();
+									derniereEnchere.getUtilisateur().setCredit(creditAncienEncherisseur);						
+									mgrUtilisateur.MiseAJourCreditUtilisateur(derniereEnchere.getUtilisateur(),cnx);
+								}
+							//fermer la transaction
+							cnx.commit();
+						} catch (BLLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}else {
+						insertion=false;
+						throw new EnchereRefuseException("Le montant est trop bas");}
+				}else {
+					insertion=false;
+					throw new EnchereRefuseException("votre credit n'est pas suffisant");}
 			}
 		
-		} catch (DALException e) {
+		catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	return insertion;	
 	}
 }

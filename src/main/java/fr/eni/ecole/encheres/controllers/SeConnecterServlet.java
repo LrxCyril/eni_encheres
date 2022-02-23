@@ -67,18 +67,6 @@ public class SeConnecterServlet extends HttpServlet {
 			//Alimentation des attributs de la page profil
 		  	System.out.println( "mon numero"+utilisateurConnecte.getNoUtilisateur());
 
-			
-
-		  	/*session.setAttribute("pseudoLu", utilisateurConnecte.getPseudo());
-			session.setAttribute("idUtilisateur", utilisateurConnecte.getNoUtilisateur());
-			session.setAttribute("nomLu",  utilisateurConnecte.getNom());
-			session.setAttribute("prenomLu",  utilisateurConnecte.getPrenom());
-			session.setAttribute("emailLu",  utilisateurConnecte.getEmail());
-			session.setAttribute("telLu",  utilisateurConnecte.getTelephone());
-			session.setAttribute("rueLu",  utilisateurConnecte.getRue());
-			session.setAttribute("cPLu",  utilisateurConnecte.getCodePostal());
-			session.setAttribute("villeLu",  utilisateurConnecte.getVille());
-			session.setAttribute("mdpLu",  utilisateurConnecte.getMotDePasse());*/
 		  	session.setAttribute("utilisateurActif", utilisateurConnecte);
 			session.setAttribute("session_active", true);
 			session.setAttribute("profilRecherche",identifiant);
