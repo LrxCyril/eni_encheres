@@ -8,6 +8,7 @@ import java.sql.*;
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
+import fr.eni.ecole.encheres.bo.Retrait;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
@@ -23,6 +24,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SQL_DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
 	private static final String SQL_SELECT_LIBELLE = "Select no_categorie, libelle from CATEGORIES";
 	private static final String SQL_UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET prix_vente=? WHERE  no_article=?";
+	private static final String SQL_INSERT_ADRESSE_RETRAIT = "INSERT INTO RETRAITS (no_article,rue, code_postal,ville) VALUES (?,?,?,?)";
+
+
 	@SuppressWarnings("null")
 	@Override
 	public List<ArticleVendu> selectArticle(LocalDate date) throws DALException {
@@ -265,6 +269,20 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de mettre à jour la ligne");
 		}
+	}
+
+	@Override
+	public void insertRetrait(Retrait ajoutRetrait) throws DALException{
+		try(Connection connexion = ConnectionProvider.getConnection();){
+			PreparedStatement ordre = connexion.prepareStatement(SQL_INSERT_ADRESSE_RETRAIT);
+			ordre.setString(1,ajoutRetrait.getRue());
+			ordre.setString(2,ajoutRetrait.getCodePostal());
+			ordre.setString(3,ajoutRetrait.getVille());
+		} catch (SQLException sqle) {
+		// TODO Auto-generated catch block
+		throw new DALException("Retrait invalide !");
+	}
+
 	}
 
 
