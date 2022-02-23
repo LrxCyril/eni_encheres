@@ -14,6 +14,9 @@ public class Article {
 	private int prixVente;
 	private int noUtilisateur;
 	private int noCategorie;
+	private String rue;
+	private String codePostal;
+	private String ville;
 	
 	/**
 	 * Constructeur d'article avec numéro d'article et nom d'article
@@ -182,5 +185,52 @@ public class Article {
 	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
 	}
-	
+
+	/**
+	 * Rue pour le retrait getter
+	 * @return rue string
+	 */
+	public String getRue() {
+		return rue;
+	}
+
+	/**
+	 * Rue pour le retrait setter
+	 * @param rue String
+	 */
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
+
+	/**
+	 * CodePostal pour le retrait getter
+	 * @return codePostal String
+	 */
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+	/**
+	 * CodePostal pour le retrait setter
+	 * @param codePostal String
+	 */
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	/**
+	 * Ville pour le retrait getter
+	 * @return ville String
+	 */
+	public String getVille() {
+		return ville;
+	}
+
+	/**
+	 * Ville pour le retrait setter
+	 * @param ville String
+	 */
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 }
