@@ -30,7 +30,7 @@ public class test extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		EnchereManager mgr= new EnchereManager();
-		  mgr.traiterEnchere(1, 100, 1);
+		  mgr.traiterEnchere(1, 100, 1, 200);
 	}
 
 	/**

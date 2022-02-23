@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 
 <!DOCTYPE html>
-<html>
+
+<html lang="fr">
+
     <head>
         <meta charset="UTF-8">
 
@@ -19,107 +21,113 @@
     <body>
       <a class="header__nav-link" href="${pageContext.request.contextPath}/test">Test</a>
         <div class="container">
+        
+        	<!-- Header ------------------ -->
+        
             <header class="header">
-                <div class="header__logo">
-                    <a class="header__main-link" href="${pageContext.request.contextPath}/home"> <!-- TODO : Retour à l'accueil | doit rester dans l'espace connecté quand l'utilisateur est identifié -->
-                        <h1 class="header__main-title">ENI - Enchères</h1>
-                    </a>
-                </div>
-                <nav class="header__nav">
-                    <ul class="header__nav-list">
-                        <li class="header__nav-item">
+				<a class="header__link" href="${pageContext.request.contextPath}/home"> <!-- TODO : Retour à l'accueil | doit rester dans l'espace connecté quand l'utilisateur est identifié -->
+					<h1 class="header__title">ENI - Enchères</h1>
+				</a>
+				<!-- Navigation -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item">
                             <c:if test="${ not sessionScope.session_active}">
-                                <a class="header__nav-link" href="${pageContext.request.contextPath}/connect">Se connecter | S'inscrire</a>
+                                <a class="nav__link" href="${pageContext.request.contextPath}/connect">Se connecter | S'inscrire</a>
                             </c:if>
                         </li>
                         <c:if test="${sessionScope.session_active}">
-	                        <li class="header__nav-item">
-	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
+	                        <li class="nav__item">
+	                            <a class="nav__link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
 	                        </li>
-	                        <li class="header__nav-item">
-	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/ajout/article">Vendre un article</a>
+	                        <li class="nav__item">
+	                            <a class="nav__link" href="${pageContext.request.contextPath}/ajout/article">Vendre un article</a>
 	                        </li>
-	                        <li class="header__nav-item">
-	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
+	                        <li class="nav__item">
+	                            <a class="nav__link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
 	                        </li>
-	                        <li class="header__nav-item">
-	                            <a class="header__nav-link" href="${pageContext.request.contextPath}/deconnect">Déconnexion</a>
+	                        <li class="nav__item">
+	                            <a class="nav__link" href="${pageContext.request.contextPath}/deconnect">Déconnexion</a>
 	                        </li>	
                         </c:if>
                     </ul>
                 </nav>
             </header>
+            
+            <!-- Main ------------------ -->
+            
             <main class="main">
-                <div class="main__name-page">
-                    <h2 class="main__title">Liste des enchères</h2>
-                </div>
-                <div class="main__form">
-                    <form class="form__container" method="post" action="${pageContext.request.contextPath}/home">
-                        <div>
+				<h2 class="main__title">Liste des enchères</h2>
+				<!-- Rechercher un article -->
+                <div class="research">
+                	<!-- formulaire -->
+                    <form class="research__form" method="post" action="${pageContext.request.contextPath}/home">
+                        <div class="form">
                             <label class="form__label" for="rechercheArticle">Recherche</label>
                             <input class="form__input" type="search" name="rechercheArticle" id="rechercheArticle" placeholder="Le nom de l'article contient">        
                         </div>
-                        <div>
-                            <label class="form__categories-label" for="categories">Categories</label>
+                        <div class="form">
+                            <label class="form__label" for="categories">Categories</label>
                             <select class="form__select" name="categories" id="categories">
                                 <c:forEach items="${listeCategories}" var="categorie" >
 	                                <option class="form__option" value="${categorie.getNoCategorie()}">${categorie.getLibelle()}</option>
                                 </c:forEach>
                             </select>
-                        </div> 
-                        <!-- TODO : afficher les boutons radios et checkbox liés aux enchères quand je suis redirigé  sur mon espace utilisateur-->
-						
-                      <div class="form__filter">
-                            <c:if test="${session_active}">
-                            <div class="form__achats-filter">
-                                <input class="form__radio" type="radio" name="achats" id="achats" value="achats">
-                                <label class="form__radio-label" for="achats">Achats</label>
-                                <ul class="form__list">
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
-                                        <label class="form__checkbox-label" for="encheres-ouvertes">enchères ouvertes</label>
+                        </div>
+                        
+                        <!-- Filtre ------------------ -->
+                        
+						<div class="filter">
+							<c:if test="${session_active}">
+                            <!-- Achats -->
+                            <div class="filter__achats">
+                                <input class="filter__radio" type="radio" name="achats" id="achats" value="achats">
+                                <label class="filter__label" for="achats">Achats</label>
+                                <ul class="filter__list">
+                                    <li class="filter__item">
+                                        <input class="filter__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
+                                        <label class="filter__label" for="encheres-ouvertes">enchères ouvertes</label>
                                     </li>
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="mes-encheres" id="mes-encheres">
-                                        <label class="form__checkbox-label" for="mes-encheres">mes enchères</label>
+                                    <li class="filter__item">
+                                        <input class="filter__checkbox" type="checkbox" name="mes-encheres" id="mes-encheres">
+                                        <label class="filter__label" for="mes-encheres">mes enchères</label>
                                     </li>
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="mes-encheres-remportees" id="mes-encheres-remportees">
-                                        <label class="form__checkbox-label" for="mes-encheres-remportees">mes enchères remportées</label>
+                                    <li class="filter__item">
+                                        <input class="filter__checkbox" type="checkbox" name="mes-encheres-remportees" id="mes-encheres-remportees">
+                                        <label class="filter__label" for="mes-encheres-remportees">mes enchères remportées</label>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="form__ventes-filter">
-                                <input class="form__radio" type="radio" name="mes-ventes" id="mes-ventes" value="mes-ventes">
-                                <label class="form__radio-label" for="mes-ventes">Mes ventes</label>
-                                <ul class="form__list">
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours">
-                                        <label class="form__checkbox-label" for="mes-ventes-en-cours">mes ventes en cours</label>
+                            
+                            <!-- Ventes -->
+                            <div class="filter__ventes">
+                                <input class="filter__radio" type="radio" name="mes-ventes" id="mes-ventes" value="mes-ventes">
+                                <label class="filter__label" for="mes-ventes">Mes ventes</label>
+                                <ul class="filter__list">
+                                    <li class="filter__item">
+                                        <input class="filter__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours">
+                                        <label class="filter__label" for="mes-ventes-en-cours">mes ventes en cours</label>
                                     </li>
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="ventes-non-debutees" id="ventes-non-debutees">
-                                        <label class="form__checkbox-label" for="ventes-non-debutees">ventes non débutées</label>
+                                    <li class="filter__item">
+                                        <input class="filter__checkbox" type="checkbox" name="ventes-non-debutees" id="ventes-non-debutees">
+                                        <label class="filter__label" for="ventes-non-debutees">ventes non débutées</label>
                                     </li>
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="ventes-terminees" id="ventes-terminees">
-                                        <label class="form__checkbox-label" for="ventes-terminees">ventes terminées</label>
+                                    <li class="filter__item">
+                                        <input class="filter__checkbox" type="checkbox" name="ventes-terminees" id="ventes-terminees">
+                                        <label class="filter__label" for="ventes-terminees">ventes terminées</label>
                                     </li>
                                 </ul>
                           </div>
                            </c:if>	
-                           
-                            
                              <a class="form__link" href="#">
                                 <input class="form__submit" type="submit" value="Rechercher">
                             </a>
-
                         </div>
-						
                     </form>
               	</div>
+              	
+              	<!-- Cartes annonces ------------------ -->
                 <div class="announce">
-        
                 	<c:forEach items="${listeArticles}" var="article" >
     					<div class="announce__card">
                         <img class="announce__image" src="#" alt="photo de l'annonce">
@@ -129,38 +137,11 @@
                             </a>
                             <p class="announce__price">Prix : ${article.getMiseAPrix()}</p>
                             <p class="announce__deadline">Fin de l'enchère : ${article.getDateFinEncheres()}</p>
-                            <p class="announce__seller-label">Vendeur : </p>
-                            <!-- TODO : renvoi vers la page profil de l'annonceur, consultation -->
-                            <a class="announce__seller-profile" href="${pageContext.request.contextPath}/consulter/profil?utilisateur=${article.getUtilisateur().getPseudo()}">${article.getUtilisateur().getPseudo()}</a>
+                            <p class="announce__seller">Vendeur : </p>
+                            <a class="announce__link" href="${pageContext.request.contextPath}/consulter/profil?utilisateur=${article.getUtilisateur().getPseudo()}">${article.getUtilisateur().getPseudo()}</a>
                         </div>
                     </div>
 					</c:forEach>
-<!--                     <div class="announce__card"> -->
-<!--                         <img class="announce__image" src="#" alt="photo de l'annonce"> -->
-<!--                         <div class="announce__description"> -->
-<!--                             <a class="announce__link" href="#"> -->
-<!--                                 <h3 class="announce__title">PC Gamer pour travailler</h3> -->
-<!--                             </a> -->
-<!--                             <p class="announce__price">Prix : 210 Points</p> -->
-<!--                             <p class="announce__deadline">Fin de l'enchère : 10/08/2018</p> -->
-<!--                             <p class="announce__seller-label">Vendeur : </p> -->
-<!--                             TODO : renvoi vers la page profil de l'annonceur, consultation -->
-<!--                             <a class="announce__seller-profile" href="#">jojo44</a> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                     <div class="announce__card"> -->
-<!--                         <img class="announce__image" src="#" alt="photo de l'annonce"> -->
-<!--                         <div class="announce__description"> -->
-<!--                             <a class="announce__link" href="#"> -->
-<!--                                 <h3 class="announce__title">Rocket stove pour riz et pâtes</h3> -->
-<!--                             </a> -->
-<!--                             <p class="announce__price">Prix : 185 Points</p> -->
-<!--                             <p class="announce__deadline">Fin de l'enchère : 09/10/2018</p> -->
-<!--                             <p class="announce__seller-label">Vendeur : </p> -->
-<!--                             TODO : renvoi vers la page profil de l'annonceur, consultation -->
-<!--                             <a class="announce__seller-profile" href="#">jiji56</a> -->
-<!--                         </div> -->
-<!--                     </div> -->
                 </div> 
             </main>
             <%@ include file="/WEB-INF/fragments/footer.jspf"%>

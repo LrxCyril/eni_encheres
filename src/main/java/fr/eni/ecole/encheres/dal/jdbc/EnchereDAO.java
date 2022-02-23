@@ -9,5 +9,13 @@ public interface EnchereDAO {
 	
 	ObjetEnchere premiereEnchere(int noArticle) throws DALException;
 	
+	void debiterAcheteur(int noUtilisateur, int nouveauCreditAcheteur);
+
+	void crediterAcheteur(int noUtilisateur, int nouveauCreditVendeur);
+
+	void meilleureOffre(int noUtilisateur, int montantEnchere);
+
+	void nouveauPrixVente(int noUtilisateur, int montantEnchere);
+	
 	
 }
