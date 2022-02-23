@@ -35,7 +35,8 @@ public class DetaillerEncheres extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		session.setAttribute("idArticle", Integer.parseInt(request.getParameter("idArticle")));
+		//if(session.getAttribute("idArticle")!=null) {
+		session.setAttribute("idArticle", Integer.parseInt(request.getParameter("idArticle")));//}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
 		
 		rd.forward(request, response);

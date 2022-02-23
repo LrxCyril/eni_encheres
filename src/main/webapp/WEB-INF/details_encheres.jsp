@@ -81,6 +81,9 @@
 						<p>${tel}</p>
 						</div>
 						<div>
+						<c:if test="${enchereInvalide}">
+							<p>Le montant de l'enchère n'est pas valide ou votre credit est insuffisant</p>
+						</c:if>
 						<label class="form__label" for="proposition">Ma Proposition</label>
 						<input class="form__input" type="text" name="proposition" id="proposition" placeholder="proposition">
 						<button type="submit">Enchérir</button>
