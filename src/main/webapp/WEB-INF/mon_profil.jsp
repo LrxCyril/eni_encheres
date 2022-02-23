@@ -24,7 +24,7 @@
         	<!-- Header ------------------ -->
         	
             <header class="header">
-				<a class="header__link" href="#">
+				<a class="header__link" href="${pageContext.request.contextPath}/home">
 					<h1 class="header__title">ENI - Enchères</h1>
 				</a>
             </header>
@@ -41,84 +41,83 @@
 						</c:if>
 						
 						<!-- pseudo -->
-						<div>
-						
+						<div class="form__fields">
+							<label class="form__label" for="pseudo">Pseudo :</label>
+							<input class="form__input" type="text" name="pseudo" id="pseudo" placeholder="pseudo" value="${utilisateurActif.getPseudo()}" >
+							<c:if test="${not empty requestScope.pseudo}">
+								<p class="form__error">champs obligatoire</p>
+							</c:if>
 						</div>
-						<label class="form__label" for="pseudo">Pseudo :</label>
-						<input class="form__input" type="text" name="pseudo" id="pseudo" placeholder="pseudo" value="${utilisateurActif.getPseudo()}" >
-						<c:if test="${not empty requestScope.pseudo}">
-							<p class="form__error">champs obligatoire</p>
-						</c:if>
+						
 						
 						<!-- nom -->
-						<div>
-						
+						<div class="form__fields">
+							<label class="form__label" for="nom">Nom :</label>
+							<input class="form__input" type="text" name="nom" id="nom" placeholder="nom" value="${utilisateurActif.getNom()}">
+							<c:if test="${not empty requestScope.nom}">
+								<p class="form__error">champs obligatoire</p>
+							</c:if>
 						</div>
-						<label class="form__label" for="nom">Nom :</label>
-						<input class="form__input" type="text" name="nom" id="nom" placeholder="nom" value="${utilisateurActif.getNom()}">
-						<c:if test="${not empty requestScope.nom}">
-							<p class="form__error">champs obligatoire</p>
-						</c:if>
+						
 						
 						<!-- prenom -->
-						<div>
-						
+						<div class="form__fields">
+							<label class="form__label" for="prenom">Prénom :</label>
+							<input class="form__input" type="text" name="prenom" id="prenom" placeholder="prénom" value="${utilisateurActif.getPrenom()}">
+							<c:if test="${not empty requestScope.prenom}">
+								<p class="form__error">champs obligatoire</p>
+							</c:if>
 						</div>
-						<label class="form__label" for="prenom">Prénom :</label>
-						<input class="form__input" type="text" name="prenom" id="prenom" placeholder="prénom" value="${utilisateurActif.getPrenom()}">
-						<c:if test="${not empty requestScope.prenom}">
-							<p class="form__error">champs obligatoire</p>
-						</c:if>
+						
 						
 						<!-- email -->
-						<div>
-						
+						<div class="form__fields">
+							<label class="form__label" for="email">Email :</label>
+							<input class="form__input" type="text" name="email" id="email" placeholder="email" value="${utilisateurActif.getEmail()}">
+							<c:if test="${not empty requestScope.email}">
+								<p class="form__error">champs obligatoire</p>
+							</c:if>
 						</div>
-						<label class="form__label" for="email">Email :</label>
-						<input class="form__input" type="text" name="email" id="email" placeholder="email" value="${utilisateurActif.getEmail()}">
-						<c:if test="${not empty requestScope.email}">
-							<p class="form__error">champs obligatoire</p>
-						</c:if>
+						
 						
 						<!-- telephone -->
-						<div>
-						
+						<div class="form__fields">
+							<label class="form__label" for="telephone">Téléphone :</label>
+							<input class="form__input" type="text" name="telephone" id="telephone" placeholder="numéro de téléphone" value="${utilisateurActif.getTelephone()}">
 						</div>
-						<label class="form__label" for="telephone">Téléphone :</label>
-						<input class="form__input" type="text" name="telephone" id="telephone" placeholder="numéro de téléphone" value="${utilisateurActif.getTelephone()}">
 						
 						<!-- rue -->
-						<div>
-						
+						<div class="form__fields">
+							<label class="form__label" for="rue">Rue :</label>
+							<input class="form__input" type="text" name="rue" id="rue" placeholder="N°, rue" value="${utilisateurActif.getRue()}">
+							<c:if test="${not empty requestScope.rue}">
+								<p class="form__error">champs obligatoire</p>
+							</c:if>
 						</div>
-						<label class="form__label" for="rue">Rue :</label>
-						<input class="form__input" type="text" name="rue" id="rue" placeholder="N°, rue" value="${utilisateurActif.getRue()}">
-						<c:if test="${not empty requestScope.rue}">
-							<p class="form__error">champs obligatoire</p>
-						</c:if>
+						
 						
 						<!-- code postal -->
-						<div>
-						
+						<div class="form__fields">
+							<label class="form__label" for="codePostal">Code postal :</label>
+							<input class="form__input" type="text" name="codePostal" id="codePostal" placeholder="code postal" value="${utilisateurActif.getCodePostal()}">
+							<c:if test="">
+								<p class="form__error">champs obligatoire</p>
+							</c:if>
 						</div>
-						<label class="form__label" for="codePostal">Code postal :</label>
-						<input class="form__input" type="text" name="codePostal" id="codePostal" placeholder="code postal" value="${utilisateurActif.getCodePostal()}">
-						<c:if test="">
-							<p class="form__error">champs obligatoire</p>
-						</c:if> 
+						 
 						
 						<!-- ville -->
-						<div>
-						
+						<div class="form__fields">
+							<label class="form__label" for="ville">Ville :</label>
+							<input class="form__input" type="text" name="ville" id="ville" placeholder="ville" value="${utilisateurActif.getVille()}">
+							<c:if test="${not empty requestScope.ville}">
+								<p class="form__error">champs oboligatoire</p>
+							</c:if>
 						</div>                   
-						<label class="form__label" for="ville">Ville :</label>
-						<input class="form__input" type="text" name="ville" id="ville" placeholder="ville" value="${utilisateurActif.getVille()}">
-						<c:if test="${not empty requestScope.ville}">
-							<p class="form__error">champs oboligatoire</p>
-						</c:if>
+						
 						
 						<!-- mot de passe -->
-						<div>
+						<div class="form__fields">
 							<label class="form__label" for="motDePasse">Mot de passe :</label>
 							<input class="form__input" type="password" name="motDePasse" id="motDePasse" placeholder="mot de passe" value="${utilisateurActif.getMotDePasse() }}">
 							<c:if test="${not empty requestScope.motDePasse}">
@@ -128,7 +127,7 @@
 						
 						
 						<!-- confirmation du mot de passe -->
-						<div>
+						<div class="form__fields">
 							<label class="form__label" for="ConfirmMotDePasse">Confirmation du mot de passe :</label>
 							<input class="form__input" type="password" name="confirmMotDePasse" id="confirmMotDePasse" value="${utilisateurActif.getMotDePasse() }" >
 							<c:if test="${not empty requestScope.confirMotDePasse}">
@@ -138,7 +137,7 @@
 						
 						
 						<!-- boutons -->
-						<div>
+						<div class="form__fields">
 							<c:if test="${requestScope.creer}">
 								<input class="form__input" type="submit" name="creer" value="Créer">
 								<a class="form__link" href="${pageContext.request.contextPath}/connect">
@@ -147,9 +146,8 @@
 							</c:if>
 						</div>
 						
-						
 						<!-- annuler -->
-						<div>
+						<div class="form__fields">
 							<c:if test="${not requestScope.creer}">
 								<input class="form__input" type="submit" name="modifier" value="Enregistrer">
 								<a class="form__link" href="${pageContext.request.contextPath}/home">
@@ -157,7 +155,6 @@
 								</a>
 							</c:if>
 						</div>
-						
 					</fieldset>
 				</form>
 			</main>
