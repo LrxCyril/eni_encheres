@@ -29,7 +29,9 @@ public class ArticleManager {
 	public void insertArticles(Article article) throws DALException, BLLException {
 		//--- Insérer l'article en base
 		try {
+			//Insérer article
 			articleDAO.insertArticles(article);
+			
 		} catch(DALException e){
 		//--- Levée d'une exception quand l'article n'est pa inséré
 			e.printStackTrace();
