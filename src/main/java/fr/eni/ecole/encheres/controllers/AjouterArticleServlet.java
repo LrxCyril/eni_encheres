@@ -71,19 +71,19 @@ public class AjouterArticleServlet extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			ajoutArticle.setNoUtilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur());
-			ajoutArticle.setNomArticle(request.getParameter("nom_article"));
+			ajoutArticle.setNomArticle(request.getParameter("nomArticle"));
 			ajoutArticle.setDescription(request.getParameter("description"));
 			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("categories")));
 			//Photo article
 			//TODO
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("date_debut_encheres"),dtf));
-			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
-			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
+			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("dateDebutEncheres"),dtf));
+			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("dateFinEncheres"),dtf));
+			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prixInitial")));
 			
 			//Paramètres adresse
 			ajoutRetrait.setRue(request.getParameter("rue"));
-			ajoutRetrait.setCodePostal(request.getParameter("code_postal"));
+			ajoutRetrait.setCodePostal(request.getParameter("codePostal"));
 			ajoutRetrait.setVille(request.getParameter("ville"));
 			
 		//récupérer les paramètres de requêtes

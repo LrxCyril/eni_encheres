@@ -59,9 +59,9 @@
             <main class="main">
 				<h2 class="main__title">Liste des enchères</h2>
 				<!-- Rechercher un article -->
-                <div class="research">
+                <div class="main__research">
                 	<!-- formulaire -->
-                    <form class="research__form" method="post" action="${pageContext.request.contextPath}/home">
+                    <form class="form__research" method="post" action="${pageContext.request.contextPath}/home">
                         <div class="form">
                             <label class="form__label" for="rechercheArticle">Recherche</label>
                             <input class="form__input" type="search" name="rechercheArticle" id="rechercheArticle" placeholder="Le nom de l'article contient">        
@@ -77,49 +77,52 @@
                         
                         <!-- Filtre ------------------ -->
                         
-						<div class="filter">
+						<div class="form__filter">
 							<c:if test="${session_active}">
+							
                             <!-- Achats -->
-                            <div class="filter__achats">
-                                <input class="filter__radio" type="radio" name="achats" id="achats" value="achats">
-                                <label class="filter__label" for="achats">Achats</label>
-                                <ul class="filter__list">
-                                    <li class="filter__item">
-                                        <input class="filter__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
-                                        <label class="filter__label" for="encheres-ouvertes">enchères ouvertes</label>
+                            <div class="form__achats">
+                                <input class="form__radio" type="radio" name="achats" id="achats" value="achats">
+                                <label class="form__label" for="achats">Achats</label>
+                                <ul class="form__list">
+                                    <li class="form__item">
+                                        <input class="form__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
+                                        <label class="form__label" for="encheres-ouvertes">enchères ouvertes</label>
                                     </li>
-                                    <li class="filter__item">
-                                        <input class="filter__checkbox" type="checkbox" name="mes-encheres" id="mes-encheres">
-                                        <label class="filter__label" for="mes-encheres">mes enchères</label>
+                                    <li class="form__item">
+                                        <input class="form__checkbox" type="checkbox" name="mes-encheres" id="mes-encheres">
+                                        <label class="form__label" for="mes-encheres">mes enchères</label>
                                     </li>
-                                    <li class="filter__item">
-                                        <input class="filter__checkbox" type="checkbox" name="mes-encheres-remportees" id="mes-encheres-remportees">
-                                        <label class="filter__label" for="mes-encheres-remportees">mes enchères remportées</label>
+                                    <li class="form__item">
+                                        <input class="form__checkbox" type="checkbox" name="mes-encheres-remportees" id="mes-encheres-remportees">
+                                        <label class="form__label" for="mes-encheres-remportees">mes enchères remportées</label>
                                     </li>
                                 </ul>
                             </div>
                             
                             <!-- Ventes -->
-                            <div class="filter__ventes">
-                                <input class="filter__radio" type="radio" name="mes-ventes" id="mes-ventes" value="mes-ventes">
-                                <label class="filter__label" for="mes-ventes">Mes ventes</label>
-                                <ul class="filter__list">
-                                    <li class="filter__item">
-                                        <input class="filter__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours">
-                                        <label class="filter__label" for="mes-ventes-en-cours">mes ventes en cours</label>
+                            <div class="form__ventes">
+                                <input class="form__radio" type="radio" name="mes-ventes" id="mes-ventes" value="mes-ventes">
+                                <label class="form__label" for="mes-ventes">Mes ventes</label>
+                                <ul class="form__list">
+                                    <li class="form__item">
+                                        <input class="form__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours">
+                                        <label class="form__label" for="mes-ventes-en-cours">mes ventes en cours</label>
                                     </li>
-                                    <li class="filter__item">
-                                        <input class="filter__checkbox" type="checkbox" name="ventes-non-debutees" id="ventes-non-debutees">
-                                        <label class="filter__label" for="ventes-non-debutees">ventes non débutées</label>
+                                    <li class="form__item">
+                                        <input class="form__checkbox" type="checkbox" name="ventes-non-debutees" id="ventes-non-debutees">
+                                        <label class="form__label" for="ventes-non-debutees">ventes non débutées</label>
                                     </li>
-                                    <li class="filter__item">
-                                        <input class="filter__checkbox" type="checkbox" name="ventes-terminees" id="ventes-terminees">
-                                        <label class="filter__label" for="ventes-terminees">ventes terminées</label>
+                                    <li class="form__item">
+                                        <input class="form__checkbox" type="checkbox" name="ventes-terminees" id="ventes-terminees">
+                                        <label class="form__label" for="ventes-terminees">ventes terminées</label>
                                     </li>
                                 </ul>
                           </div>
                            </c:if>	
-                             <a class="form__link" href="#">
+                        </div>
+                        <div class="form__validate">
+                        	<a class="form__link" href="#">
                                 <input class="form__submit" type="submit" value="Rechercher">
                             </a>
                         </div>

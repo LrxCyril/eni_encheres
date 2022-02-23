@@ -1,67 +1,85 @@
-* {}
+* { box-sizing: border-box; }
 
-body {}
+body { background-color: #f7f7f7; }
 
-/* --- principal container --- */
 .container { font-family: 'Open Sans', sans-serif; }
 
 /* --- header --- */
-.header {}
-	.header__link {}
-		.header__title {}
+.header {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header__link {}
+.header__title {}
 
 /* --- nav --- */
 .nav {}
-	.nav__list {}
-		.nav__item {}
-			.nav__link {}
+.nav__list {}
+.nav__item {}
+.nav__link {}
 
 /* --- main --- */
-.main {}
-	.main__title {}
-		.main__list {}
-			.main__item {}
-				.main__text {}
-					.main__link {}
-						.main__submit {}
-	
-/* --- research --- */
-.research {}
-	.research__form {}
+.main {
+	width: 300px;
+    margin: auto;
+}
+.main__title {
+	text-align: center;
+    margin: 40px auto;
+}
+main__container {}
+main__redirection {}
+.main__research {
+	display: flex;
+    justify-content: center;
+}
+.main__signup {}
+.main__list {}
+.main__item {}
+.main__text {}
+.main__subcontainer {}
+.main__link {}
+.main__submit {}
 
 /* --- form --- */
 .form {}
-	.form__fieldset {}
-		.form__text {}
-		    .form__label {}
-		    	.form__input {}
-		    		.form__error{}
-			        	.form__select {}
-							.form__option {}
-								.form__link {}
-									.form__submit {}
-				
-/* --- filter --- */
-.filter {}
-	.filter__achats {}
-		.filter__ventes {}
-			.filter__radio {}
-				.filter__label {}
-					.filter__list {}
-						.filter__item {}
-							.filter__checkbox {}
+.form__connexion {}
+.form__identifiant {}
+.form__mdp {}
+.form__send {
+	display: flex;
+	flex-direction: column;
+    justify-content: space-between;
+}
+.form__remember {
+	display: flex;
+    flex-direction: column;
+}
+.form__remember-check {}
+.form__checkbox {}
+.form__label {}
+.form__input {}
+.form__submit {}
+.form__message {}
+.form__link {}
 
+.form__fieldset {}
+.form__text {}
+.form__error{}
+.form__select {}
+.form__option {}
 	
 /* --- announce --- */
 .announce {}
-    .announce__card {}
-        .annouce__image {}
-            .announce__description {}
-                .announce__link {}
-                    .announce__title {}
-                        .announce__price {}
-                            .announce__deadline {}
-                                .announce__seller {}
+.announce__card {}
+.annouce__image {}
+.announce__description {}
+.announce__link {}
+.announce__title {}
+.announce__price {}
+.announce__deadline {}
+.announce__seller {}
 
 /* --- footer --- */
 

@@ -21,62 +21,54 @@
         <title>ENI | Enchères | Connexion</title>
     </head>
 	<body>
-		<!-- Container principal ------------------ -->
 		<div class="container">
-		
-        		<!-- Header ------------------ -->
-	    
-	            <header class="header">
-					<a class="header__link" href="${pageContext.request.contextPath}/home">
-						<h1 class="header__title">ENI - Enchères</h1>
-					</a>
-	            </header>
-	                        
-            	<!-- Main ------------------ -->
-            
-	            <main class="main">
-                    <h2 class="main__title">Connexion</h2>
-                    <!-- Connexion -->
-	                <div class="connexion">
-	                	<!-- formulaire -->
-	                    <form class="connexion__form" action="${pageContext.request.contextPath}/connect" method="post">
-	                        <!-- identifiant -->
-	                        <div class="identifiant">
-	                            <label class="connexion__label" for="identifiant">Identifiant</label>
-	                            <input class="connexion__input" type="text" name="identifiant" id="identifiant" value="" placeholder="identifiant">       
-	                        </div>
-	                        <!-- mot de passe -->
-	                        <div class="mdp">
-	                            <label class="connexion__label" for="mdp">Mot de passe</label>
-	                            <input class="connexion__input" type="password" name="mdp" value="" id="mdp" placeholder="mot de passe">
-	                        </div>
-	                        <!-- bouton connexion -->
-	                        <div class="submit">
-	                            <input class="connexion__submit" type="submit" value="Connexion">
-	                            <c:if test="${requestScope.La_connexion == false }">
-									<p class="connexion__message">La connexion est invalide</p>
-								</c:if>
-								<!-- se souvenir de moi -->
-	                            <div class="remember">
-	                                <input class="connexion__checkbox" type="checkbox" name="se-souvenir-de-moi" id="se-souvenir-de-moi">
-	                                <label for="connexion__label">Se souvenir de moi</label>
-	                                <a class="connexion__link" href="#">Mot de passe oublié</a>
-	                            </div>
-	                        </div>
-	                    </form>
-	                </div>
-	                
-					<!-- créer un compte ------------------ -->
-					<a class="main__link" href="${pageContext.request.contextPath}/creer/utilisateur">
-						<input class="main__submit" type="submit" name="creercompte" value="Créer un compte">
-					</a>
-					<a class="main__link" href="${pageContext.request.contextPath}/home">
-						<input class="main__submit" type="button" name="annuler" value="Annuler">
-					</a>
-            </main>
-            
-            <!--  footer ------------------ -->
-            <%@ include file="/WEB-INF/fragments/footer.jspf"%>
-        </div>
+			<header class="header">
+				<a class="header__link" href="${pageContext.request.contextPath}/home">
+					<h1 class="header__title">ENI - Enchères</h1>
+				</a>
+            </header>
+            <main class="main">
+                   <h2 class="main__title">Connexion</h2>
+                <div class="main__container">
+                    <form class="form__connexion" action="${pageContext.request.contextPath}/connect" method="post">
+                        <div class="form__identifiant">
+                            <label class="form__label" for="identifiant">Identifiant</label>
+                            <input class="form__input" type="text" name="identifiant" id="identifiant" value="" placeholder="identifiant">       
+						</div>
+						<div class="form__mdp">
+							<label class="form__label" for="mdp">Mot de passe</label>
+							<input class="form__input" type="password" name="mdp" value="" id="mdp" placeholder="mot de passe">
+						</div>
+						<div class="form__send">
+							<div class="form__remember">
+								<div class="form__remember-check">
+									<input class="form__checkbox" type="checkbox" name="se-souvenir-de-moi" id="se-souvenir-de-moi">
+									<label for="form__label">Se souvenir de moi</label>
+								</div>
+								<a class="form__link" href="#">Mot de passe oublié</a>
+							</div>
+							<input class="form__submit" type="submit" value="Connexion">
+							<c:if test="${requestScope.La_connexion == false }">
+								<p class="form__message">La connexion est invalide</p>
+							</c:if>
+						</div>
+					</form>
+				</div>
+				<div class="main__container">
+					<div class="main__redirection">
+						<p class="main__text">Nouveau membre ?</p>
+						<div class="main__subcontainer">
+							<a class="main__link" href="${pageContext.request.contextPath}/creer/utilisateur">
+								<input class="main__submit" type="submit" name="creercompte" value="Créer un compte">
+							</a>
+							<a class="main__link" href="${pageContext.request.contextPath}/home">
+								<input class="main__submit" type="button" name="annuler" value="Annuler">
+							</a>
+						</div>
+					</div>
+				</div>
+			</main>
+			<%@ include file="/WEB-INF/fragments/footer.jspf"%>
+		</div>
 	</body>
 </html>
