@@ -77,6 +77,11 @@ public class AjouterArticleServlet extends HttpServlet {
 			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
 			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
 			
+			//Paramètres adresse
+			ajoutArticle.setRue(request.getParameter("rue"));
+			ajoutArticle.setCodePostal(request.getParameter("code_postal"));
+			ajoutArticle.setVille(request.getParameter("ville"));
+			
 		//récupérer les paramètres de requêtes
 			
 			//envoyer article fonctionBLL
