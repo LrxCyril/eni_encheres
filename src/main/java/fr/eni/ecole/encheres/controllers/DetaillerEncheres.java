@@ -35,8 +35,9 @@ public class DetaillerEncheres extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
 		session.setAttribute("idArticle", Integer.parseInt(request.getParameter("idArticle")));
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
+		
 		rd.forward(request, response);
 	}
 
@@ -49,29 +50,25 @@ public class DetaillerEncheres extends HttpServlet {
 		EnchereManager mgrEnchere =new EnchereManager();
 		Utilisateur utilisateur;
 		utilisateur= (Utilisateur) session.getAttribute("utilisateurActif");
-		System.out.println(session.getAttribute("utilisateurActif").toString());
 		int enchere=Integer.parseInt(request.getParameter("proposition"));
 		int idArticle =(int) session.getAttribute("idArticle");
 		int idUtilisateur=	utilisateur.getNoUtilisateur();
 		int credit=utilisateur.getCredit();
-		System.out.println(idUtilisateur);
-
-		
-		System.out.println("monid "+idArticle);
-		System.out.println(enchere);
-		System.out.println(credit);
-		
+	
 		//noArticle, montant enchere, no encherisseur, credit echerisseur
-		try {
-			boolean enchereOk=mgrEnchere.traiterEnchere(idArticle, enchere, idUtilisateur, credit);
-		session.setAttribute("idArticle", null);
-		} catch (EnchereRefuseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+		boolean enchereOk=mgrEnchere.traiterEnchere(idArticle, enchere, idUtilisateur, credit);
+
+		if(!enchereOk) {
+			request.setAttribute("enchereInvalide",true);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
+			rd.forward(request, response);
+			return;
 		}
-		
-		
-		doGet(request, response);
+		session.setAttribute("idArticle", null);
+		RequestDispatcher rd = request.getRequestDispatcher("/home");
+		rd.forward(request, response);
+		//doGet(request, response);
 	}
 
 }
