@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.ecole.encheres.bll.EnchereManager;
 import fr.eni.ecole.encheres.bll.EnchereRefuseException;
+import fr.eni.ecole.encheres.bo.EnchereComplete;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 
 /**
@@ -35,8 +36,14 @@ public class DetaillerEncheres extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		EnchereManager mgrEnchere =new EnchereManager();
+		EnchereComplete enchereComplete;
+		
 		//if(session.getAttribute("idArticle")!=null) {
 		session.setAttribute("idArticle", Integer.parseInt(request.getParameter("idArticle")));//}
+		enchereComplete= mgrEnchere.recupererEnchereEnCours(Integer.parseInt(request.getParameter("idArticle")));
+		request.setAttribute("enchereEncours", enchereComplete);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
 		
 		rd.forward(request, response);
@@ -62,14 +69,15 @@ public class DetaillerEncheres extends HttpServlet {
 
 		if(!enchereOk) {
 			request.setAttribute("enchereInvalide",true);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
-			rd.forward(request, response);
-			return;
+			request.setAttribute("encherevalide",false);
+		}else {
+			request.setAttribute("encherevalide",true);
+			request.setAttribute("enchereInvalide",false);
 		}
 		session.setAttribute("idArticle", null);
-		RequestDispatcher rd = request.getRequestDispatcher("/home");
-		rd.forward(request, response);
-		//doGet(request, response);
+		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
+		//rd.forward(request, response);
+		doGet(request, response);
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.Enchere;
-import fr.eni.ecole.encheres.bo.ObjetEnchere;
+import fr.eni.ecole.encheres.bo.EnchereComplete;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
@@ -19,7 +19,28 @@ public class EnchereManager {
 
 	EnchereDAO enchereDAO;
 	
+	
+	
 	public EnchereManager() {
+	try {
+		enchereDAO = DAOFactory.getEnchereDAO();
+	} catch (DALException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
+	
+	public EnchereComplete recupererEnchereEnCours (int noArticle) {
+		EnchereComplete enchereComplete = null;
+		
+		try {
+			enchereComplete=enchereDAO.lectureEnchereComplete(noArticle);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return enchereComplete;
 	}
 	
 	public boolean traiterEnchere(int noArticle, int montantEnchere, int noEncherisseur, int creditEncherisseur)  {
@@ -28,7 +49,7 @@ public class EnchereManager {
 		try {
 			// --- 1 | Créer une instance d'enchère
 			
-			enchereDAO = DAOFactory.getEnchereDAO();
+			//enchereDAO = DAOFactory.getEnchereDAO();
 			ArticleManager mgrArticle = new ArticleManager();
 			UtilisateurManager mgrUtilisateur = new UtilisateurManager();
 			Enchere derniereEnchere= enchereDAO.enchereExistante(noArticle);

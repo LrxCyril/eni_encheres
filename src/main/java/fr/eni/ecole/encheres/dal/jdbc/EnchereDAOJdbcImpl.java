@@ -11,7 +11,8 @@ import java.util.List;
 
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.Enchere;
-import fr.eni.ecole.encheres.bo.ObjetEnchere;
+import fr.eni.ecole.encheres.bo.EnchereComplete;
+import fr.eni.ecole.encheres.bo.Retrait;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.EnchereDAO;
@@ -23,29 +24,60 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SQL_SELECT_ENCHERE = "SELECT UTILISATEURS.no_utilisateur, credit, prix_initial, prix_vente FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur WHERE no_article = ? ";
 	private static final String SQL_SELECT_ENCHERE_EXIST = "SELECT TOP 1 no_enchere, date_enchere, montant_enchere,ENCHERES.no_article, ENCHERES.no_utilisateur, credit, ARTICLES_VENDUS.prix_initial, ARTICLES_VENDUS.prix_vente FROM ENCHERES inner Join UTILISATEURS on ENCHERES.no_utilisateur =UTILISATEURS.no_utilisateur inner Join ARTICLES_VENDUS on ENCHERES.no_article=ARTICLES_VENDUS.no_article WHERE ENCHERES.no_article=? ORDER BY montant_enchere DESC;";
 	private static final String SQL_INSERT_ENCHERE = "INSERT INTO ENCHERES (date_enchere,montant_enchere,no_article,no_utilisateur) values (?,?,?,?)"; // première enchère
+	private static final String SQL_ENCHERE_COMPLETE="SELECT TOP 1  UTILISATEURS.no_utilisateur as [no_encherisseur],UTILISATEURS.pseudo as [encherisseur],no_enchere,nom_article, description, date_fin_encheres, montant_enchere,prix_initial, ENCHERES.no_article ,(SELECT pseudo from ARTICLES_VENDUS inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where no_article=?) as [vendeur],(SELECT telephone from ARTICLES_VENDUS inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where no_article=?)as [tel_vendeur],(SELECT Utilisateurs.no_utilisateur from ARTICLES_VENDUS inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where no_article=?)as[no_vendeur],RETRAITS.code_postal,RETRAITS.rue,RETRAITS.ville FROM ENCHERES inner Join UTILISATEURS on ENCHERES.no_utilisateur =UTILISATEURS.no_utilisateur inner Join ARTICLES_VENDUS on ENCHERES.no_article=ARTICLES_VENDUS.no_article inner Join RETRAITS on ARTICLES_VENDUS.no_article=RETRAITS.no_article WHERE ENCHERES.no_article=? ORDER BY montant_enchere DESC;";
 	private static final String SQL_UPDATE_ENCHERE = null; // surenchérir
 	
 
 	@Override
-	public ObjetEnchere premiereEnchere(int noArticle) throws DALException {
-		
-		ObjetEnchere enchereInitiale = null;
+	
+	public EnchereComplete lectureEnchereComplete(int noArticle) throws DALException {
+
+		EnchereComplete enchereComplete = new EnchereComplete();
 
 		// --- 1 | Obtenir une connexion
 		try (Connection cnx = ConnectionProvider.getConnection();){
 		
 		// --- 2 | Construire la requête
-			PreparedStatement ordre = cnx.prepareStatement(SQL_SELECT_ENCHERE);
+			PreparedStatement ordre = cnx.prepareStatement(SQL_ENCHERE_COMPLETE);
 		
 		// --- 3 | Ajouter le paramètre à la requête (Where...)
 			ordre.setInt(1, noArticle);
+			ordre.setInt(2, noArticle);
+			ordre.setInt(3, noArticle);
+			ordre.setInt(4, noArticle);
 		
 		// --- 4 | Appeler la méthode construisant l'enchère
 			ResultSet rs = ordre.executeQuery(); 
 		
 		// --- 5 | Vérifier si la connexion est existante
 			if (rs.next()) {
-				enchereInitiale = new ObjetEnchere(rs.getInt("no_utilisateur"), rs.getInt("credit"), rs.getInt("prix_initial"), rs.getInt("prix_vente"));
+				Utilisateur encherisseur = new Utilisateur();
+				encherisseur.setNoUtilisateur(rs.getInt("no_encherisseur"));
+				encherisseur.setPseudo(rs.getString("encherisseur"));
+				Utilisateur vendeur = new Utilisateur();
+				vendeur.setNoUtilisateur(rs.getInt("no_vendeur"));
+				vendeur.setPseudo(rs.getString("vendeur"));
+				vendeur.setTelephone(rs.getString("tel_vendeur"));
+				Enchere enchere = new Enchere();
+				enchere.setNoEnchere(rs.getInt("no_enchere"));
+				enchere.setMontantEnchere(rs.getInt("montant_enchere"));
+				Retrait retrait = new Retrait();
+				retrait.setCodePostal(rs.getString("code_postal"));
+				retrait.setRue(rs.getString("rue"));
+				retrait.setVille(rs.getString("ville"));
+				Article article = new Article();
+				article.setNoCategorie(rs.getInt("no_article"));
+				article.setNomArticle(rs.getString("nom_article"));
+				article.setDescription(rs.getString("description"));
+				article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				article.setPrixInitial(rs.getInt("prix_initial"));
+
+				enchereComplete.setEncherisseur(encherisseur);
+				enchereComplete.setEnchere(enchere);
+				enchereComplete.setRetrait(retrait);
+				enchereComplete.setArticle(article);
+				enchereComplete.setVendeur(vendeur);
+								
 			}
 			
 		} catch (SQLException e) {
@@ -53,7 +85,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 			throw new DALException("le numéro article n'existe pas");
 		}
-		return enchereInitiale;
+		return enchereComplete;
 	}
 	
 	
@@ -111,4 +143,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	
 	}
+
+
+
 }
