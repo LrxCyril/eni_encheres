@@ -65,7 +65,7 @@ public class SeConnecterServlet extends HttpServlet {
 		// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
 		  	HttpSession session = request.getSession();
 			//Alimentation des attributs de la page profil
-		  	System.out.println( "mon numero"+utilisateurConnecte.getNoUtilisateur());
+		  	//System.out.println( "mon numero"+utilisateurConnecte.getNoUtilisateur());
 
 		  	session.setAttribute("utilisateurActif", utilisateurConnecte);
 			session.setAttribute("session_active", true);

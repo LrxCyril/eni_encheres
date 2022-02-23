@@ -48,7 +48,6 @@ public class ConsulterProfilServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		//Alimentation des attributs de la page profil
-		System.out.println(profilUtilisateur.getNoUtilisateur());
 		request.setAttribute("pseudo", profilUtilisateur.getPseudo());
 		request.setAttribute("nom",  profilUtilisateur.getNom());
 		request.setAttribute("prenom",  profilUtilisateur.getPrenom());

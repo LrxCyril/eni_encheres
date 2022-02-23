@@ -81,44 +81,47 @@
 							<c:if test="${session_active}">
 							
                             <!-- Achats -->
-                            <div class="form__achats">
-                                <input class="form__radio" type="radio" name="achats" id="achats" value="achats">
-                                <label class="form__label" for="achats">Achats</label>
-                                <ul class="form__list">
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
-                                        <label class="form__label" for="encheres-ouvertes">enchères ouvertes</label>
-                                    </li>
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="mes-encheres" id="mes-encheres">
-                                        <label class="form__label" for="mes-encheres">mes enchères</label>
-                                    </li>
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="mes-encheres-remportees" id="mes-encheres-remportees">
-                                        <label class="form__label" for="mes-encheres-remportees">mes enchères remportées</label>
-                                    </li>
-                                </ul>
-                            </div>
                             
-                            <!-- Ventes -->
-                            <div class="form__ventes">
-                                <input class="form__radio" type="radio" name="mes-ventes" id="mes-ventes" value="mes-ventes">
-                                <label class="form__label" for="mes-ventes">Mes ventes</label>
-                                <ul class="form__list">
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours">
-                                        <label class="form__label" for="mes-ventes-en-cours">mes ventes en cours</label>
-                                    </li>
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="ventes-non-debutees" id="ventes-non-debutees">
-                                        <label class="form__label" for="ventes-non-debutees">ventes non débutées</label>
-                                    </li>
-                                    <li class="form__item">
-                                        <input class="form__checkbox" type="checkbox" name="ventes-terminees" id="ventes-terminees">
-                                        <label class="form__label" for="ventes-terminees">ventes terminées</label>
-                                    </li>
-                                </ul>
-                          </div>
+                            <div class="form__check">
+							  <input class="form__input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+							  	<label class="form__label" for="inlineRadio1">Achats</label>
+							  		<ul class="form__list">
+	                                    <li class="form__item">
+	                                        <input class="form__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
+	                                        <label class="form__label" for="encheres-ouvertes">enchères ouvertes</label>
+	                                    </li>
+	                                    <li class="form__item">
+	                                        <input class="form__checkbox" type="checkbox" name="mes-encheres" id="mes-encheres">
+	                                        <label class="form__label" for="mes-encheres">mes enchères</label>
+	                                    </li>
+	                                    <li class="form__item">
+	                                        <input class="form__checkbox" type="checkbox" name="mes-encheres-remportees" id="mes-encheres-remportees">
+	                                        <label class="form__label" for="mes-encheres-remportees">mes enchères remportées</label>
+	                                    </li>
+	                                </ul>
+							</div>
+							
+							<!-- Ventes -->
+							
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+							  	<label class="form-check-label" for="inlineRadio2">Ventes</label>
+								  	<ul class="form__list">
+		                                    <li class="form__item">
+		                                        <input class="form__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours">
+		                                        <label class="form__label" for="mes-ventes-en-cours">mes ventes en cours</label>
+		                                    </li>
+		                                    <li class="form__item">
+		                                        <input class="form__checkbox" type="checkbox" name="ventes-non-debutees" id="ventes-non-debutees">
+		                                        <label class="form__label" for="ventes-non-debutees">ventes non débutées</label>
+		                                    </li>
+		                                    <li class="form__item">
+		                                        <input class="form__checkbox" type="checkbox" name="ventes-terminees" id="ventes-terminees">
+		                                        <label class="form__label" for="ventes-terminees">ventes terminées</label>
+		                                    </li>
+	                                </ul>
+							</div>
+						
                            </c:if>	
                         </div>
                         <div class="form__validate">
@@ -135,9 +138,15 @@
     					<div class="announce__card">
                         <img class="announce__image" src="#" alt="photo de l'annonce">
                         <div class="announce__description">
-                            <a class="announce__link" href="#">
+                           <c:if test="${session_active}">
+                            <a class="announce__link" href="${pageContext.request.contextPath}/detail/enchere?idArticle=${article.getNoArticle()}">
                                 <h3 class="announce__title">${article.getNomArticle()}</h3>
                             </a>
+                            </c:if>
+                             <c:if test="${not session_active}">
+                               <h3 class="announce__title">${article.getNomArticle()}</h3>
+                            </c:if>
+                            
                             <p class="announce__price">Prix : ${article.getMiseAPrix()}</p>
                             <p class="announce__deadline">Fin de l'enchère : ${article.getDateFinEncheres()}</p>
                             <p class="announce__seller">Vendeur : </p>
