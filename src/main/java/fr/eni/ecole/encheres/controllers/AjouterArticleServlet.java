@@ -35,7 +35,6 @@ public class AjouterArticleServlet extends HttpServlet {
      */
     public AjouterArticleServlet() {
         super();
-        //mgr = new ArticleManager();
        
     }
 
