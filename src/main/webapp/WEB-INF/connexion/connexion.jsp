@@ -31,11 +31,11 @@
                    <h2 class="main__title">Connexion</h2>
                 <div class="main__container">
                     <form class="form__connexion" action="${pageContext.request.contextPath}/connect" method="post">
-                        <div class="form__identifiant">
+                        <div class="form__fields">
                             <label class="form__label" for="identifiant">Identifiant</label>
                             <input class="form__input" type="text" name="identifiant" id="identifiant" value="" placeholder="identifiant">       
 						</div>
-						<div class="form__mdp">
+						<div class="form__fields">
 							<label class="form__label" for="mdp">Mot de passe</label>
 							<input class="form__input" type="password" name="mdp" value="" id="mdp" placeholder="mot de passe">
 						</div>

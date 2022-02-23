@@ -62,7 +62,7 @@
                 <div class="main__research">
                 	<!-- formulaire -->
                     <form class="form__research" method="post" action="${pageContext.request.contextPath}/home">
-                        <div class="form">
+                        <div class="form__fields">
                             <label class="form__label" for="rechercheArticle">Recherche</label>
                             <input class="form__input" type="search" name="rechercheArticle" id="rechercheArticle" placeholder="Le nom de l'article contient">        
                         </div>

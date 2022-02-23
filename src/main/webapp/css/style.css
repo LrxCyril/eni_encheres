@@ -28,8 +28,11 @@ body { background-color: #f7f7f7; }
 	text-align: center;
     margin: 40px auto;
 }
-main__container {}
-main__redirection {}
+main__container { margin: 20px auto; }
+main__redirection {
+	display: flex;
+    flex-direction: column;
+}
 .main__research {
 	display: flex;
     justify-content: center;
@@ -38,15 +41,23 @@ main__redirection {}
 .main__list {}
 .main__item {}
 .main__text {}
-.main__subcontainer {}
-.main__link {}
-.main__submit {}
+.main__subcontainer {
+    display: flex;
+    flex-direction: column;
+}
+.main__link { display: contents; }
+.main__submit {
+    height: 40px;
+    margin: 10px 0;
+}
 
 /* --- form --- */
 .form {}
-.form__connexion {}
-.form__identifiant {}
-.form__mdp {}
+.form__fields {
+	display: flex;
+    margin: 10px 0;
+    flex-direction: column;
+}
 .form__send {
 	display: flex;
 	flex-direction: column;
@@ -55,12 +66,16 @@ main__redirection {}
 .form__remember {
 	display: flex;
     flex-direction: column;
+    margin: 5px 0;
 }
 .form__remember-check {}
 .form__checkbox {}
-.form__label {}
-.form__input {}
-.form__submit {}
+.form__label {margin-bottom: 7px;}
+.form__input {height: 30px;}
+.form__submit {
+	height: 40px;
+    margin: 20px 0;
+}
 .form__message {}
 .form__link {}
 
