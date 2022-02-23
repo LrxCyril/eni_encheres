@@ -55,7 +55,12 @@ main__redirection {
 }
 
 /* --- form --- */
-.form {}
+.form {
+	display: grid;
+    grid-template: repeat(2, 1fr) / auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+}
 .form__filter {    
 	display: grid;
     grid-template-columns: repeat(2, 220px);
@@ -101,13 +106,15 @@ main__redirection {
 .announce {
 	display: grid;
     justify-content: center;
-    grid-template: repeat(2, 2fr) / repeat(3, 2fr);
+    grid-template: repeat(2, 2fr) / repeat(2, 2fr);
     grid-gap: 10px;
 }
 .announce__card {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
+    padding: 10px;
+    background-color: white;
 }
 .annouce__image {
 	width: 160px;
