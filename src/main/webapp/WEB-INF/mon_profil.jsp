@@ -118,7 +118,7 @@
 					<!-- mot de passe -->
 					<div class="form__fields">
 						<label class="form__label" for="motDePasse">Mot de passe :</label>
-						<input class="form__input" type="password" name="motDePasse" id="motDePasse" placeholder="mot de passe" value="${utilisateurActif.getMotDePasse() }}">
+						<input class="form__input" type="password" name="motDePasse" id="motDePasse" placeholder="mot de passe" value="${utilisateurActif.getMotDePasse()}}">
 						<c:if test="${not empty requestScope.motDePasse}">
 							<p class="form__error">champs obligatoire</p>
 						</c:if>
