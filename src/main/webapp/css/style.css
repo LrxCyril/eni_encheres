@@ -2,7 +2,10 @@
 
 body { background-color: #f7f7f7; }
 
-.container { font-family: 'Open Sans', sans-serif; }
+.container {
+	margin: auto 80px;
+	font-family: 'Open Sans', sans-serif;
+	}
 
 /* --- header --- */
 .header {
@@ -15,15 +18,15 @@ body { background-color: #f7f7f7; }
 
 /* --- nav --- */
 .nav {}
-.nav__list {}
+.nav__list {
+	display: flex;
+    margin: 0 20px;
+}
 .nav__item {}
-.nav__link {}
+.nav__link {margin: 0 10px;}
 
 /* --- main --- */
-.main {
-	width: 300px;
-    margin: auto;
-}
+.main {}
 .main__title {
 	text-align: center;
     margin: 40px auto;
@@ -52,11 +55,21 @@ main__redirection {
 }
 
 /* --- form --- */
-.form {}
+.form {
+	display: grid;
+    grid-template: repeat(2, 1fr) / auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+}
+.form__filter {    
+	display: grid;
+    grid-template-columns: repeat(2, 220px);
+    grid-gap: 20px;
+}
 .form__fields {
 	display: flex;
-    margin: 10px 0;
     flex-direction: column;
+    margin: 10px 0;
 }
 .form__send {
 	display: flex;
@@ -73,23 +86,41 @@ main__redirection {
 .form__label {margin-bottom: 7px;}
 .form__input {height: 30px;}
 .form__submit {
+	width: 460px;
 	height: 40px;
     margin: 20px 0;
 }
 .form__message {}
-.form__link {}
+.form__link {
+	display: flex;
+    justify-content: center;
+}
 
 .form__fieldset {}
 .form__text {}
 .form__error{}
-.form__select {}
+.form__select {height: 30px;}
 .form__option {}
 	
 /* --- announce --- */
-.announce {}
-.announce__card {}
-.annouce__image {}
-.announce__description {}
+.announce {
+	display: grid;
+    justify-content: center;
+    grid-template: repeat(2, 2fr) / repeat(2, 2fr);
+    grid-gap: 10px;
+}
+.announce__card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+    background-color: white;
+}
+.annouce__image {
+	width: 160px;
+    height: 160px;
+}
+.announce__description {width: 240px;}
 .announce__link {}
 .announce__title {}
 .announce__price {}
@@ -98,7 +129,7 @@ main__redirection {
 
 /* --- footer --- */
 
-.footer {}
+.footer {margin-top: 100px;}
 	.footer__container {}
 		.footer__title {}
 			.footer__list {}

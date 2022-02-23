@@ -91,7 +91,6 @@ public class AcceuillirServlet extends HttpServlet {
 			if(erreur) {
 				articles=manager.selectArticle();	
 			}
-			System.out.println("jepasseparla");
 			categorieArticle= manager.selectCategorie();
 			Categorie cateVide= new Categorie();
 			//cateVide.setNoCategorie(0);

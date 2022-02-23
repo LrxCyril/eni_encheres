@@ -138,9 +138,15 @@
     					<div class="announce__card">
                         <img class="announce__image" src="#" alt="photo de l'annonce">
                         <div class="announce__description">
-                            <a class="announce__link" href="#">
+                           <c:if test="${session_active}">
+                            <a class="announce__link" href="${pageContext.request.contextPath}/detail/enchere?idArticle=${article.getNoArticle()}">
                                 <h3 class="announce__title">${article.getNomArticle()}</h3>
                             </a>
+                            </c:if>
+                             <c:if test="${not session_active}">
+                               <h3 class="announce__title">${article.getNomArticle()}</h3>
+                            </c:if>
+                            
                             <p class="announce__price">Prix : ${article.getMiseAPrix()}</p>
                             <p class="announce__deadline">Fin de l'enchère : ${article.getDateFinEncheres()}</p>
                             <p class="announce__seller">Vendeur : </p>
