@@ -82,9 +82,9 @@
 							
                             <!-- Achats -->
                             
-                            <div class="form-check form-check-inline">
-							  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-							  	<label class="form-check-label" for="inlineRadio1">Achats</label>
+                            <div class="form__check">
+							  <input class="form__input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+							  	<label class="form__label" for="inlineRadio1">Achats</label>
 							  		<ul class="form__list">
 	                                    <li class="form__item">
 	                                        <input class="form__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
