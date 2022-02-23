@@ -21,7 +21,7 @@ public class EnchereManager {
 	public EnchereManager() {
 	}
 	
-	public boolean traiterEnchere(int noArticle, int montantEnchere, int noEncherisseur, int creditEncherisseur) throws EnchereRefuseException {
+	public boolean traiterEnchere(int noArticle, int montantEnchere, int noEncherisseur, int creditEncherisseur)  {
 		boolean insertion =true;
 		try {
 			// --- 1 | Créer une instance d'enchère
@@ -71,10 +71,12 @@ public class EnchereManager {
 						}
 					}else {
 						insertion=false;
-						throw new EnchereRefuseException("Le montant est trop bas");}
+						//throw new EnchereRefuseException("Le montant est trop bas");
+						}
 				}else {
 					insertion=false;
-					throw new EnchereRefuseException("votre credit n'est pas suffisant");}
+					//throw new EnchereRefuseException("votre credit n'est pas suffisant");
+					}
 			}
 		
 		catch (DALException e) {
