@@ -102,10 +102,12 @@ main__redirection {
 	display: grid;
     justify-content: center;
     grid-template: repeat(2, 2fr) / repeat(3, 2fr);
+    grid-gap: 10px;
 }
 .announce__card {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
 }
 .annouce__image {
 	width: 160px;
