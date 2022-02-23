@@ -1,5 +1,10 @@
 package fr.eni.ecole.encheres.bll;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
@@ -105,7 +110,7 @@ public class UtilisateurManager {
 			utilisateurDAO.MajUtilisateur(utilisateurConnecte);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
-			throw new BLLException("Erreur lors de l'insertion!");
+			throw new BLLException("Erreur lors de la mise a jour de l'utilisateur!");
 		}
 		
 	}
@@ -115,10 +120,21 @@ public class UtilisateurManager {
 			utilisateurDAO.SupprimerUtilisateur(noUtilisateur);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
-			throw new BLLException("Erreur lors de l'insertion!");
+			throw new BLLException("Erreur lors de la suppression de l'utilisateur!");
 		}
 		
 	}
+
+
+		public void MiseAJourCreditUtilisateur(Utilisateur encherisseur, Connection cnx) throws BLLException {
+			try {
+				utilisateurDAO.MiseAJourCreditUtilisateur(encherisseur,cnx);
+			} catch (DALException e) {
+				// --- Levée d'une exception quand l'email n'est pas reconnu
+				throw new BLLException("Erreur lors de la mise à jour credit de l'utilisateur !");
+			}
+	
+		}
 }
 	
 

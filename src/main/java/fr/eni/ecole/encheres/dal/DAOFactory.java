@@ -1,7 +1,6 @@
 package fr.eni.ecole.encheres.dal;
 
 import fr.eni.ecole.encheres.dal.jdbc.ArticleDAOJdbcImpl;
-import fr.eni.ecole.encheres.dal.jdbc.EnchereDAO;
 import fr.eni.ecole.encheres.dal.jdbc.EnchereDAOJdbcImpl;
 import fr.eni.ecole.encheres.dal.jdbc.UtilisateurDAOJdbcImpl;
 

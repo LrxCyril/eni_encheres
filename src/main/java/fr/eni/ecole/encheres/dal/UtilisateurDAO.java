@@ -1,5 +1,7 @@
 package fr.eni.ecole.encheres.dal;
 
+import java.sql.Connection;
+
 import fr.eni.ecole.encheres.bo.Utilisateur;
 
 /**
@@ -19,4 +21,5 @@ public interface UtilisateurDAO {
 	Utilisateur lireUtilisateurPseudo(String pseudo) throws DALException;
 	void MajUtilisateur(Utilisateur utilisateur)throws DALException;
 	void SupprimerUtilisateur(int noUtilisateur) throws DALException;
+	void MiseAJourCreditUtilisateur(Utilisateur encherisseur, Connection cnx) throws DALException;
 }

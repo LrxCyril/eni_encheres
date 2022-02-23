@@ -4,36 +4,68 @@ import java.time.LocalDateTime;
 
 public class Enchere {
 	
+	int noEnchere;
 	LocalDateTime dateEnchere;
 	int montantEnchere;
-	ArticleVendu articleVendu;
+	Article article;
+	Utilisateur utilisateur;
 	
-	// --- Getters and Setters
-	// --- date enchère
-	public LocalDateTime getDateEnchere() {
-		return dateEnchere;
+	
+	public Enchere()
+{
+		super();
+
 	}
-	
-	public void setDateEnchere(LocalDateTime dateEnchere) {
+	public Enchere( LocalDateTime dateEnchere, int montantEnchere) {
+		super();
+
 		this.dateEnchere = dateEnchere;
-	}
-	
-	// --- montant enchère
-	public int getMontantEnchere() {
-		return montantEnchere;
-	}
-	
-	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
 	
-	// --- article vendu
-	public ArticleVendu getArticleVendu() {
-		return articleVendu;
+	public Enchere(int noEnchere, LocalDateTime dateEnchere, int montantEnchere) {
+		super();
+		this.noEnchere = noEnchere;
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
 	}
-	public void setArticleVendu(ArticleVendu articleVendu) {
-		this.articleVendu = articleVendu;
+	public int getNoEnchere() {
+		return noEnchere;
 	}
+	public void setNoEnchere(int noEnchere) {
+		this.noEnchere = noEnchere;
+	}
+	public LocalDateTime getDateEnchere() {
+		return dateEnchere;
+	}
+	public void setDateEnchere(LocalDateTime dateEnchere) {
+		this.dateEnchere = dateEnchere;
+	}
+	public int getMontantEnchere() {
+		return montantEnchere;
+	}
+	public void setMontantEnchere(int montantEnchere) {
+		this.montantEnchere = montantEnchere;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	
+	
 	
 	
 }
