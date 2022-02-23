@@ -182,5 +182,4 @@ public class Article {
 	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
 	}
-	
 }

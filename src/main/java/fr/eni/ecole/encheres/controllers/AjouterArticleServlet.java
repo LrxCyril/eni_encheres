@@ -20,6 +20,7 @@ import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.bo.Categorie;
+import fr.eni.ecole.encheres.bo.Retrait;
 import fr.eni.ecole.encheres.dal.DALException;
 
 /**
@@ -35,7 +36,6 @@ public class AjouterArticleServlet extends HttpServlet {
      */
     public AjouterArticleServlet() {
         super();
-        //mgr = new ArticleManager();
        
     }
 
@@ -65,6 +65,10 @@ public class AjouterArticleServlet extends HttpServlet {
 		
 			Article ajoutArticle = new Article();
 			Boolean vide = false;
+			
+			Retrait ajoutRetrait = new Retrait();
+			
+			
 			HttpSession session = request.getSession();
 			ajoutArticle.setNoUtilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur());
 			ajoutArticle.setNomArticle(request.getParameter("nom_article"));
@@ -77,11 +81,16 @@ public class AjouterArticleServlet extends HttpServlet {
 			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("date_fin_encheres"),dtf));
 			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prix_initial")));
 			
+			//Paramètres adresse
+			ajoutRetrait.setRue(request.getParameter("rue"));
+			ajoutRetrait.setCodePostal(request.getParameter("code_postal"));
+			ajoutRetrait.setVille(request.getParameter("ville"));
+			
 		//récupérer les paramètres de requêtes
 			
 			//envoyer article fonctionBLL
 			try {
-				manager.insertArticles(ajoutArticle);
+				manager.insertArticles(ajoutArticle, ajoutRetrait);
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

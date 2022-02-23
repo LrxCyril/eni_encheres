@@ -103,10 +103,13 @@ public class UtilisateurManager {
 	public void majUtilisateur(Utilisateur utilisateurConnecte) throws BLLException {
 		try {
 			utilisateurDAO.MajUtilisateur(utilisateurConnecte);
+			
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
 			throw new BLLException("Erreur lors de l'insertion!");
 		}
+		
+		
 		
 	}
 

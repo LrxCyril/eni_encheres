@@ -7,6 +7,7 @@ import java.util.List;
 import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
+import fr.eni.ecole.encheres.bo.Retrait;
 import fr.eni.ecole.encheres.dal.ArticleDAO;
 import fr.eni.ecole.encheres.dal.DALException;
 import fr.eni.ecole.encheres.dal.DAOFactory;
@@ -26,10 +27,13 @@ public class ArticleManager {
 		}
 	}
 
-	public void insertArticles(Article article) throws DALException, BLLException {
+	public void insertArticles(Article article, Retrait ajoutRetrait) throws DALException, BLLException {
 		//--- Insérer l'article en base
 		try {
+			//Insérer article
 			articleDAO.insertArticles(article);
+			articleDAO.insertRetrait(ajoutRetrait);
+			
 		} catch(DALException e){
 		//--- Levée d'une exception quand l'article n'est pa inséré
 			e.printStackTrace();
