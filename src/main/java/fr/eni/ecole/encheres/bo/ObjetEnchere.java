@@ -6,23 +6,34 @@ public class ObjetEnchere {
 	int credit;
 	int miseAPrix;
 	int prixVente;
+	int noUtilisateur;
 	
 	
 	// --- constructeur
-	public ObjetEnchere(int noArticle, int credit, int miseAPrix, int prixVente) {
+	public ObjetEnchere(int noUtilisateur, int credit, int miseAPrix, int prixVente) {
 		super();
-		this.noArticle = noArticle;
+		this.noUtilisateur = noUtilisateur;
 		this.credit = credit;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
+		
 	}
 
 	// --- Getters and Setters ---------------------
-	// --- numero utilisateur
+	// --- numéro utilisateur
+	public int getNoUtilisateur() {
+		return noUtilisateur;
+	}
+
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
+	
+	// --- numero article
 	public int getNoArticle() {
 		return noArticle;
 	}
-	
+
 	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
@@ -39,10 +50,10 @@ public class ObjetEnchere {
 	
 	
 	// --- prix initial
-	public int getPrixInitial() {
+	public int getMiseAPrix() {
 		return miseAPrix;
 	}
-	public void setPrixInitial(int miseAPrix) {
+	public void setMiseAPrix(int miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
 	

@@ -1,144 +1,76 @@
-/* --- principal container --- */
+* {}
 
+body {}
+
+/* --- principal container --- */
 .container { font-family: 'Open Sans', sans-serif; }
 
-
 /* --- header --- */
+.header {}
+	.header__link {}
+		.header__title {}
 
-.header { 
-    display: flex;
-    justify-content: space-between; 
-    margin-bottom: 40px;
-    padding: 40px;
-    align-items: center;
-    border : 1px solid black
-}
-/*
-    .header__logo {}
-*/
-        .header__main-link { text-decoration: none; }
-
-            .header__main-title {
-                font-weight: 700;
-                color: black;
-            }
-/*
-                .header__nav {}
-*/
-                    .header__nav-list { display: flex; }
-
-                        .header__nav-item {
-                        	margin: auto 20px;
-                        	list-style: none; 
-                        }
-
-                            .header__nav-link {
-                                text-decoration: none;
-                                font-weight: 700;
-                                color: black;
-                            }
-
+/* --- nav --- */
+.nav {}
+	.nav__list {}
+		.nav__item {}
+			.nav__link {}
 
 /* --- main --- */
-
-.main { margin: auto 80px; }
-/*
-    .main__name-page {}
-*/
-        .main__title {
-            margin-bottom: 40px;
-            text-align: center;
-            font-weight: 700;
-        }
-
-            .main__form { margin-bottom: 40px; }
-/*
-                .main__announce {}
-*/
+.main {}
+	.main__title {}
+		.main__list {}
+			.main__item {}
+				.main__text {}
+					.main__link {}
+						.main__submit {}
+	
+/* --- research --- */
+.research {}
+	.research__form {}
 
 /* --- form --- */
-/*
-.form__container {}
-    .form__label {}
-*/
-        .form__input { width: 200px; }
-/*
-			.form__message {}
-	            .form__categories-label {}
-	                .form__select {}
-	                    .form__option {}
-*/
-	                        .form__filter {
-	                            display: flex;
-	                            justify-content: space-evenly;
-	                            margin-top: 20px;
+.form {}
+	.form__fieldset {}
+		.form__text {}
+		    .form__label {}
+		    	.form__input {}
+		    		.form__error{}
+			        	.form__select {}
+							.form__option {}
+								.form__link {}
+									.form__submit {}
+				
+/* --- filter --- */
+.filter {}
+	.filter__achats {}
+		.filter__ventes {}
+			.filter__radio {}
+				.filter__label {}
+					.filter__list {}
+						.filter__item {}
+							.filter__checkbox {}
+
 	
-	                        }
-/*
-	                            .form__achats-filter {}
-	                                .form__ventes-filter {}
-	                                    .form__radio {}
-	                                        .form__radio-label {}
-	                                            .form__list {}
-	                                                .form__item {}
-	                                                    .form__checkbox {}
-	                                                        .form__link {}
-	                                                            .form__submit {}
-*/
-
 /* --- announce --- */
-
-.announce {
-    display: flex;
-    justify-content: space-around;
-}
-
-    .announce__card {
-        display: flex;
-        margin: auto 40px;
-        border : 1px solid black
-    }
-/*
+.announce {}
+    .announce__card {}
         .annouce__image {}
-*/
-            .announce__description { margin-right: 20px; }
-
-                .announce__link {
-                    text-decoration: none;
-                    font-weight: 700;
-                    color: black;
-                }
-/*
+            .announce__description {}
+                .announce__link {}
                     .announce__title {}
                         .announce__price {}
                             .announce__deadline {}
-                                .announce__seller-label {}
-                                    .announce__seller-profile {}
-*/
+                                .announce__seller {}
 
 /* --- footer --- */
 
-.footer {
-	display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 80px;
-    padding: 20px;
-    border: 1px solid black;
-}
-
-	.footer__container { display: flex; }
-/*	
-		.footer__team {}
-*/
-			.footer__title { margin: 0 20px; }
-/*
-				.footer__list-name {}
-					.footer__list {}
-						.footer__item {}
-							.footer__date {}
-								.footer__text {}
-*/
+.footer {}
+	.footer__container {}
+		.footer__title {}
+			.footer__list {}
+				.footer__item {}
+					.footer__text {}
 
 
 
