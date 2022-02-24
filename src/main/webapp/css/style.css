@@ -17,8 +17,11 @@ body {background-color: #f7f7f7;}
     justify-content: space-between;
     margin: 40px auto;
 }
+
+/*
 .header__link {}
 .header__title {}
+*/
 
 /* --- nav --- */
 .nav {font-weight: 700;}
@@ -27,7 +30,11 @@ body {background-color: #f7f7f7;}
 	display: flex;
     margin: 0 20px;
 }
+
+/*
 .nav__item {}
+*/
+
 .nav__home {
 	padding: 8px;
     border: 1px solid #2E6FF2;
@@ -72,14 +79,18 @@ main__redirection {
 	display: flex;
     justify-content: center;
 }
+/*
 .main__signup {}
+*/
 .main__list {
 	display: flex;
     flex-direction: column;
     margin: 40px auto;
 }
+/*
 .main__item {}
 .main__text {}
+*/
 .main__subcontainer {
     display: flex;
     flex-direction: column;
@@ -129,8 +140,10 @@ main__redirection {
     flex-direction: column;
     margin: 5px 0;
 }
+/*
 .form__remember-check {}
 .form__checkbox {}
+*/
 .form__label {margin-bottom: 7px;}
 .form__input {
 	height: 30px;
@@ -171,13 +184,19 @@ main__redirection {
     justify-content: center;
     text-decoration : none;
 }
-
+/*
 .form__fieldset {}
 .form__text {}
 .form__error{}
+*/
+
 .form__select {height: 30px;}
+
+/*
 .form__option {}
-	
+*/
+
+
 /* --- announce --- */
 .announce {
 	display: grid;
@@ -191,7 +210,9 @@ main__redirection {
     grid-gap: 10px;
     padding: 10px;
     background-color: whitesmoke;
-    box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;}
+.announce__card:hover {
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .announce__image {
 	width: 240px;
@@ -207,10 +228,14 @@ main__redirection {
 .announce__link:hover {
     color: #F27D16;
 }
+
 .announce__title {font-weight: 700;}
+/*
 .announce__price {}
 .announce__deadline {}
 .announce__seller {}
+*/
+
 
 /* --- footer --- */
 
@@ -226,12 +251,15 @@ main__redirection {
 		display: flex;
     	justify-content: space-between;
 	}
+/*	
 		.footer__title {}
+*/
 			.footer__list {display: flex;}
 				.footer__item {
 					margin: auto 20px;
 				}
+/*
 					.footer__text {}
-
+*/
 
 
