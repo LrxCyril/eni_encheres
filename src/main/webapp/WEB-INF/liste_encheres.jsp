@@ -16,6 +16,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
         
+        <script type="text/javascript" src="./radioDesactive.js"></script>
+        
         <title>ENI | Enchères</title>
     </head>
     <body>
@@ -83,9 +85,9 @@
                             <!-- Achats -->
                             
                             <div class="form__check">
-							  <input class="form__input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+							  <input class="form__input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="radioDesactive()">
 							  	<label class="form__label" for="inlineRadio1">Achats</label>
-							  		<ul class="form__list">
+							  		<ul class="form__list" id="liste-achats">
 	                                    <li class="form__item">
 	                                        <input class="form__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
 	                                        <label class="form__label" for="encheres-ouvertes">enchères ouvertes</label>
@@ -104,9 +106,9 @@
 							<!-- Ventes -->
 							
 							<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+							  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="radioDesactive()">
 							  	<label class="form-check-label" for="inlineRadio2">Ventes</label>
-								  	<ul class="form__list">
+								  	<ul class="form__list" id="liste-ventes">
 		                                    <li class="form__item">
 		                                        <input class="form__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours">
 		                                        <label class="form__label" for="mes-ventes-en-cours">mes ventes en cours</label>
