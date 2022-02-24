@@ -102,9 +102,14 @@
 							<c:if test="${ encherevalide}">
 								<p>votre enchère est validée</p>
 							</c:if>
+							<c:if test="${not utilisateurActif.getPseudo()==enchereEncours.getVendeur().getPseudo()}">
 							<label class="form__label" for="proposition">Ma Proposition</label>
 							<input class="form__input" type="text" name="proposition" id="proposition" placeholder="proposition">
 							<button type="submit">Enchérir</button>
+							</c:if>
+							<c:if test="${utilisateurActif.getPseudo()==enchereEncours.getVendeur().getPseudo()}">
+							<p>L'enchère sur votre propre article n'est pas authorisée</p>
+							</c:if>
 						</div>
 						<a class="form__link" href="${pageContext.request.contextPath}/home">
 							<input class="form__button" type="button" name="annuler" value="Annuler">
