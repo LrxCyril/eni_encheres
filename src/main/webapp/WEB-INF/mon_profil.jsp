@@ -155,9 +155,16 @@
 					<!-- annuler if -->
 					<div class="form__fields">
 						<c:if test="${requestScope.creer}">
-							<input class="form__input" type="submit" name="creer" value="Créer">
+							<input class="form__submit" type="submit" name="creer" value="Créer">
+<%-- 							<a class="form__link" href="${pageContext.request.contextPath}/connect"> --%>
+<!-- 								<input class="form__submit" type="button" name="annuler" value="Annuler"> -->
+<!-- 							</a> -->
+						</c:if>
+					</div>
+					<div class="form__fields">
+						<c:if test="${requestScope.creer}">
 							<a class="form__link" href="${pageContext.request.contextPath}/connect">
-								<input class="form__input" type="button" name="annuler" value="Annuler">
+								<input class="form__submit" type="button" name="annuler" value="Annuler">
 							</a>
 						</c:if>
 					</div>
