@@ -17,7 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.ecole.encheres.bll.ArticleManager;
 import fr.eni.ecole.encheres.bll.BLLException;
-import fr.eni.ecole.encheres.bo.Article;
+
+import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.bo.Retrait;
@@ -63,7 +64,7 @@ public class AjouterArticleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Création d'un article avec les données mise à jour
 		
-			Article ajoutArticle = new Article();
+			ArticleVendu ajoutArticle = new ArticleVendu();
 			Boolean vide = false;
 			
 			Retrait ajoutRetrait = new Retrait();

@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.ecole.encheres.bo.Article;
+import fr.eni.ecole.encheres.bo.ArticleVendu;
+import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.bo.Enchere;
 import fr.eni.ecole.encheres.bo.EnchereComplete;
 import fr.eni.ecole.encheres.bo.ObjetEnchere;
@@ -36,7 +37,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public EnchereComplete lectureEnchereComplete(int noArticle) throws DALException {
 
 		EnchereComplete enchereComplete = new EnchereComplete();
-		System.out.println("dal"+noArticle);
 		// --- 1 | Obtenir une connexion
 		try (Connection cnx = ConnectionProvider.getConnection();){
 
@@ -69,12 +69,12 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				retrait.setCodePostal(rs.getString("code_postal"));
 				retrait.setRue(rs.getString("rue"));
 				retrait.setVille(rs.getString("ville"));
-				Article article = new Article();
-				article.setNoCategorie(rs.getInt("no_article"));
+				ArticleVendu article = new ArticleVendu();
+				article.setNoArticle(noArticle);
 				article.setNomArticle(rs.getString("nom_article"));
 				article.setDescription(rs.getString("description"));
 				article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-				article.setPrixInitial(rs.getInt("prix_initial"));
+				article.setMiseAPrix(rs.getInt("prix_initial"));
 
 				enchereComplete.setEncherisseur(encherisseur);
 				enchereComplete.setEnchere(enchere);
@@ -109,9 +109,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Utilisateur encherisseur = new Utilisateur();
 				encherisseur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				encherisseur.setCredit(rs.getInt("credit"));
-				Article article = new Article();
+				ArticleVendu article = new ArticleVendu();
 				article.setNoArticle(rs.getInt("no_article"));
-				article.setPrixInitial(rs.getInt("prix_initial"));
+				article.setMiseAPrix((rs.getInt("prix_initial")));
 				article.setPrixVente(rs.getInt("prix_vente"));	
 				encherePrecedente = new Enchere(noArticle,LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()),rs.getTime("date_enchere").toLocalTime()), rs.getInt("montant_enchere"));
 				encherePrecedente.setArticle(article);

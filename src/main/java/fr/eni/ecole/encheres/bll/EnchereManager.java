@@ -5,8 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.eni.ecole.encheres.bo.Article;
+import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Enchere;
 import fr.eni.ecole.encheres.bo.EnchereComplete;
 import fr.eni.ecole.encheres.bo.ObjetEnchere;
@@ -57,7 +56,7 @@ public class EnchereManager {
 					if(derniereEnchere==null) {
 						authorisationEnchere=true;
 						nouvelleEnchere=new Enchere();
-						Article article=new Article();
+						ArticleVendu article=new ArticleVendu();
 						article.setNoArticle(noArticle);
 						nouvelleEnchere.setArticle(article);
 						Utilisateur encherisseur = new Utilisateur();

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
-import fr.eni.ecole.encheres.bo.Article;
+
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.bo.Retrait;
@@ -232,7 +232,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public void MiseAJourArticle(Article article, Connection cnx) throws DALException {
+	public void MiseAJourArticle(ArticleVendu article, Connection cnx) throws DALException {
 		
 		try {
 			// 2- Contruire la requete
