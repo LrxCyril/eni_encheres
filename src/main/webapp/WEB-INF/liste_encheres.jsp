@@ -24,33 +24,9 @@
     	<div class="container">
 		<!-- Header ------------------ -->
             <header class="header">
-				<a class="header__link" href="${pageContext.request.contextPath}/home"> <!-- TODO : Retour à l'accueil | doit rester dans l'espace connecté quand l'utilisateur est identifié -->
-					<h1 class="header__title">ENI - Enchères</h1>
-				</a>
+				<%@ include file="/WEB-INF/fragments/logo.jspf"%>
 				<!-- Navigation -->
-                <nav class="nav">
-                    <ul class="nav__list">
-                        <li class="nav__item">
-                            <c:if test="${ not sessionScope.session_active}">
-                                <a class="nav__home" href="${pageContext.request.contextPath}/connect">Se connecter | S'inscrire</a>
-                            </c:if>
-                        </li>
-                        <c:if test="${sessionScope.session_active}">
-	                        <li class="nav__item">
-	                            <a class="nav__link" href="${pageContext.request.contextPath}/afficher/encheres">Enchères</a>
-	                        </li>
-	                        <li class="nav__item">
-	                            <a class="nav__link" href="${pageContext.request.contextPath}/ajout/article">Vendre un article</a>
-	                        </li>
-	                        <li class="nav__item">
-	                            <a class="nav__link" href="${pageContext.request.contextPath}/consulter/profil">Mon profil</a>
-	                        </li>
-	                        <li class="nav__item">
-	                            <a class="nav__link" href="${pageContext.request.contextPath}/deconnect">Déconnexion</a>
-	                        </li>	
-                        </c:if>
-                    </ul>
-                </nav>
+                <%@ include file="/WEB-INF/fragments/nav.jspf"%>
             </header>
             
             <!-- Main ------------------ -->

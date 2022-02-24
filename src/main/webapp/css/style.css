@@ -89,8 +89,9 @@ main__redirection {
 }
 /*
 .main__item {}
-.main__text {}
 */
+.main__text {margin-bottom: 15px;}
+
 .main__subcontainer {
     display: flex;
     flex-direction: column;

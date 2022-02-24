@@ -25,14 +25,14 @@
 			<!-- Header ------------------ -->
 			
 			<header class="header">
-				<a class="header__link" href="#">
-					<h1 class="header__title">ENI - Enchères</h1>
-				</a>
+				<%@ include file="/WEB-INF/fragments/logo.jspf"%>
+				<!-- Navigation -->
+                <%@ include file="/WEB-INF/fragments/nav.jspf"%>
 			</header>
 			
 			<!-- Main ------------------ -->
 			
-			<div class="main">
+			<main class="main">
 				<!-- formulaire de création d'une vente -->
 				<form class="form__container" method="post" action="${pageContext.request.contextPath}/detail/enchere">
 					<!-- nom de l'article -->
@@ -116,7 +116,8 @@
            		 		</a>
            		 	</div>
 				</form>
-			</div>
+			</main>
+			<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 		</div>		                
 	</body>
 </html>
