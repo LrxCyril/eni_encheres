@@ -142,7 +142,7 @@ main__redirection {
 .announce {
 	display: grid;
     justify-content: center;
-    grid-template: repeat(2, 2fr) / repeat(2, 2fr);
+    grid-template: repeat(2, 2fr) / repeat(1, 2fr);
     grid-gap: 10px;
 }
 .announce__card {
