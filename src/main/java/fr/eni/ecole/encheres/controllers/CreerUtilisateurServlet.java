@@ -95,6 +95,10 @@ public class CreerUtilisateurServlet extends HttpServlet {
 			request.setAttribute("prenom", "vide");
 			vide=true;
 		}
+		if (!profilUtilisateur.getEmail().contains("@")) {
+			request.setAttribute("email", "vide");
+			vide=true;
+		}
 		
 		if (profilUtilisateur.getEmail().isEmpty()) {
 			request.setAttribute("email", "vide");
@@ -115,7 +119,13 @@ public class CreerUtilisateurServlet extends HttpServlet {
 			request.setAttribute("ville", "vide");
 			vide=true;
 		}
+	
 		
+		if (!motDePasse.matches("[a-zA-Z0-9]")){
+			System.out.println("invalide");
+			request.setAttribute("mauvaisFormat", true);
+			vide=true;
+		}
 		if (motDePasse.isEmpty()) {
 			request.setAttribute("motDePasse", "vide");
 			vide=true;
@@ -127,7 +137,7 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		}
 		//comparer motDePasse et confirmMotDePasse
 		if (!motDePasse.equals(confirmMotDePasse)) {
-			request.setAttribute("motDePasseInvalide", "invalide");
+			request.setAttribute("motDePasseInvalide", true);
 			vide=true;
 		}
 		//si champ vide ou erreur retourner sur la page, avertir et sortir de la fonction
