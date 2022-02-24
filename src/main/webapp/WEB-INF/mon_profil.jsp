@@ -119,6 +119,14 @@
 					<div class="form__fields">
 						<label class="form__label" for="motDePasse">Mot de passe :</label>
 						<input class="form__input" type="password" name="motDePasse" id="motDePasse" placeholder="mot de passe" value="${utilisateurActif.getMotDePasse()}">
+						
+						<c:if test="${mauvaisFormat}">
+							<p class="form__error">Le format du mot de passe n'est pas correcte</p>
+						</c:if>
+						<c:if test="${motDePasseInvalide}">
+							<p class="form__error">Les mots de passes ne sont pas concordants</p>
+						</c:if>
+						
 						<c:if test="${not empty requestScope.motDePasse}">
 							<p class="form__error">champs obligatoire</p>
 						</c:if>
