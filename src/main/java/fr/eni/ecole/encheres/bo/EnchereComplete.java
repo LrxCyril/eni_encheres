@@ -7,6 +7,13 @@ public class EnchereComplete {
 	ArticleVendu article;
 	Utilisateur vendeur;
 	Retrait retrait;
+	Categorie categorie;
+	public Categorie getCategorie() {
+		return categorie;
+	}
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
 	public Utilisateur getEncherisseur() {
 		return encherisseur;
 	}
