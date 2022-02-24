@@ -81,8 +81,8 @@
 							
                             <!-- Achats -->
                             
-                            <div class="form__check">
-							  <input class="form__input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="radioDesactive()">
+                            <div class="form-check form-check-inline">
+							  <input class="form-check" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="radioDesactive()">
 							  	<label class="form__label" for="inlineRadio1">Achats</label>
 							  		<ul class="form__list" >
 	                                    <li class="form__item" id="liste-achats">

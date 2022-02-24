@@ -48,7 +48,7 @@
                     
                     <!-- description -->
                     <div class="form__fields">
-	                    <label class="form_label" for="description">Description :</label>
+	                    <label class="form__label" for="description">Description :</label>
 	                    <input class="form__input" type="text" name="description" id="description" placeholder="Description">
 	                    <c:if test="${not empty requestScope.description}">
 	                    	<p class="form__error">Champs obligatoire</p>
@@ -126,7 +126,7 @@
                     
 	                <!-- ville -->
 	                <div class="form__fields">
-	                    <label class="form__class" for="ville">Ville :</label>
+	                    <label class="form__label" for="ville">Ville :</label>
 	                    <input class="form__input" type="text" name="ville" id="ville" value="${utilisateurActif.getVille()}">
 	                    <c:if test="${not empty requestScope.ville}">
 	                    	<p class="form__error">Champs obligatoire</p>
@@ -136,9 +136,13 @@
 	                    
 	                <!-- soumettre -->
 	                <div class="form__fields">
-	                    <input class="form__button" type="submit" name="enregistrer" value="Enregistrer">
+	                    <input class="form__submit" type="submit" name="enregistrer" value="Enregistrer">
+                    </div>
+                    
+                    <!-- annuler -->
+	                <div class="form__fields">
 	                    <a class="form__link" href="${pageContext.request.contextPath}/home">
-	                        <input class="form__button" type="button" name="annuler" value="Annuler">
+	                        <input class="form__submit" type="button" name="annuler" value="Annuler">
 	                    </a>
                     </div>
 	            </form>
