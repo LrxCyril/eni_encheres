@@ -35,7 +35,7 @@
                     <ul class="nav__list">
                         <li class="nav__item">
                             <c:if test="${ not sessionScope.session_active}">
-                                <a class="nav__link" href="${pageContext.request.contextPath}/connect">Se connecter | S'inscrire</a>
+                                <a class="nav__home" href="${pageContext.request.contextPath}/connect">Se connecter | S'inscrire</a>
                             </c:if>
                         </li>
                         <c:if test="${sessionScope.session_active}">
