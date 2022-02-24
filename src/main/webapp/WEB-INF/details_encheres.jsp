@@ -35,61 +35,58 @@
 			<div class="main">
 				<!-- formulaire de création d'une vente -->
 				<form class="form__container" method="post" action="${pageContext.request.contextPath}/detail/enchere">
-					<fieldset class="form__fieldset">
-						<!-- nom de l'article -->
-						<div>
+					<!-- nom de l'article -->
+					<div class="form__fields">
 						<label class="form__label" for="nom_article"></label>
 						<input type="hidden" name="idArticle" value="${idArticle}">
 						<p>${nomArticle}</p>
-						</div>
-										        
-				        <!-- description de la vente -->            
-						<div>
+					</div>
+									        
+			        <!-- description de la vente -->            
+					<div class="form__fields">
 						<label class="form__label" for="nom_article">Description:</label>
 						<p>${description}</p>
-						</div>
-				        
-				        <!-- meilleure offre -->            
-						<div>
+					</div>
+			        
+			        <!-- meilleure offre -->            
+					<div class="form__fields">
 						<label class="form__label" for="nom_article">Meilleure offre:</label>
 						<p>${meilleureOffre} par ${exEncherisseur} </p>
-						</div>
-						
-						<!-- meise à prix -->            
-						<div>
+					</div>
+					
+					<!-- meise à prix -->            
+					<div class="form__fields">
 						<label class="form__label" for="nom_article">Mise à prix:</label>
 						<p>${miseaPrix}</p>
-						</div>
-						
-			            
-			            <!-- Retrais -->              
-						<div>
+					</div>
+					
+		            
+		            <!-- Retrais -->              
+					<div class="form__fields">
 						<label class="form__label" for="nom_article">Retrait</label>
 						<p>${adresse}</p>
 						<p>${codePostal} ${ville}</p>
-						</div>
-						
-						<!-- Vendeur -->
-						<div>
+					</div>
+					
+					<!-- Vendeur -->
+					<div class="form__fields">
 						<label class="form__label" for="nom_article">Vendeur:</label>
 						<p>${vendeur}</p>
-						</div>
-						
-						<!-- Tel -->
-						<div>
+					</div>
+					
+					<!-- Tel -->
+					<div class="form__fields">
 						<label class="form__label" for="nom_article">Tel:</label>
 						<p>${tel}</p>
-						</div>
-						<div>
+					</div>
+					<div class="form__fields">
 						<c:if test="${enchereInvalide}">
 							<p>Le montant de l'enchère n'est pas valide ou votre credit est insuffisant</p>
 						</c:if>
 						<label class="form__label" for="proposition">Ma Proposition</label>
 						<input class="form__input" type="text" name="proposition" id="proposition" placeholder="proposition">
 						<button type="submit">Enchérir</button>
-						</div>
-						
-					</fieldset>
+					</div>
 				</form>
 			</div>
 		</div>		                
