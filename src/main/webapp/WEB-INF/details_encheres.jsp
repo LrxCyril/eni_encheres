@@ -52,7 +52,11 @@
 						<label class="form__label" for="nom_article">Description :&nbsp;</label>
 						<p>${enchereEncours.getArticle().getDescription()}</p>
 					</div>
-				        
+					   <!-- categorie -->            
+					<div class="main__fields">
+						<label class="form__label" for="nom_article">Categorie :&nbsp;</label>
+						<p>categorie ${enchereEncours.getCategorie().getLibelle()}</p>
+					</div>
 			        <!-- meilleure offre -->            
 					<div class="main__fields">
 						<label class="form__label" for="nom_article">Meilleure offre :&nbsp;</label>
