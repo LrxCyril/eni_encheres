@@ -70,49 +70,39 @@ public class AjouterArticleServlet extends HttpServlet {
 			
 			
 			HttpSession session = request.getSession();
-			ajoutArticle.setNoUtilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur());
-			ajoutArticle.setNomArticle(request.getParameter("nomArticle"));
-			ajoutArticle.setDescription(request.getParameter("description"));
-			ajoutArticle.setNoCategorie(Integer.parseInt(request.getParameter("categories")));
-			//Photo article
-			//TODO
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			ajoutArticle.setDateDebutEncheres(LocalDate.parse(request.getParameter("dateDebutEncheres"),dtf));
-			ajoutArticle.setDateFinEncheres(LocalDate.parse(request.getParameter("dateFinEncheres"),dtf));
-			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prixInitial")));
+			//new version
+			int noUtilisateur=((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur();
+			String nomArticle=request.getParameter("nomArticle");
+			String description =request.getParameter("description");
+			int noCategorie =Integer.parseInt(request.getParameter("categories"));
+			DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate dateDebut=(LocalDate.parse(request.getParameter("dateDebutEncheres"),dtf2));
+			LocalDate dateFin=(LocalDate.parse(request.getParameter("dateFinEncheres"),dtf2));
+			int prixIntial =(Integer.parseInt(request.getParameter("prixInitial")));
+			String rue =(request.getParameter("rue"));
+			String codePostal=(request.getParameter("codePostal"));
+			String ville =(request.getParameter("ville"));
 			
-			//Paramètres adresse
-			System.out.println("rue" +request.getParameter("rue"));
-			ajoutRetrait.setRue(request.getParameter("rue"));
-			ajoutRetrait.setCodePostal(request.getParameter("codePostal"));
-			ajoutRetrait.setVille(request.getParameter("ville"));
-			
-		//récupérer les paramètres de requêtes
-			
-			//envoyer article fonctionBLL
 			try {
-				manager.insertArticles(ajoutArticle, ajoutRetrait);
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				manager.insertArticlesRetrait(noUtilisateur, nomArticle,description,noCategorie,dateDebut,dateFin,prixIntial,rue,codePostal,ville);
+		
 			} catch (BLLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-
-			
-			//TODO gérer un objet erreur
-			//vérfier si les champs sont vides 
-			if (ajoutArticle.getNomArticle().isEmpty()) {
-				request.setAttribute("nom_article", "vide");
-				vide = true;
-			}
-			
-			if (ajoutArticle.getDescription().isEmpty()) {
-				request.setAttribute("description", "vide");
-				vide = true;
-			}
+//			
+//			//TODO gérer un objet erreur
+//			//vérfier si les champs sont vides 
+//			if (ajoutArticle.getNomArticle().isEmpty()) {
+//				request.setAttribute("nom_article", "vide");
+//				vide = true;
+//			}
+//			
+//			if (ajoutArticle.getDescription().isEmpty()) {
+//				request.setAttribute("description", "vide");
+//				vide = true;
+//			}
 			
 		
 			
