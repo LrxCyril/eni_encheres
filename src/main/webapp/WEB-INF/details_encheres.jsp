@@ -62,7 +62,7 @@
 					<!-- mise à prix -->            
 					<div class="main__fields">
 						<label class="form__label" for="nom_article">Mise à prix :&nbsp;</label>
-						<p>${enchereEncours.getArticle().getPrixInitial()} crédits</p>
+						<p>${enchereEncours.getArticle().getMiseAPrix()} crédits</p>
 					</div>
 		            
 		            <!-- Retrais -->              
