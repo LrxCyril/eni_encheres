@@ -21,11 +21,8 @@
         <title>ENI | Enchères</title>
     </head>
     <body>
-      <a class="header__nav-link" href="${pageContext.request.contextPath}/test">Test</a>
-        <div class="container">
-        
-        	<!-- Header ------------------ -->
-        
+    	<div class="container">
+		<!-- Header ------------------ -->
             <header class="header">
 				<a class="header__link" href="${pageContext.request.contextPath}/home"> <!-- TODO : Retour à l'accueil | doit rester dans l'espace connecté quand l'utilisateur est identifié -->
 					<h1 class="header__title">ENI - Enchères</h1>

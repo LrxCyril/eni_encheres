@@ -23,6 +23,7 @@ body {background-color: #f7f7f7;}
 /* --- nav --- */
 .nav {font-weight: 700;}
 .nav__list {
+    width: max-content;
 	display: flex;
     margin: 0 20px;
 }
@@ -34,9 +35,21 @@ body {background-color: #f7f7f7;}
     text-decoration: none;
     color: #2E6FF2;
 }
-.nav__link:hover {
+.nav__home:hover {
 	border: 1px solid #0528F2;
 	color: #0528F2;
+}
+.nav__home {
+	padding: 8px;
+    border: 1px solid #2E6FF2;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #2E6FF2;
+}
+.nav__link {
+	text-decoration: none;
+    margin: 0 10px;
+    color: #0528F2;
 }
 
 /* --- main --- */
