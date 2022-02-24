@@ -35,29 +35,49 @@
 			<div class="main">
 				<!-- formulaire de création d'une vente -->
 				<form class="form__container" method="post" action="${pageContext.request.contextPath}/detail/enchere">
-					<fieldset class="form__fieldset">
-						<!-- nom de l'article -->
-						<div>
+					<!-- nom de l'article -->
+					<div class="form__fields">
 						<label class="form__label" for="nom_article"></label>
 						<input type="hidden" name="idArticle" value="${idArticle}">
+						<p>${nomArticle}</p>
+					</div>
+									        
+			        <!-- description de la vente -->            
+					<div class="form__fields">
 						<h3>${enchereEncours.getArticle().getNomArticle()}</h3>
 						</div>
 										        
 				        <!-- description de la vente -->            
 						<div>
 						<label class="form__label" for="nom_article">Description:</label>
+						<p>${description}</p>
+					</div>
+			        
+			        <!-- meilleure offre -->            
+					<div class="form__fields">
 						<p>${enchereEncours.getArticle().getDescription()}</p>
 						</div>
 				        
 				        <!-- meilleure offre -->            
 						<div>
 						<label class="form__label" for="nom_article">Meilleure offre:</label>
+						<p>${meilleureOffre} par ${exEncherisseur} </p>
+					</div>
+					
+					<!-- meise à prix -->            
+					<div class="form__fields">
 						<p>${enchereEncours.getEnchere().getMontantEnchere()} par ${enchereEncours.getEncherisseur().getPseudo()} </p>
 						</div>
 						
 						<!-- meise à prix -->            
 						<div>
 						<label class="form__label" for="nom_article">Mise à prix:</label>
+						<p>${miseaPrix}</p>
+					</div>
+					
+		            
+		            <!-- Retrais -->              
+					<div class="form__fields">
 						<p>${enchereEncours.getArticle().getPrixInitial()}</p>
 						</div>
 						
@@ -65,6 +85,12 @@
 			            <!-- Retrais -->              
 						<div>
 						<label class="form__label" for="nom_article">Retrait</label>
+						<p>${adresse}</p>
+						<p>${codePostal} ${ville}</p>
+					</div>
+					
+					<!-- Vendeur -->
+					<div class="form__fields">
 						<p>${enchereEncours.getRetrait().getRue()}</p>
 						<p>${enchereEncours.getRetrait().getCodePostal()} ${enchereEncours.getRetrait().getVille()}</p>
 						</div>
@@ -72,12 +98,20 @@
 						<!-- Vendeur -->
 						<div>
 						<label class="form__label" for="nom_article">Vendeur:</label>
+						<p>${vendeur}</p>
+					</div>
+					
+					<!-- Tel -->
+					<div class="form__fields">
 						<p>${enchereEncours.getVendeur().getPseudo()}</p>
 						</div>
 						
 						<!-- Tel -->
 						<div>
 						<label class="form__label" for="nom_article">Tel:</label>
+						<p>${tel}</p>
+					</div>
+					<div class="form__fields">
 						<p>${enchereEncours.getVendeur().getTelephone()}</p>
 						</div>
 						<div>
@@ -94,7 +128,6 @@
 						 <a class="form__link" href="${pageContext.request.contextPath}/home">
                         <input class="form__button" type="button" name="annuler" value="Annuler">
                    		 </a>
-						
 					</fieldset>
 				</form>
 			</div>

@@ -132,9 +132,6 @@
 						<c:if test="${not empty requestScope.confirMotDePasse}">
 							<p class="form__error">champs obligatoire</p>
 						</c:if>
-						<c:if test="${motDePasseInvalide}">
-							<p class="form__error">Les mots de passes ne sont pas identiques</p>
-						</c:if>
 					</div>
 					
 					

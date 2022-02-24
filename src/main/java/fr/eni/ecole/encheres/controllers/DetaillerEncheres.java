@@ -74,7 +74,7 @@ public class DetaillerEncheres extends HttpServlet {
 			request.setAttribute("encherevalide",true);
 			request.setAttribute("enchereInvalide",false);
 		}
-		session.setAttribute("idArticle", null);
+		//session.setAttribute("idArticle", null);
 		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
 		//rd.forward(request, response);
 		doGet(request, response);
