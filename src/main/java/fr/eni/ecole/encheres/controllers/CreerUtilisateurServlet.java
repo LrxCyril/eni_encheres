@@ -79,7 +79,6 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		String confirmMotDePasse = request.getParameter("confirmMotDePasse");
 		String creation = request.getParameter("creer");
 		String modification = request.getParameter("modifier");
-		System.out.println(modification);
 		Boolean vide = false;
 		//vérfier si les champs sont vides 
 		if (profilUtilisateur.getPseudo().isEmpty()) {
@@ -128,7 +127,7 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		}
 		//comparer motDePasse et confirmMotDePasse
 		if (!motDePasse.equals(confirmMotDePasse)) {
-			request.setAttribute("motDePasseInvalide", true);
+			request.setAttribute("motDePasseInvalide", "invalide");
 			vide=true;
 		}
 		//si champ vide ou erreur retourner sur la page, avertir et sortir de la fonction
@@ -154,10 +153,8 @@ public class CreerUtilisateurServlet extends HttpServlet {
 				return;
 			}
 		}
-		System.out.println("jesuis avant la");
 		if (modification!=null ) {
 			try {
-			
 				manager.majUtilisateur((Utilisateur) session.getAttribute("utilisateurActif"));
 			} catch (BLLException e) {
 				e.printStackTrace();
