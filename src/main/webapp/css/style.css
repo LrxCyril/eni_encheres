@@ -113,6 +113,16 @@ main__redirection {
     color: whitesmoke;
 }
 
+.main__announce {
+	margin: 20px auto;
+    font-weight: 700;
+}
+
+.main__fields {
+	display: flex;
+	flex-direction: row;
+}
+
 /* --- form --- */
 .form {
 	display: grid;

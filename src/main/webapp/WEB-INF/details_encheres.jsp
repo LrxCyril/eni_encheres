@@ -36,99 +36,80 @@
 				<!-- formulaire de création d'une vente -->
 				<form class="form__container" method="post" action="${pageContext.request.contextPath}/detail/enchere">
 					<!-- nom de l'article -->
-					<div class="form__fields">
-						<label class="form__label" for="nom_article"></label>
+					<div class="hidden">
+						<label class="hidden" for="nom_article"></label>
 						<input type="hidden" name="idArticle" value="${idArticle}">
 						<p>${nomArticle}</p>
 					</div>
 									        
 			        <!-- description de la vente -->            
-					<div class="form__fields">
-						<h3>${enchereEncours.getArticle().getNomArticle()}</h3>
-						</div>
+					<div class="main__announce">
+						<h3>A vendre | ${enchereEncours.getArticle().getNomArticle()}</h3>
+					</div>
 										        
-				        <!-- description de la vente -->            
-						<div>
-						<label class="form__label" for="nom_article">Description:</label>
-						<p>${description}</p>
-					</div>
-			        
-			        <!-- meilleure offre -->            
-					<div class="form__fields">
+			        <!-- description de la vente -->            
+					<div class="main__fields">
+						<label class="form__label" for="nom_article">Description :&nbsp;</label>
 						<p>${enchereEncours.getArticle().getDescription()}</p>
-						</div>
+					</div>
 				        
-				        <!-- meilleure offre -->            
-						<div>
-						<label class="form__label" for="nom_article">Meilleure offre:</label>
-						<p>${meilleureOffre} par ${exEncherisseur} </p>
+			        <!-- meilleure offre -->            
+					<div class="main__fields">
+						<label class="form__label" for="nom_article">Meilleure offre :&nbsp;</label>
+						<p>${enchereEncours.getEnchere().getMontantEnchere()} crédits par ${enchereEncours.getEncherisseur().getPseudo()} </p>
 					</div>
-					
-					<!-- meise à prix -->            
-					<div class="form__fields">
-						<p>${enchereEncours.getEnchere().getMontantEnchere()} par ${enchereEncours.getEncherisseur().getPseudo()} </p>
-						</div>
-						
-						<!-- meise à prix -->            
-						<div>
-						<label class="form__label" for="nom_article">Mise à prix:</label>
-						<p>${miseaPrix}</p>
+
+					<!-- mise à prix -->            
+					<div class="main__fields">
+						<label class="form__label" for="nom_article">Mise à prix :&nbsp;</label>
+						<p>${enchereEncours.getArticle().getPrixInitial()} crédits</p>
 					</div>
-					
 		            
 		            <!-- Retrais -->              
-					<div class="form__fields">
-						<p>${enchereEncours.getArticle().getPrixInitial()}</p>
-						</div>
-						
-			            
-			            <!-- Retrais -->              
-						<div>
-						<label class="form__label" for="nom_article">Retrait</label>
-						<p>${adresse}</p>
-						<p>${codePostal} ${ville}</p>
-					</div>
+					<div class="main__fields">
+						<div class="main__pickup">
+							<label class="form__label" for="nom_article">Retrait</label>
 					
-					<!-- Vendeur -->
-					<div class="form__fields">
-						<p>${enchereEncours.getRetrait().getRue()}</p>
-						<p>${enchereEncours.getRetrait().getCodePostal()} ${enchereEncours.getRetrait().getVille()}</p>
+						<!-- Vendeur -->
+						<div class="main__fields">
+							<p>${enchereEncours.getRetrait().getRue()}</p>
+							<p>${enchereEncours.getRetrait().getCodePostal()} ${enchereEncours.getRetrait().getVille()}</p>
 						</div>
-						
+							
 						<!-- Vendeur -->
 						<div>
-						<label class="form__label" for="nom_article">Vendeur:</label>
-						<p>${vendeur}</p>
-					</div>
-					
-					<!-- Tel -->
-					<div class="form__fields">
-						<p>${enchereEncours.getVendeur().getPseudo()}</p>
+							<label class="form__label" for="nom_article">Vendeur:</label>
+							<p>${vendeur}</p>
 						</div>
 						
 						<!-- Tel -->
+						<div class="form__fields">
+							<p>${enchereEncours.getVendeur().getPseudo()}</p>
+						</div>
+							
+						<!-- Tel -->
 						<div>
-						<label class="form__label" for="nom_article">Tel:</label>
-						<p>${tel}</p>
-					</div>
-					<div class="form__fields">
-						<p>${enchereEncours.getVendeur().getTelephone()}</p>
+							<label class="form__label" for="nom_article">Tel:</label>
+							<p>${tel}</p>
+						</div>
+						<div class="form__fields">
+							<p>${enchereEncours.getVendeur().getTelephone()}</p>
 						</div>
 						<div>
-						<c:if test="${enchereInvalide}">
-							<p>Le montant de l'enchère n'est pas valide ou votre credit est insuffisant</p>
-						</c:if>
-						<c:if test="${ encherevalide}">
-							<p>votre enchère est validée</p>
-						</c:if>
-						<label class="form__label" for="proposition">Ma Proposition</label>
-						<input class="form__input" type="text" name="proposition" id="proposition" placeholder="proposition">
-						<button type="submit">Enchérir</button>
+							<c:if test="${enchereInvalide}">
+								<p>Le montant de l'enchère n'est pas valide ou votre credit est insuffisant</p>
+							</c:if>
+							<c:if test="${ encherevalide}">
+								<p>votre enchère est validée</p>
+							</c:if>
+							<label class="form__label" for="proposition">Ma Proposition</label>
+							<input class="form__input" type="text" name="proposition" id="proposition" placeholder="proposition">
+							<button type="submit">Enchérir</button>
 						</div>
-						 <a class="form__link" href="${pageContext.request.contextPath}/home">
-                        <input class="form__button" type="button" name="annuler" value="Annuler">
-                   		 </a>
-					</fieldset>
+						<a class="form__link" href="${pageContext.request.contextPath}/home">
+							<input class="form__button" type="button" name="annuler" value="Annuler">
+           		 		</a>
+           		 	</div>
 				</form>
 			</div>
 		</div>		                
