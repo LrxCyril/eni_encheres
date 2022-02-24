@@ -136,6 +136,23 @@
 					
 					
 					<!-- boutons -->
+					
+					<!-- enregistrer -->
+					<div class="form__fields">
+						<c:if test="${not requestScope.creer}">
+							<input class="form__submit" type="submit" name="modifier" value="Enregistrer">
+						</c:if>
+					</div>
+					<!-- annuler -->
+					<div class="form__fields">
+						<c:if test="${not requestScope.creer}">
+							<a class="form__link" href="${pageContext.request.contextPath}/home">
+								<input class="form__submit" type="button" name="annuler" value="Annuler">
+							</a>
+						</c:if>
+					</div>
+					
+					<!-- annuler if -->
 					<div class="form__fields">
 						<c:if test="${requestScope.creer}">
 							<input class="form__input" type="submit" name="creer" value="Créer">
@@ -144,21 +161,6 @@
 							</a>
 						</c:if>
 					</div>
-					
-					<!-- annuler -->
-					<div class="form__fields">
-						<c:if test="${not requestScope.creer}">
-							<input class="form__input" type="submit" name="modifier" value="Enregistrer">
-						</c:if>
-					</div>
-					<div class="form__fields">
-						<c:if test="${not requestScope.creer}">
-							<a class="form__link" href="${pageContext.request.contextPath}/home">
-								<input class="form__input" type="button" name="annuler" value="Annuler">
-							</a>
-						</c:if>
-					</div>
-					
 				</form>
 			</main>
 		</div>

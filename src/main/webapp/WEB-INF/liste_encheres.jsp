@@ -21,11 +21,8 @@
         <title>ENI | Enchères</title>
     </head>
     <body>
-      <a class="header__nav-link" href="${pageContext.request.contextPath}/test">Test</a>
-        <div class="container">
-        
-        	<!-- Header ------------------ -->
-        
+    	<div class="container">
+		<!-- Header ------------------ -->
             <header class="header">
 				<a class="header__link" href="${pageContext.request.contextPath}/home"> <!-- TODO : Retour à l'accueil | doit rester dans l'espace connecté quand l'utilisateur est identifié -->
 					<h1 class="header__title">ENI - Enchères</h1>
@@ -35,7 +32,7 @@
                     <ul class="nav__list">
                         <li class="nav__item">
                             <c:if test="${ not sessionScope.session_active}">
-                                <a class="nav__link" href="${pageContext.request.contextPath}/connect">Se connecter | S'inscrire</a>
+                                <a class="nav__home" href="${pageContext.request.contextPath}/connect">Se connecter | S'inscrire</a>
                             </c:if>
                         </li>
                         <c:if test="${sessionScope.session_active}">
@@ -84,8 +81,8 @@
 							
                             <!-- Achats -->
                             
-                            <div class="form__check">
-							  <input class="form__input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="radioDesactive()">
+                            <div class="form-check form-check-inline">
+							  <input class="form-check" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="radioDesactive()">
 							  	<label class="form__label" for="inlineRadio1">Achats</label>
 							  		<ul class="form__list" >
 	                                    <li class="form__item" id="liste-achats">
