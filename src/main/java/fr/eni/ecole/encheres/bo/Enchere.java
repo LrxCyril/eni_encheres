@@ -7,7 +7,7 @@ public class Enchere {
 	int noEnchere;
 	LocalDateTime dateEnchere;
 	int montantEnchere;
-	Article article;
+	ArticleVendu article;
 	Utilisateur utilisateur;
 	
 	
@@ -48,11 +48,11 @@ public class Enchere {
 		this.montantEnchere = montantEnchere;
 	}
 
-	public Article getArticle() {
+	public ArticleVendu getArticle() {
 		return article;
 	}
 
-	public void setArticle(Article article) {
+	public void setArticle(ArticleVendu article) {
 		this.article = article;
 	}
 

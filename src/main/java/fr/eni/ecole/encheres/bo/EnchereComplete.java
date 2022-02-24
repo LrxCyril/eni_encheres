@@ -4,7 +4,7 @@ public class EnchereComplete {
 	
 	Utilisateur encherisseur;
 	Enchere enchere;
-	Article article;
+	ArticleVendu article;
 	Utilisateur vendeur;
 	Retrait retrait;
 	public Utilisateur getEncherisseur() {
@@ -19,10 +19,10 @@ public class EnchereComplete {
 	public void setEnchere(Enchere enchere) {
 		this.enchere = enchere;
 	}
-	public Article getArticle() {
+	public ArticleVendu getArticle() {
 		return article;
 	}
-	public void setArticle(Article article) {
+	public void setArticle(ArticleVendu article) {
 		this.article = article;
 	}
 	public Utilisateur getVendeur() {

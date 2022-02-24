@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.eni.ecole.encheres.bo.Article;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.bo.Retrait;
@@ -100,7 +98,7 @@ public class ArticleManager {
 			return articles;
 		}
 
-		public Connection MiseAJourArticle(Article article, Connection cnx) throws BLLException {
+		public Connection MiseAJourArticle(ArticleVendu article, Connection cnx) throws BLLException {
 			try {
 				articleDAO.MiseAJourArticle(article,cnx);
 			} catch (DALException e) {
