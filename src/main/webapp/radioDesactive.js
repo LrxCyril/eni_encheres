@@ -5,16 +5,14 @@
  */
 
 function radioDesactive(){
-	if(inlineRadio2.onclick == true){
+	if(inlineRadio2.onclick){
 		
-		document.getElementById("encheres-ouvertes").disabled = true;
-		document.getElementById("mes-encheres").disabled = true;
-		document.getElementById("mes-encheres-remportees").disabled = true;
+		document.getElementById("liste-achats").disabled = false;
 		
-	} 	else if(inlineRadio1 == true){
+		
+	} 	else(inlineRadio1.onclick)
 	
-		document.getElementById("mes-ventes-en-cours").disabled = true;
-		document.getElementById("ventes-non-debutees").disabled = true;
-		document.getelementById("ventes-terminees").disabled = true;
-	}
+		document.getElementById("liste-ventes").disabled = false;
+		
+	
 }
