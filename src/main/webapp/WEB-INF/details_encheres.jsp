@@ -25,14 +25,14 @@
 			<!-- Header ------------------ -->
 			
 			<header class="header">
-				<a class="header__link" href="#">
-					<h1 class="header__title">ENI - Enchères</h1>
-				</a>
+				<%@ include file="/WEB-INF/fragments/logo.jspf"%>
+				<!-- Navigation -->
+                <%@ include file="/WEB-INF/fragments/nav.jspf"%>
 			</header>
 			
 			<!-- Main ------------------ -->
 			
-			<div class="main">
+			<main class="main">
 				<!-- formulaire de création d'une vente -->
 				<form class="form__container" method="post" action="${pageContext.request.contextPath}/detail/enchere">
 					<!-- nom de l'article -->
@@ -64,50 +64,55 @@
 						<label class="form__label" for="nom_article">Mise à prix :&nbsp;</label>
 						<p>${enchereEncours.getArticle().getMiseAPrix()} crédits</p>
 					</div>
+					
+					<div class="main__fields">
+						<label class="form__label" for="nom_article">Fin de vente:&nbsp;</label>
+						<p>${enchereEncours.getArticle().getDateFinEncheres()} </p>
+					</div>
 		            
 		            <!-- Retrais -->              
 					<div class="main__fields">
 						<div class="main__pickup">
 							<label class="form__label" for="nom_article">Retrait</label>
 					
-						<!-- Vendeur -->
+						<!-- Vendeur | adresse (rue et code postal) -->
 						<div class="main__fields">
 							<p>${enchereEncours.getRetrait().getRue()}</p>
 							<p>${enchereEncours.getRetrait().getCodePostal()} ${enchereEncours.getRetrait().getVille()}</p>
 						</div>
 							
 						<!-- Vendeur -->
-						<div>
+						<div class="main__fields">
 							<label class="form__label" for="nom_article">Vendeur:</label>
 							<p>${vendeur}</p>
 						</div>
 						
 						<!-- Tel -->
-						<div class="form__fields">
+						<div class="main__fields">
 							<p>${enchereEncours.getVendeur().getPseudo()}</p>
 						</div>
 							
 						<!-- Tel -->
-						<div>
+						<div class="main__fields">
 							<label class="form__label" for="nom_article">Tel:</label>
 							<p>${tel}</p>
 						</div>
-						<div class="form__fields">
+						<div class="main__fields">
 							<p>${enchereEncours.getVendeur().getTelephone()}</p>
 						</div>
-						<div>
+						<div class="main__fields">
 							<c:if test="${enchereInvalide}">
 								<p>Le montant de l'enchère n'est pas valide ou votre credit est insuffisant</p>
 							</c:if>
 							<c:if test="${ encherevalide}">
 								<p>votre enchère est validée</p>
 							</c:if>
-							<c:if test="${not utilisateurActif.getPseudo()==enchereEncours.getVendeur().getPseudo()}">
-							<label class="form__label" for="proposition">Ma Proposition</label>
-							<input class="form__input" type="text" name="proposition" id="proposition" placeholder="proposition">
-							<button type="submit">Enchérir</button>
+							<c:if test="${not utilisateurActif.getPseudo().equals(enchereEncours.getVendeur().getPseudo())}">
+								<label class="form__label" for="proposition">Ma Proposition</label>
+								<input class="form__input" type="number" name="proposition" id="proposition" placeholder="proposition">
+								<button type="submit">Enchérir</button>
 							</c:if>
-							<c:if test="${utilisateurActif.getPseudo()==enchereEncours.getVendeur().getPseudo()}">
+							<c:if test="${utilisateurActif.getPseudo().equals(enchereEncours.getVendeur().getPseudo())}">
 							<p>L'enchère sur votre propre article n'est pas authorisée</p>
 							</c:if>
 						</div>
@@ -116,7 +121,8 @@
            		 		</a>
            		 	</div>
 				</form>
-			</div>
+			</main>
+			<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 		</div>		                
 	</body>
 </html>

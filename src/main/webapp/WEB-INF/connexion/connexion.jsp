@@ -23,9 +23,7 @@
 	<body>
 		<div class="container">
 			<header class="header">
-				<a class="header__link" href="${pageContext.request.contextPath}/home">
-					<h1 class="header__title">ENI - Enchères</h1>
-				</a>
+				<%@ include file="/WEB-INF/fragments/logo.jspf"%>
             </header>
             <main class="main">
                    <h2 class="main__title">Connexion</h2>

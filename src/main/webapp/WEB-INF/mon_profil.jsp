@@ -24,9 +24,9 @@
         	<!-- Header ------------------ -->
         	
             <header class="header">
-				<a class="header__link" href="${pageContext.request.contextPath}/home">
-					<h1 class="header__title">ENI - Enchères</h1>
-				</a>
+				<%@ include file="/WEB-INF/fragments/logo.jspf"%>
+				<!-- Navigation -->
+                <%@ include file="/WEB-INF/fragments/nav.jspf"%>
             </header>
             
             <!-- Main ------------------ -->
@@ -164,9 +164,6 @@
 					<div class="form__fields">
 						<c:if test="${requestScope.creer}">
 							<input class="form__submit" type="submit" name="creer" value="Créer">
-<%-- 							<a class="form__link" href="${pageContext.request.contextPath}/connect"> --%>
-<!-- 								<input class="form__submit" type="button" name="annuler" value="Annuler"> -->
-<!-- 							</a> -->
 						</c:if>
 					</div>
 					<div class="form__fields">
@@ -178,6 +175,7 @@
 					</div>
 				</form>
 			</main>
+			<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 		</div>
     </body>
 </html>

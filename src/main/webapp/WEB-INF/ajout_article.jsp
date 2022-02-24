@@ -24,9 +24,9 @@
 			<!-- Header ------------------ -->
 			
 			<header class="header">
-				<a class="header__link" href="#">
-					<h1 class="header__title">ENI - Enchères</h1>
-				</a>
+				<%@ include file="/WEB-INF/fragments/logo.jspf"%>
+				<!-- Navigation -->
+                <%@ include file="/WEB-INF/fragments/nav.jspf"%>
 			</header>
 			
 			<!-- Main ------------------ -->
@@ -80,7 +80,7 @@
                     <!-- prix initial -->
                     <div class="form__fields">
 	                    <label class="form__label" for="prixInitial">Mise à prix: </label>
-	                    <input class="form__input" type="number" name="prixInitial" min="2" max="5000" step="2" value="2">
+	                    <input class="form__input" type="number" name="prixInitial" min="2" max="5000" step="1" value="2">
                     </div>
                    
                     <!-- date de début de l'enchère -->
@@ -147,6 +147,7 @@
                     </div>
 	            </form>
 			</main>
+			<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 		</div>
 	</body>
 </html>
