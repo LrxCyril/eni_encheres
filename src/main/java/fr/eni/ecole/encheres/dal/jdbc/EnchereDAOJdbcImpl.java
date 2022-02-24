@@ -58,21 +58,17 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Utilisateur encherisseur = new Utilisateur();
 				encherisseur.setNoUtilisateur(rs.getInt("no_encherisseur"));
 				encherisseur.setPseudo(rs.getString("encherisseur"));
-System.out.println("renseigement utilisateur");
 				Utilisateur vendeur = new Utilisateur();
 				vendeur.setNoUtilisateur(rs.getInt("no_vendeur"));
 				vendeur.setPseudo(rs.getString("vendeur"));
 				vendeur.setTelephone(rs.getString("tel_vendeur"));
-System.out.println("renseignement vendeur");
 				Enchere enchere = new Enchere();
 				enchere.setNoEnchere(rs.getInt("no_enchere"));
 				enchere.setMontantEnchere(rs.getInt("montant_enchere"));
-System.out.println("renseignement retrait");
 				Retrait retrait = new Retrait();
 				retrait.setCodePostal(rs.getString("code_postal"));
 				retrait.setRue(rs.getString("rue"));
 				retrait.setVille(rs.getString("ville"));
-System.out.println("renseignement retrait");
 				Article article = new Article();
 				article.setNoCategorie(rs.getInt("no_article"));
 				article.setNomArticle(rs.getString("nom_article"));
@@ -84,8 +80,7 @@ System.out.println("renseignement retrait");
 				enchereComplete.setEnchere(enchere);
 				enchereComplete.setRetrait(retrait);
 				enchereComplete.setArticle(article);
-				enchereComplete.setVendeur(vendeur);
-System.out.println("construction objet");								
+				enchereComplete.setVendeur(vendeur);							
 			}
 
 		} catch (SQLException e) {

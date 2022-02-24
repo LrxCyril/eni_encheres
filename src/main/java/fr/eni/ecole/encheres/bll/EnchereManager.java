@@ -32,7 +32,6 @@ public class EnchereManager {
 		EnchereComplete enchereComplete = null;
 		
 		try {
-			System.out.println(noArticle);
 			enchereComplete=enchereDAO.lectureEnchereComplete(noArticle);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block

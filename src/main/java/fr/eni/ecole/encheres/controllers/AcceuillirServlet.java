@@ -44,9 +44,6 @@ public class AcceuillirServlet extends HttpServlet {
 		try {
 			articles=manager.selectArticle();
 			categorieArticle= manager.selectCategorie();
-			//cateVide.setNoCategorie(0);
-			//cateVide.setLibelle("");
-			//categorieArticle.add(0,cateVide);
 			request.setAttribute("listeCategories", categorieArticle);
 			request.setAttribute("listeArticles", articles);
 		} catch (BLLException e) {
@@ -63,20 +60,27 @@ public class AcceuillirServlet extends HttpServlet {
 		boolean erreur=true;
 		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		List<Categorie> categorieArticle =new ArrayList<Categorie>();
+		int filtreCategorie = 1;
+		String recherche = null;
 		try {
-			int filtreCategorie=Integer.parseInt(request.getParameter("categories"));
-			String recherche= request.getParameter("rechercheArticle");
+			if ((request.getParameter("categories"))!=null) {
+				filtreCategorie=Integer.parseInt(request.getParameter("categories"));
+				System.out.println(filtreCategorie);
+				}
+
+			recherche= request.getParameter("rechercheArticle");
 			//filtres
-			if (filtreCategorie !=0) {
+			if (filtreCategorie !=1) {
 				//filtre par recherche et categorie
-				if(!recherche.isBlank()) {
+				if(recherche!=null) {
 					articles=manager.selectArticlebyCateNom(filtreCategorie,recherche);				
 				// filtre par Categorie
 				}else {
+					
 					articles=manager.selectArticlebyCate(filtreCategorie);
 				}}
-			//filtre par recherche
-			if(!recherche.isBlank()&&filtreCategorie !=0) {
+			//filtre par recherche	
+			if(recherche!=null&&filtreCategorie ==1) {
 				articles=manager.selectArticlebyNom(recherche);
 			}
 			erreur=false;
@@ -88,14 +92,12 @@ public class AcceuillirServlet extends HttpServlet {
 		}finally {
 			
 		try {	
-			if(erreur) {
+			if(erreur |(recherche==null&&filtreCategorie ==1) ) {
 				articles=manager.selectArticle();	
 			}
+
 			categorieArticle= manager.selectCategorie();
 			Categorie cateVide= new Categorie();
-			//cateVide.setNoCategorie(0);
-			//cateVide.setLibelle("");
-			//categorieArticle.add(0,cateVide);
 			request.setAttribute("listeCategories", categorieArticle);
 			request.setAttribute("listeArticles", articles);
 		} catch (BLLException e) {

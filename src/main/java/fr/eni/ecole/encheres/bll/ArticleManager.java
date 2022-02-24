@@ -73,7 +73,9 @@ public class ArticleManager {
 			LocalDate date=LocalDate.now();
 				// --- récupérer la liste des articles en vente
 			try {
-				articles = articleDAO.selectArticlebyCateNom(date, filtreCategorie, recherche);
+				String articleRecherche = "%"+recherche+"%";
+				articles = articleDAO.selectArticlebyNom(date, articleRecherche);
+				articles = articleDAO.selectArticlebyCateNom(date, filtreCategorie, articleRecherche);
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
 				throw new BLLException("Erreur lors de la selection par nom");
@@ -86,7 +88,6 @@ public class ArticleManager {
 			LocalDate date=LocalDate.now();
 				// --- récupérer la liste des articles en vente
 			try {
-				
 				articles = articleDAO.selectArticlebyCate(date, filtreCategorie);
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
@@ -101,7 +102,8 @@ public class ArticleManager {
 			LocalDate date=LocalDate.now();
 				// --- récupérer la liste des articles en vente
 			try {
-				articles = articleDAO.selectArticlebyNom(date, recherche);
+				String articleRecherche = "%"+recherche+"%";
+				articles = articleDAO.selectArticlebyNom(date, articleRecherche);
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
 				throw new BLLException("Erreur lors de la selection des articles");

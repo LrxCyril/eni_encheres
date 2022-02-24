@@ -82,6 +82,7 @@ public class AjouterArticleServlet extends HttpServlet {
 			ajoutArticle.setPrixInitial(Integer.parseInt(request.getParameter("prixInitial")));
 			
 			//Paramètres adresse
+			System.out.println("rue" +request.getParameter("rue"));
 			ajoutRetrait.setRue(request.getParameter("rue"));
 			ajoutRetrait.setCodePostal(request.getParameter("codePostal"));
 			ajoutRetrait.setVille(request.getParameter("ville"));
@@ -113,41 +114,10 @@ public class AjouterArticleServlet extends HttpServlet {
 				vide = true;
 			}
 			
-		//	if (ajoutArticle.getNoCategorie().isEmpty()) {
-		//		request.setAttribute("no_categorie", "vide");
-		//		vide = true;
-		//	}
-			
-			
-		//	if (ajoutArticle.getDateDebutEncheres().isEmpty()) {
-		//		request.setAttribute("date_debut_encheres", "vide");
-		//		vide = true;
-		//	}
-			
-		//	if (ajoutArticle.getDateFinEncheres().isEmpty()) {
-		//		request.setAttribute("date_fin_encheres", "vide");
-		//		vide = true;
-		//	}
-			
-		//	if (ajoutArticle.getRue().isEmpty()) {
-		//		request.setAttribute("rue", "vide");
-		//		vide = true;
-		//	}
-			
-		//	if (ajoutArticle.getCodePostal.isEmpty()) {
-		//		request.setAttribute("code_postal", "vide");
-		//		vide = true;
-		//	}
-	 
-		//	if (ajoutArticle.getVille.isEmpty()) {
-		//		request.setAttribute("ville", "vide");
-		//		vide = true;
-		//	}
-			
 		
 			
 			//appeler liste des enchères
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/home");
 			rd.forward(request, response);
 		}
 
