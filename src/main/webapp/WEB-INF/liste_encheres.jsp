@@ -87,17 +87,17 @@
                             <div class="form__check">
 							  <input class="form__input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="radioDesactive()">
 							  	<label class="form__label" for="inlineRadio1">Achats</label>
-							  		<ul class="form__list" id="liste-achats">
-	                                    <li class="form__item">
-	                                        <input class="form__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes">
+							  		<ul class="form__list" >
+	                                    <li class="form__item" id="liste-achats">
+	                                        <input class="form__checkbox" type="checkbox" name="encheres-ouvertes" id="encheres-ouvertes" disabled>
 	                                        <label class="form__label" for="encheres-ouvertes">enchères ouvertes</label>
 	                                    </li>
-	                                    <li class="form__item">
-	                                        <input class="form__checkbox" type="checkbox" name="mes-encheres" id="mes-encheres">
+	                                    <li class="form__item" id="liste-achats">
+	                                        <input class="form__checkbox" type="checkbox" name="mes-encheres" id="mes-encheres" disabled>
 	                                        <label class="form__label" for="mes-encheres">mes enchères</label>
 	                                    </li>
-	                                    <li class="form__item">
-	                                        <input class="form__checkbox" type="checkbox" name="mes-encheres-remportees" id="mes-encheres-remportees">
+	                                    <li class="form__item" id="liste-achats">
+	                                        <input class="form__checkbox" type="checkbox" name="mes-encheres-remportees" id="mes-encheres-remportees" disabled>
 	                                        <label class="form__label" for="mes-encheres-remportees">mes enchères remportées</label>
 	                                    </li>
 	                                </ul>
@@ -108,17 +108,17 @@
 							<div class="form-check form-check-inline">
 							  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="radioDesactive()">
 							  	<label class="form-check-label" for="inlineRadio2">Ventes</label>
-								  	<ul class="form__list" id="liste-ventes">
-		                                    <li class="form__item">
-		                                        <input class="form__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours">
+								  	<ul class="form__list" >
+		                                    <li class="form__item" id="liste-ventes">
+		                                        <input class="form__checkbox" type="checkbox" name="mes-ventes-en-cours" id="mes-ventes-en-cours" disabled>
 		                                        <label class="form__label" for="mes-ventes-en-cours">mes ventes en cours</label>
 		                                    </li>
-		                                    <li class="form__item">
-		                                        <input class="form__checkbox" type="checkbox" name="ventes-non-debutees" id="ventes-non-debutees">
+		                                    <li class="form__item" id="liste-ventes">
+		                                        <input class="form__checkbox" type="checkbox" name="ventes-non-debutees" id="ventes-non-debutees" disabled>
 		                                        <label class="form__label" for="ventes-non-debutees">ventes non débutées</label>
 		                                    </li>
-		                                    <li class="form__item">
-		                                        <input class="form__checkbox" type="checkbox" name="ventes-terminees" id="ventes-terminees">
+		                                    <li class="form__item" id="liste-ventes">
+		                                        <input class="form__checkbox" type="checkbox" name="ventes-terminees" id="ventes-terminees" disabled>
 		                                        <label class="form__label" for="ventes-terminees">ventes terminées</label>
 		                                    </li>
 	                                </ul>
