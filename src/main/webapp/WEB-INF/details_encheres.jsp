@@ -82,7 +82,7 @@
 						<!-- Vendeur | adresse (rue et code postal) -->
 						<div class="main__fields">
 							<p>${enchereEncours.getRetrait().getRue()}</p>
-							<p>${enchereEncours.getRetrait().getCodePostal()} ${enchereEncours.getRetrait().getVille()}</p>
+							<p>${enchereEncours.getRetrait().getCodePostal()}      ${enchereEncours.getRetrait().getVille()}</p>
 						</div>
 							
 						<!-- Vendeur -->
@@ -111,11 +111,14 @@
 							<c:if test="${ encherevalide}">
 								<p>votre enchère est validée</p>
 							</c:if>
+							<c:if test="${ EtatVente!=10 }">
 							<c:if test="${not utilisateurActif.getPseudo().equals(enchereEncours.getVendeur().getPseudo())}">
 								<label class="form__label" for="proposition">Ma Proposition</label>
 								<input class="form__input" type="number" name="proposition" id="proposition" placeholder="proposition">
 								<button type="submit">Enchérir</button>
 							</c:if>
+							</c:if>
+							<c:if test="${ EtatVente==10 }">Vous avez remporté la vente</c:if>
 							<c:if test="${utilisateurActif.getPseudo().equals(enchereEncours.getVendeur().getPseudo())}">
 							<p>L'enchère sur votre propre article n'est pas authorisée</p>
 							</c:if>

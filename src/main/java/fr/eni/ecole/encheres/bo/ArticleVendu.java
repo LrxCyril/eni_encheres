@@ -12,6 +12,14 @@ public class ArticleVendu {
 	private int miseAPrix;
 	private int prixVente;
 	private int etatVente;
+	private int monOffre;
+	private String etatVenteTxt;
+	public String getEtatVenteTxt() {
+		return etatVenteTxt;
+	}
+	public void setEtatVenteTxt(String etatVenteTxt) {
+		this.etatVenteTxt = etatVenteTxt;
+	}
 	private Categorie categorieArticle;
 	private Retrait lieuRetrait;
 	private Utilisateur utilisateur;
@@ -33,7 +41,12 @@ public class ArticleVendu {
 	public void setNomArticle(String nomArticle) {
 		this.nomArticle = nomArticle;
 	}
-	
+	public int getMonOffre() {
+		return monOffre;
+	}
+	public void setMonOffre(int monOffre) {
+		this.monOffre = monOffre;
+	}
 	// --- description
 	public String getDescription() {
 		return description;

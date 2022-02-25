@@ -2,6 +2,7 @@ package fr.eni.ecole.encheres.bll;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,44 @@ public class EnchereManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<ArticleVendu> selectMesOffres (int noUtilisateur) {
+		List<ArticleVendu>mesOffres = null;
+		Utilisateur moi= new Utilisateur();
+		moi.setNoUtilisateur(noUtilisateur);
+		try {
+			mesOffres=enchereDAO.selectMesOffres(moi);
+			for (ArticleVendu offre : mesOffres) {
+				// la vente n'est pas terminee
+				if( LocalDate.now().isBefore(offre.getDateFinEncheres())) {
+					if(offre.getMonOffre()==offre.getPrixVente()) {
+						offre.setEtatVenteTxt("vous êtes le meilleur encherisseur");
+						offre.setEtatVente(0);
+					}else {	
+						offre.setEtatVenteTxt("vous n'êtes pas le meilleur encherisseur");			
+						offre.setEtatVente(0);
+					}
+				// la vente est terminee
+				}else {
+					if(offre.getMonOffre()==offre.getPrixVente()) {
+						offre.setEtatVenteTxt("vous avez remporté la vente");
+						offre.setEtatVente(10);
+					}else {	
+						offre.setEtatVenteTxt("vous avez perdu la vente");
+						offre.setEtatVente(11);
+					}
+				}
+			}
+			
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return mesOffres;
+		
+	}
+	
 	public EnchereComplete recupererEnchereEnCours (int noArticle) {
 		EnchereComplete enchereComplete = null;
 		

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SQL_ENCHERE_COMPLETE_OLD="SELECT TOP 1  UTILISATEURS.no_utilisateur as [no_encherisseur],UTILISATEURS.pseudo as [encherisseur],no_enchere,nom_article, description, date_fin_encheres, montant_enchere,prix_initial, ENCHERES.no_article ,(SELECT pseudo from ARTICLES_VENDUS inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where no_article=?) as [vendeur],(SELECT telephone from ARTICLES_VENDUS inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where no_article=?)as [tel_vendeur],(SELECT Utilisateurs.no_utilisateur from ARTICLES_VENDUS inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where no_article=?)as[no_vendeur],RETRAITS.code_postal,RETRAITS.rue,RETRAITS.ville FROM ENCHERES inner Join UTILISATEURS on ENCHERES.no_utilisateur =UTILISATEURS.no_utilisateur inner Join ARTICLES_VENDUS on ENCHERES.no_article=ARTICLES_VENDUS.no_article inner Join RETRAITS on ARTICLES_VENDUS.no_article=RETRAITS.no_article WHERE ENCHERES.no_article=? ORDER BY montant_enchere DESC;";
 	private static final String SQL_UPDATE_ENCHERE = null; // surenchérir
 	private static final String SQL_ENCHERE_COMPLETE="SELECT (Select TOP 1 ENCHERES.no_enchere  FROM ENCHERES  where ENCHERES.no_article=? ORDER BY ENCHERES.montant_enchere DESC)as[no_enchere],(Select TOP 1 ENCHERES.montant_enchere  FROM ENCHERES  where ENCHERES.no_article=? ORDER BY ENCHERES.montant_enchere DESC)as[montant_enchere],(Select TOP 1 UTILISATEURS.no_utilisateur  FROM ENCHERES inner join UTILISATEURS on ENCHERES.no_utilisateur=UTILISATEURS.no_utilisateur  where ENCHERES.no_article=? ORDER BY ENCHERES.montant_enchere DESC)as[no_encherisseur],(Select TOP 1 UTILISATEURS.pseudo  FROM ENCHERES inner join UTILISATEURS on ENCHERES.no_utilisateur=UTILISATEURS.no_utilisateur  where ENCHERES.no_article=? ORDER BY ENCHERES.montant_enchere DESC)as[encherisseur],CATEGORIES.libelle,UTILISATEURS.no_utilisateur as [no_vendeur],UTILISATEURS.pseudo as [vendeur],telephone as [tel_vendeur],nom_article,ARTICLES_VENDUS.no_article, description, date_fin_encheres,prix_initial,RETRAITS.code_postal,RETRAITS.rue,RETRAITS.ville FROM ARTICLES_VENDUS inner Join CATEGORIES on CATEGORIES.no_categorie=ARTICLES_VENDUS.no_categorie Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur =UTILISATEURS.no_utilisateur  inner Join RETRAITS on ARTICLES_VENDUS.no_article=RETRAITS.no_article WHERE ARTICLES_VENDUS.no_article=?;";
-
+	private static final String SQL_MES_ENCHERES="SELECT max (montant_enchere)as [mon_offre],ENCHERES.no_article,date_fin_encheres,prix_vente as[offre_max],ARTICLES_VENDUS.nom_article from encheres inner join ARTICLES_VENDUS on ENCHERES.no_article=ARTICLES_VENDUS.no_article where ENCHERES.no_utilisateur=? Group by ENCHERES.no_article,date_fin_encheres,prix_vente,ARTICLES_VENDUS.nom_article;";
 
 
 	@Override
@@ -148,7 +149,46 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 
 	}
+	@Override
+	public List<ArticleVendu> selectMesOffres(Utilisateur moi) throws DALException {
 
+		List<ArticleVendu> mesEncheres = new ArrayList<ArticleVendu>(); // on s'assure qu'il y a ait toujours une liste,
+																		// même vide.
+
+		// Recherche de l'utilisateur selon son identifiant dans la Base de donnée
+		// 1- Obtenir une connexion
+		try (Connection connexion = ConnectionProvider.getConnection();) {
+			// 2- Contruire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_MES_ENCHERES);
+			// ajout du paramètre à la requete(Where pseudo)
+			ordre.setInt(1, moi.getNoUtilisateur());
+			// Appel de la methode constuisant l'utilisateur
+			ResultSet rs = ordre.executeQuery();
+
+			// si il y'a un resultat de requete
+
+			while (rs.next()) {
+				ArticleVendu articleLu = new ArticleVendu();
+				// Alimentation de l'instance d'utilisateur depuis les champs récupérés de la
+				// requette
+				articleLu.setNoArticle(rs.getInt("no_article"));
+				articleLu.setNomArticle(rs.getString("nom_article"));
+				articleLu.setMonOffre(rs.getInt("mon_offre"));
+				articleLu.setPrixVente(rs.getInt("offre_max"));
+				articleLu.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				articleLu.setUtilisateur(moi);
+
+				mesEncheres.add(articleLu);
+
+			}
+			// 5-fermeture de la connexion
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			// Levé de l'exception l'utilisateur n'existe pas
+			throw new DALException("Impossible de lire la connexion");
+		}
+		return mesEncheres;
+	}
 
 
 

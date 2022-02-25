@@ -16,10 +16,10 @@ import fr.eni.ecole.encheres.dal.DALException;
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 	// creer constante de requete d'insertion d'un article
 
-	private static final String SQL_SELECT_ARTICLE = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS  Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE (date_debut_encheres<=?)AND(date_fin_encheres>=?)";
-	private static final String SQL_SELECT_ARTICLE_BY_CATE = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?) AND Categories.no_categorie=?)";
-	private static final String SQL_SELECT_ARTICLE_BY_NOM = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?)AND nom_article Like ?)";
-	private static final String SQL_SELECT_ARTICLE_BY_CATE_NOM = "SELECT no_article, nom_article, description, prix_initial, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?) AND nom_article Like ? AND Categories.no_categorie=?)";
+	private static final String SQL_SELECT_ARTICLE = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres, date_debut_encheres, pseudo from ARTICLES_VENDUS  Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE (date_debut_encheres<=?)AND(date_fin_encheres>=?)";
+	private static final String SQL_SELECT_ARTICLE_BY_CATE = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?) AND Categories.no_categorie=?)";
+	private static final String SQL_SELECT_ARTICLE_BY_NOM = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?)AND nom_article Like ?)";
+	private static final String SQL_SELECT_ARTICLE_BY_CATE_NOM = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?) AND nom_article Like ? AND Categories.no_categorie=?)";
 	private static final String SQL_INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?)";
 	private static final String SQL_DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
 	private static final String SQL_SELECT_LIBELLE = "Select no_categorie, libelle from CATEGORIES";
@@ -55,7 +55,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				articleLu.setNomArticle(rs.getString("nom_article"));
 				articleLu.setDescription(rs.getString("description"));
 				articleLu.setMiseAPrix(rs.getInt("prix_initial"));
-				articleLu.setDateFinEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articleLu.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setPseudo(rs.getString("pseudo"));
 				articleLu.setUtilisateur(utilisateur);
@@ -127,7 +127,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 						articleLu.setNomArticle(rs.getString("nom_article"));
 						articleLu.setDescription(rs.getString("description"));
 						articleLu.setMiseAPrix(rs.getInt("prix_initial"));
-						articleLu.setDateFinEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+						articleLu.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 						Utilisateur utilisateur = new Utilisateur();
 						utilisateur.setPseudo(rs.getString("pseudo"));
 						articleLu.setUtilisateur(utilisateur);
@@ -170,7 +170,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 						articleLu.setNomArticle(rs.getString("nom_article"));
 						articleLu.setDescription(rs.getString("description"));
 						articleLu.setMiseAPrix(rs.getInt("prix_initial"));
-						articleLu.setDateFinEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+						articleLu.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 						Utilisateur utilisateur = new Utilisateur();
 						utilisateur.setPseudo(rs.getString("pseudo"));
 						articleLu.setUtilisateur(utilisateur);
@@ -213,7 +213,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 						articleLu.setNomArticle(rs.getString("nom_article"));
 						articleLu.setDescription(rs.getString("description"));
 						articleLu.setMiseAPrix(rs.getInt("prix_initial"));
-						articleLu.setDateFinEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+						articleLu.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 						Utilisateur utilisateur = new Utilisateur();
 						utilisateur.setPseudo(rs.getString("pseudo"));
 						articleLu.setUtilisateur(utilisateur);

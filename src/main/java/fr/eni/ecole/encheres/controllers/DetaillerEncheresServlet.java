@@ -38,12 +38,24 @@ public class DetaillerEncheresServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		EnchereManager mgrEnchere =new EnchereManager();
 		EnchereComplete enchereComplete;
+		if(request.getParameter("EtatVente")==null) {
+			request.setAttribute("EtatVente",0);
+		}else {
+			request.setAttribute("EtatVente",10);
+		}
 		
+//		try {
+//			System.out.println(request.getParameter("EtatVente"));
+//			request.setAttribute("EtatVente",1);
+//			
+//		} catch (NumberFormatException e) {
+//			request.setAttribute("EtatVente",0);
+//		}
+
 		//if(session.getAttribute("idArticle")!=null) {
 		session.setAttribute("idArticle", Integer.parseInt(request.getParameter("idArticle")));//}
 		enchereComplete= mgrEnchere.recupererEnchereEnCours(Integer.parseInt(request.getParameter("idArticle")));
 		request.setAttribute("enchereEncours", enchereComplete);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
 		
 		rd.forward(request, response);
