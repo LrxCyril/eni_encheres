@@ -33,7 +33,7 @@ public class test extends HttpServlet {
 		EnchereManager mgr= new EnchereManager();
 		  try {
 			mgr.traiterEnchere(1, 250, 2,300);
-		} catch (EnchereRefuseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

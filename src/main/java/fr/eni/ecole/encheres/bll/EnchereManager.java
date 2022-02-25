@@ -98,13 +98,12 @@ public class EnchereManager {
 						ArticleVendu article=new ArticleVendu();
 						article.setNoArticle(noArticle);
 						nouvelleEnchere.setArticle(article);
-						Utilisateur encherisseur = new Utilisateur();
-						encherisseur.setNoUtilisateur(noEncherisseur);
-						encherisseur.setCredit(creditEncherisseur-montantEnchere);
-						nouvelleEnchere.setUtilisateur(encherisseur);
-
-
+						
 					}
+					Utilisateur encherisseur = new Utilisateur();
+					encherisseur.setNoUtilisateur(noEncherisseur);
+					encherisseur.setCredit(creditEncherisseur-montantEnchere);
+					nouvelleEnchere.setUtilisateur(encherisseur);
 					if(derniereEnchere!=null) {
 					if (montantEnchere>derniereEnchere.getMontantEnchere()) {
 						authorisationEnchere=true;
@@ -127,7 +126,6 @@ public class EnchereManager {
 								derniereEnchere.getUtilisateur().setCredit(creditEncherisseur);
 								}
 								//1-nouvel encherisseur	
-								Utilisateur encherisseur = new Utilisateur();
 								encherisseur.setNoUtilisateur(noEncherisseur);
 								encherisseur.setCredit(creditEncherisseur-montantEnchere);
 								mgrUtilisateur.MiseAJourCreditUtilisateur(encherisseur,cnx);

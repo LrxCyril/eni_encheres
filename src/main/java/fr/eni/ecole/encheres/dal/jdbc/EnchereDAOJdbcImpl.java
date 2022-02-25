@@ -138,7 +138,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ordre.setInt(2,derniereEnchere.getMontantEnchere());
 			ordre.setInt(3,derniereEnchere.getArticle().getNoArticle());
 			ordre.setInt(4,derniereEnchere.getUtilisateur().getNoUtilisateur());
-
 			ordre.executeUpdate();
 			//--- 5- Fermer la connexion
 			} catch (SQLException sqle){
