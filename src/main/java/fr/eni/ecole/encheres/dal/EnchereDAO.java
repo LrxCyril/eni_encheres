@@ -16,7 +16,7 @@ public interface EnchereDAO {
 
 	Enchere enchereExistante(int noArticle) throws DALException;
 
-	void InsertEnchere(Enchere derniereEnchere, Connection cnx) throws DALException;
+	void insertEnchere(Enchere derniereEnchere, Connection cnx) throws DALException;
 
 	EnchereComplete lectureEnchereComplete(int noArticle)throws DALException;
 

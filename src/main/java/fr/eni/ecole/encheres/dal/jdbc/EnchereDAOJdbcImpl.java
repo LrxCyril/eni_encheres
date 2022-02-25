@@ -130,7 +130,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 
 	@Override
-	public  void InsertEnchere(Enchere derniereEnchere, Connection cnx)throws DALException {
+	public  void insertEnchere(Enchere derniereEnchere, Connection cnx)throws DALException {
 
 		try{
 			PreparedStatement ordre = cnx.prepareStatement(SQL_INSERT_ENCHERE);

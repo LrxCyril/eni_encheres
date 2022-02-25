@@ -15,11 +15,11 @@ public interface UtilisateurDAO {
 	/**
 	 * Methode permettant de recuperer un utilisateur selon son pseudo
 	 */
-	Utilisateur VerifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException;
+	Utilisateur verifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException;
 	//String VerifIdentifiantExistant(String email,String pseudo) throws DALException ;
-	void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException;
+	void insertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException;
 	Utilisateur lireUtilisateurPseudo(String pseudo) throws DALException;
-	void MajUtilisateur(Utilisateur utilisateur)throws DALException;
-	void SupprimerUtilisateur(int noUtilisateur) throws DALException;
-	void MiseAJourCreditUtilisateur(Utilisateur encherisseur, Connection cnx) throws DALException;
+	void majUtilisateur(Utilisateur utilisateur)throws DALException;
+	void supprimerUtilisateur(int noUtilisateur) throws DALException;
+	void miseAJourCreditUtilisateur(Utilisateur encherisseur, Connection cnx) throws DALException;
 }

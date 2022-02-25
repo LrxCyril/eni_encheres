@@ -116,7 +116,7 @@ public class EnchereManager {
 							cnx.setAutoCommit(false);
 								nouvelleEnchere.setDateEnchere(LocalDateTime.now());
 								nouvelleEnchere.setMontantEnchere(montantEnchere);
-								enchereDAO.InsertEnchere(nouvelleEnchere, cnx);
+								enchereDAO.insertEnchere(nouvelleEnchere, cnx);
 								if(derniereEnchere!=null) {
 								//enregistrer nouvelle valeur de l'article
 								derniereEnchere.getArticle().setPrixVente(montantEnchere);
@@ -125,15 +125,15 @@ public class EnchereManager {
 								//Mettre à jour le credit utilisateur en BDD
 								derniereEnchere.getUtilisateur().setCredit(creditEncherisseur);
 								}
-								//1-nouvel encherisseur	
+							//1-nouvel encherisseur	
 								encherisseur.setNoUtilisateur(noEncherisseur);
 								encherisseur.setCredit(creditEncherisseur-montantEnchere);
-								mgrUtilisateur.MiseAJourCreditUtilisateur(encherisseur,cnx);
-								//2-ancien encherisseur si existe
+								mgrUtilisateur.miseAJourCreditUtilisateur(encherisseur,cnx);
+							//2-ancien encherisseur si existe
 								if (derniereEnchere!=null) {
 									int creditAncienEncherisseur=creditEncherisseur+derniereEnchere.getMontantEnchere();
 									derniereEnchere.getUtilisateur().setCredit(creditAncienEncherisseur);						
-									mgrUtilisateur.MiseAJourCreditUtilisateur(derniereEnchere.getUtilisateur(),cnx);
+									mgrUtilisateur.miseAJourCreditUtilisateur(derniereEnchere.getUtilisateur(),cnx);
 								}
 							//fermer la transaction
 							cnx.commit();

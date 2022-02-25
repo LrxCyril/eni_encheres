@@ -54,7 +54,7 @@ public class UtilisateurManager {
 		boolean cnx = false;
 		// --- récupérer un utilisateur
 		try {
-			utilisateur = utilisateurDAO.VerifUtilisateurIdentifiant(identifiant, mdp);
+			utilisateur = utilisateurDAO.verifUtilisateurIdentifiant(identifiant, mdp);
 			cnx = true;
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
@@ -64,39 +64,12 @@ public class UtilisateurManager {
 	}
 	
 	
-	/**
-	 * Verification si email ou pseudo deja present en base
-	 * @param pseudo
-	 * @param email
-	 * @return
-	 * @throws BLLException
-	 */
-	
-	/*
-	 * public boolean existanceIdentifiant(String pseudo, String email) throws BLLException {
-	 */
-	/*
-		// verifier si l'identifiant ou pseudo existe en base
-		boolean exist = false;
-		try {
-			String nom;
-			nom = utilisateurDAO.VerifIdentifiantExistant(email, pseudo);
-			if (nom.isEmpty()) {
-				exist = true;
-			}
-		} catch (DALException e) {
-			throw new BLLException("Lecture de valeur impossible");
-		}
-		return exist;
-	}
-*/
-
 	public void insererUtilisateur(Utilisateur utilisateur) throws BLLException {
 		// construire un utilisateur
 		utilisateur.setCredit(utilisateur.getCredit() + 100);
 		// inserer l'utilisateur en base
 		try {
-			utilisateurDAO.InsertUtilisateur(utilisateur);
+			utilisateurDAO.insertUtilisateur(utilisateur);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
 			throw new BLLException("Erreur lors de l'insertion utilisateur existant!");
@@ -106,7 +79,7 @@ public class UtilisateurManager {
 
 	public void majUtilisateur(Utilisateur utilisateurConnecte) throws BLLException {
 		try {
-			utilisateurDAO.MajUtilisateur(utilisateurConnecte);
+			utilisateurDAO.majUtilisateur(utilisateurConnecte);
 			
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
@@ -119,7 +92,7 @@ public class UtilisateurManager {
 
 	public void supprimerUtilisateur(int noUtilisateur) throws BLLException {
 		try {
-			utilisateurDAO.SupprimerUtilisateur(noUtilisateur);
+			utilisateurDAO.supprimerUtilisateur(noUtilisateur);
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu
 			throw new BLLException("Erreur lors de la suppression de l'utilisateur!");
@@ -128,9 +101,9 @@ public class UtilisateurManager {
 	}
 
 
-		public void MiseAJourCreditUtilisateur(Utilisateur encherisseur, Connection cnx) throws BLLException {
+		public void miseAJourCreditUtilisateur(Utilisateur encherisseur, Connection cnx) throws BLLException {
 			try {
-				utilisateurDAO.MiseAJourCreditUtilisateur(encherisseur,cnx);
+				utilisateurDAO.miseAJourCreditUtilisateur(encherisseur,cnx);
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
 				throw new BLLException("Erreur lors de la mise à jour credit de l'utilisateur !");

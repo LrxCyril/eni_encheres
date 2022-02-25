@@ -26,7 +26,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	 * Methode permettant de recuperer un utilisateur selon son pseudo
 	 */
 	@Override
-	public Utilisateur VerifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException {
+	public Utilisateur verifUtilisateurIdentifiant(String identifiant, String motdepasse) throws DALException {
 		Utilisateur utilisateurConnecte= new Utilisateur();
 		//Recherche de l'utilisateur selon son identifiant dans la Base de donnée
 		// 1- Obtenir une connexion
@@ -102,7 +102,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 //	}
 
 	@Override
-	public void InsertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException {
+	public void insertUtilisateur(Utilisateur nouvelUtilisateur) throws DALException {
 		//---  1- Obtenir une connexion
 		try(Connection connexion = ConnectionProvider.getConnection();){
 		
@@ -153,7 +153,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		return utilisateurConnecte;
 	}
 	@Override
-	public void MajUtilisateur(Utilisateur utilisateur) throws DALException {
+	public void majUtilisateur(Utilisateur utilisateur) throws DALException {
 		//Recherche de l'utilisateur selon son identifiant dans la Base de donnée
 		// 1- Obtenir une connexion
 		try(Connection connexion = ConnectionProvider.getConnection();) {
@@ -186,7 +186,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	}
 
 	@Override
-	public void SupprimerUtilisateur(int noUtilisateur) throws DALException {
+	public void supprimerUtilisateur(int noUtilisateur) throws DALException {
 		try(Connection connexion = ConnectionProvider.getConnection();) {
 			// 2- Contruire la requete
 			PreparedStatement ordre = connexion.prepareStatement(SQL_DELETE_UTILISATEUR);
@@ -203,7 +203,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	
 
 	@Override
-	public void MiseAJourCreditUtilisateur (Utilisateur encherisseur, Connection cnx) throws DALException {
+	public void miseAJourCreditUtilisateur (Utilisateur encherisseur, Connection cnx) throws DALException {
 		try{
 			// 2- Contruire la requete
 			PreparedStatement ordre = cnx.prepareStatement(SQL_UPDATE_CREDIT_UTILISATEUR);

@@ -232,7 +232,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public void MiseAJourArticle(ArticleVendu article, Connection cnx) throws DALException {
+	public void miseAJourArticle(ArticleVendu article, Connection cnx) throws DALException {
 		
 		try {
 			// 2- Contruire la requete

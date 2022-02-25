@@ -100,7 +100,7 @@ public class ArticleManager {
 
 		public Connection MiseAJourArticle(ArticleVendu article, Connection cnx) throws BLLException {
 			try {
-				articleDAO.MiseAJourArticle(article,cnx);
+				articleDAO.miseAJourArticle(article,cnx);
 			} catch (DALException e) {
 				// --- Levée d'une exception quand l'email n'est pas reconnu
 				throw new BLLException("Erreur lors de la mise à jour de l'article !");
