@@ -35,13 +35,14 @@ public class CreerUtilisateurServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		String modif = (String)request.getAttribute("modif");
 		if (modif!=null) {
+			//configuration de la page mon profil en mode modification
 			request.setAttribute("creer",  (boolean) false);
-		}else {		request.setAttribute("creer",  (boolean) true);
+		}else {	
+			//configuration de la page mon profil en mode creation
+			request.setAttribute("creer",  (boolean) true);
 		}
-
 		//Appel de la page mon-profil
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/mon_profil.jsp");
 		if (rd != null) {
@@ -56,103 +57,46 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		//creation d'un utilisateur avec les données mise à jour
-		profilUtilisateur=new Utilisateur();
-		profilUtilisateur.setPseudo(request.getParameter("pseudo"));
-		profilUtilisateur.setNom(request.getParameter("nom"));
-		profilUtilisateur.setPrenom(request.getParameter("prenom"));
-		profilUtilisateur.setEmail(request.getParameter("email"));
-		profilUtilisateur.setTelephone(request.getParameter("telephone"));
-		profilUtilisateur.setVille(request.getParameter("ville"));
-		profilUtilisateur.setRue(request.getParameter("rue"));
-		profilUtilisateur.setCodePostal(request.getParameter("codePostal"));
-		profilUtilisateur.setMotDePasse(request.getParameter("motDePasse"));
-		if(session.getAttribute("utilisateurActif")!=null) {
-			profilUtilisateur.setNoUtilisateur(((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur());
-			profilUtilisateur.setCredit(((Utilisateur) session.getAttribute("utilisateurActif")).getCredit());
-			profilUtilisateur.setAdministrateur(((Utilisateur) session.getAttribute("utilisateurActif")).isAdministrateur());
-			
-		}
-		//mise à jour de l'utilisateur de session
-		session.setAttribute("utilisateurActif",profilUtilisateur);
-
-		String motDePasse = request.getParameter("motDePasse");
+		String pseudo=request.getParameter("pseudo");
+		String nom=request.getParameter("nom");
+		String prenom=request.getParameter("prenom");
+		String email =request.getParameter("email");
+		String telephone=request.getParameter("telephone");
+		String ville=request.getParameter("ville");
+		String rue =request.getParameter("rue");
+		String codePostal=request.getParameter("codePostal");
+		String motDePasse=request.getParameter("motDePasse");
 		String confirmMotDePasse = request.getParameter("confirmMotDePasse");
 		String creation = request.getParameter("creer");
 		String modification = request.getParameter("modifier");
-		Boolean vide = false;
-		//vérfier si les champs sont vides 
-		if (profilUtilisateur.getPseudo().isEmpty()) {
-			request.setAttribute("pseudo", "vide");
-			vide=true;
+		int noUtilisteur = 0;
+		int credit = 0;
+		boolean administrateur = false;		
+		if(session.getAttribute("utilisateurActif")!=null) {
+			noUtilisteur= ((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur();
+			credit=((Utilisateur) session.getAttribute("utilisateurActif")).getCredit();
+			administrateur=((Utilisateur) session.getAttribute("utilisateurActif")).isAdministrateur();
 		}
-		
-		if (profilUtilisateur.getNom().isEmpty()) {
-			request.setAttribute("nom", "vide");
-			vide=true;
-		}
-		
-		if (profilUtilisateur.getPrenom().isEmpty()) {
-			request.setAttribute("prenom", "vide");
-			vide=true;
-		}
-		if (!profilUtilisateur.getEmail().contains("@")) {
-			request.setAttribute("email", "vide");
-			vide=true;
-		}
-		
-		if (profilUtilisateur.getEmail().isEmpty()) {
-			request.setAttribute("email", "vide");
-			vide=true;
-		}
-		
-		if (profilUtilisateur.getRue().isEmpty()) {
-			request.setAttribute("rue", "vide");
-			vide=true;
-		}
-		
-		if (profilUtilisateur.getCodePostal().isEmpty()) {
-			request.setAttribute("codePostal", "vide");
-			vide=true;
-		}
-		
-		if (profilUtilisateur.getVille().isEmpty()) {
-			request.setAttribute("ville", "vide");
-			vide=true;
-		}
-	
-		
-		if (!motDePasse.matches("[a-zA-Z0-9]")){
-			System.out.println("invalide");
-			request.setAttribute("mauvaisFormat", true);
-			vide=true;
-		}
-		if (motDePasse.isEmpty()) {
-			request.setAttribute("motDePasse", "vide");
-			vide=true;
-		}
- 
-		if (confirmMotDePasse.isEmpty()) {
-			request.setAttribute("confirmMotDePasse", "vide");
-			vide=true;
-		}
-		//comparer motDePasse et confirmMotDePasse
-		if (!motDePasse.equals(confirmMotDePasse)) {
-			request.setAttribute("motDePasseInvalide", true);
-			vide=true;
-		}
-		//si champ vide ou erreur retourner sur la page, avertir et sortir de la fonction
-		if (vide) {
-			if (modification!=null ) {
-				request.setAttribute("modif","oui");
-			}
-		doGet(request, response);
-		return;
-		}
+		String[][] tablErreur;
+
+
 		
 		if (creation!=null) {
 			try {
-				manager.insererUtilisateur((Utilisateur) session.getAttribute("utilisateurActif"));
-				//manager.insererUtilisateur(pseudo, nom, prenom,telephone, email, motDePasse, rue, codePostal, ville, 0);
+				//si champ vide ou erreur retourner sur la page, avertir et sortir de la fonction
+				try {
+				manager.verifSaisi(pseudo, nom, prenom,telephone, email, rue, codePostal, ville, motDePasse,confirmMotDePasse);
+				}catch (BLLException e) {
+						request.setAttribute("erreur", e.getMessage());
+					if (modification!=null ) {
+						request.setAttribute("modif","oui");
+					}
+					doGet(request, response);
+					return;
+				}
+				profilUtilisateur=manager.insererUtilisateur(noUtilisteur,pseudo, nom, prenom,telephone, email, motDePasse, rue, codePostal, ville, credit,administrateur);
+				//mise à jour de l'utilisateur de session
+				session.setAttribute("utilisateurActif",profilUtilisateur);
 			} catch (BLLException e) {
 				//l'utilsateur existe le mentionner et rediriger
 				request.setAttribute("userExist", true);

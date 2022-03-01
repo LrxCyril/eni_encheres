@@ -40,14 +40,16 @@ public class AcceuillirServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		List<Categorie> categorieArticle =new ArrayList<Categorie>();
-		Categorie cateVide= new Categorie();
+		//Categorie cateVide= new Categorie();
 		try {
+			// recuperation des Articles en BDD
 			articles=manager.selectArticle();
+			// recuperation des Categories en BDD
 			categorieArticle= manager.selectCategorie();
+			//creation des attributs pour affichage
 			request.setAttribute("listeCategories", categorieArticle);
 			request.setAttribute("listeArticles", articles);
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
@@ -62,50 +64,28 @@ public class AcceuillirServlet extends HttpServlet {
 		List<Categorie> categorieArticle =new ArrayList<Categorie>();
 		int filtreCategorie = 1;
 		String recherche = null;
-		try {
-			if ((request.getParameter("categories"))!=null) {
-				filtreCategorie=Integer.parseInt(request.getParameter("categories"));
-				System.out.println(filtreCategorie);
-				}
-
+		// recuperation des parametres de filtres
+		if ((request.getParameter("categories"))!=null) {
+			filtreCategorie=Integer.parseInt(request.getParameter("categories"));
+			}
+		if ((request.getParameter("rechercheArticle"))!=null) {
 			recherche= request.getParameter("rechercheArticle");
-			//filtres
-			if (filtreCategorie !=1) {
-				//filtre par recherche et categorie
-				if(recherche!=null) {
-					articles=manager.selectArticlebyCateNom(filtreCategorie,recherche);				
-				// filtre par Categorie
-				}else {
-					
-					articles=manager.selectArticlebyCate(filtreCategorie);
-				}}
-			//filtre par recherche	
-			if(recherche!=null&&filtreCategorie ==1) {
-				articles=manager.selectArticlebyNom(recherche);
 			}
-			erreur=false;
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (NumberFormatException nf) {
-			nf.printStackTrace();
-		}finally {
-			
-		try {	
-			if(erreur |(recherche==null&&filtreCategorie ==1) ) {
-				articles=manager.selectArticle();	
-			}
-
+		try {
+			// recuperation des Articles en BDD
+			articles=manager.selectListArticles(filtreCategorie,recherche);	
+			// recuperation des Categories en BDD
 			categorieArticle= manager.selectCategorie();
-			Categorie cateVide= new Categorie();
+			//creation des attributs pour affichage
 			request.setAttribute("listeCategories", categorieArticle);
 			request.setAttribute("listeArticles", articles);
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();		
+				e.printStackTrace();		
 		}
+		//Appel de la page à afficher
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/liste_encheres.jsp");
-		rd.forward(request, response);}
-	}
-
+		rd.forward(request, response);
+		}
 }
+
+

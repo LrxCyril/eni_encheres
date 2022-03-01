@@ -30,28 +30,16 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//recuperation de la session active
 		HttpSession session = request.getSession();
-		
 		profilUtilisateur=(Utilisateur) session.getAttribute("utilisateurActif");
-//		//Alimentation des attributs de la page profil
-//		session.setAttribute("pseudoLu", profilUtilisateur.getPseudo());
-//		session.setAttribute("nomLu",  profilUtilisateur.getNom());
-//		session.setAttribute("prenomLu",  profilUtilisateur.getPrenom());
-//		session.setAttribute("emailLu",  profilUtilisateur.getEmail());
-//		session.setAttribute("telLu",  profilUtilisateur.getTelephone());
-//		session.setAttribute("rueLu",  profilUtilisateur.getRue());
-//		session.setAttribute("cPLu",  profilUtilisateur.getCodePostal());
-//		session.setAttribute("villeLu",  profilUtilisateur.getVille());
-//		session.setAttribute("mdpLu",  profilUtilisateur.getMotDePasse());
-		//modification du bouton creer profil en modifier profil
+		//configuration de la page mon profil en modifier profil
 		session.setAttribute("creer",  (boolean) false);
 		request.setAttribute("modif","oui");
-		
+		//appel de la page
 		RequestDispatcher rd = request.getRequestDispatcher("/creer/utilisateur");
 		rd.forward(request, response);
-		//redirect fonctionne pas pbm parametre?
-		//response.sendRedirect(request.getContextPath()+"/creer/utilisateur");
-		
+
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bll.EnchereManager;
 import fr.eni.ecole.encheres.bll.EnchereRefuseException;
 import fr.eni.ecole.encheres.bo.EnchereComplete;
@@ -43,19 +44,13 @@ public class DetaillerEncheresServlet extends HttpServlet {
 		}else {
 			request.setAttribute("EtatVente",10);
 		}
-		
-//		try {
-//			System.out.println(request.getParameter("EtatVente"));
-//			request.setAttribute("EtatVente",1);
-//			
-//		} catch (NumberFormatException e) {
-//			request.setAttribute("EtatVente",0);
-//		}
-
-		//if(session.getAttribute("idArticle")!=null) {
 		session.setAttribute("idArticle", Integer.parseInt(request.getParameter("idArticle")));//}
-		enchereComplete= mgrEnchere.recupererEnchereEnCours(Integer.parseInt(request.getParameter("idArticle")));
-		request.setAttribute("enchereEncours", enchereComplete);
+		try {
+			enchereComplete= mgrEnchere.recupererEnchereEnCours(Integer.parseInt(request.getParameter("idArticle")));
+			request.setAttribute("enchereEncours", enchereComplete);
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/details_encheres.jsp");
 		
 		rd.forward(request, response);

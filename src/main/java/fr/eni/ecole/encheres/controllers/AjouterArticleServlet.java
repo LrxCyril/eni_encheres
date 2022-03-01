@@ -62,16 +62,11 @@ public class AjouterArticleServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Création d'un article avec les données mise à jour
-		
+		//Recuperation session
+		HttpSession session = request.getSession();
 			ArticleVendu ajoutArticle = new ArticleVendu();
 			Boolean vide = false;
-			
 			Retrait ajoutRetrait = new Retrait();
-			
-			
-			HttpSession session = request.getSession();
-			//new version
 			int noUtilisateur=((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur();
 			String nomArticle=request.getParameter("nomArticle");
 			String description =request.getParameter("description");
@@ -83,31 +78,11 @@ public class AjouterArticleServlet extends HttpServlet {
 			String rue =(request.getParameter("rue"));
 			String codePostal=(request.getParameter("codePostal"));
 			String ville =(request.getParameter("ville"));
-			
 			try {
 				manager.insertArticlesRetrait(noUtilisateur, nomArticle,description,noCategorie,dateDebut,dateFin,prixIntial,rue,codePostal,ville);
-		
 			} catch (BLLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-//			
-//			//TODO gérer un objet erreur
-//			//vérfier si les champs sont vides 
-//			if (ajoutArticle.getNomArticle().isEmpty()) {
-//				request.setAttribute("nom_article", "vide");
-//				vide = true;
-//			}
-//			
-//			if (ajoutArticle.getDescription().isEmpty()) {
-//				request.setAttribute("description", "vide");
-//				vide = true;
-//			}
-			
-		
-			
-			//appeler liste des enchères
 			RequestDispatcher rd = request.getRequestDispatcher("/home");
 			rd.forward(request, response);
 		}

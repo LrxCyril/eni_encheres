@@ -26,9 +26,6 @@ public class ArticleManager {
 			e.printStackTrace();
 		}
 	}
-
-
-	
 	public List<ArticleVendu> selectArticle() throws BLLException {
 		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		LocalDate date=LocalDate.now();
@@ -82,7 +79,6 @@ public class ArticleManager {
 			}
 			return articles;
 		}
-		
 
 		public List<ArticleVendu> selectArticlebyNom(String recherche) throws BLLException {
 			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
@@ -109,8 +105,7 @@ public class ArticleManager {
 		}
 
 		public void insertArticlesRetrait(int noUtilisateur, String nomArticle, String description, int noCategorie,
-				LocalDate dateDebut, LocalDate dateFin, int prixIntial, String rue, String codePostal, String ville) throws BLLException {
-			
+			LocalDate dateDebut, LocalDate dateFin, int prixIntial, String rue, String codePostal, String ville) throws BLLException {
 			ArticleVendu ajoutArticle = new ArticleVendu();
 			Boolean vide = false;
 			Retrait ajoutRetrait = new Retrait();
@@ -129,8 +124,6 @@ public class ArticleManager {
 			ajoutArticle.setUtilisateur(utilisateur);
 			ajoutArticle.setLieuRetrait(ajoutRetrait);
 			ajoutArticle.setCategorieArticle(categorie);
-			
-			
 			try {
 				//Insérer article
 				articleDAO.insertArticleComplet(ajoutArticle);
@@ -141,12 +134,41 @@ public class ArticleManager {
 				e.printStackTrace();
 				throw new BLLException("Erreur lors de l'insertion de l'article !");
 			}
-			
-			
-			
+
 		}
-	
-	
-	
-	
+/**
+ * Recherche de la liste d'article en fonction des filtres fournies
+ * @param filtreCategorie
+ * @param recherche
+ * @return Liste d'articles
+ * @throws BLLException
+ */
+		public List<ArticleVendu> selectListArticles(int filtreCategorie, String recherche) throws BLLException {
+			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+			boolean erreur=true;	
+			try {
+				//lecture des filtres
+				if (filtreCategorie !=1) {
+					if(recherche!=null) {
+						//filtre par recherche et categorie
+						articles= selectArticlebyCateNom(filtreCategorie,recherche);				
+					}else {
+							// filtre par Categorie Uniquement
+							articles= selectArticlebyCate(filtreCategorie);
+						}
+					}
+				if(recherche!=null&&filtreCategorie ==1) {
+					//filtre par recherche Uniquement
+					articles= selectArticlebyNom(recherche);}
+				erreur=false;
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new BLLException();
+			}finally {
+				//Aucun filtre
+				if(erreur |(recherche==null&&filtreCategorie ==1) ) {
+					articles=selectArticle();}	
+			}
+			return articles;
+		}
 }

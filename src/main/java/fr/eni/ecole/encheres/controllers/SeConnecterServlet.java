@@ -25,9 +25,7 @@ public class SeConnecterServlet extends HttpServlet {
      * Default constructor. 
      */
     public SeConnecterServlet() {
-
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -35,24 +33,19 @@ public class SeConnecterServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
 		rd.forward(request, response);
-		
+	
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//recuperation de la session en cours
+		HttpSession session = request.getSession();
 		UtilisateurManager manager= new UtilisateurManager();
 		boolean connecte = false;
 		request.setAttribute("La_connexion", connecte);
-		// --- Si l'identifant OU le mot de passe est " vide " alors la connexion refusée et redirection vers la page de connexion
 		String identifiant = request.getParameter("identifiant");
 		String mdp = request.getParameter("mdp");
-		if(identifiant.isBlank() || mdp.isBlank()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");
-			rd.forward(request, response);
-			return;
-		}
 		//verification de l'existance de l'utilisateur
 		try {
 			utilisateurConnecte = manager.verificationUtilisateur(identifiant, mdp);
@@ -62,16 +55,13 @@ public class SeConnecterServlet extends HttpServlet {
 				rd.forward(request, response);
 				return;
 		}
-		// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
-		  	HttpSession session = request.getSession();
 			//Alimentation des attributs de la page profil
-		  	//System.out.println( "mon numero"+utilisateurConnecte.getNoUtilisateur());
-
 		  	session.setAttribute("utilisateurActif", utilisateurConnecte);
 			session.setAttribute("session_active", true);
 			session.setAttribute("profilRecherche",identifiant);
 			session.setAttribute("login",identifiant);
 			request.setAttribute("La_connexion", connecte);
+			// --- Si la connexion est validée, redirige vers la page d'accueil liste des enchères
 			RequestDispatcher rd = request.getRequestDispatcher("/home");
 			rd.forward(request, response);
 

@@ -29,7 +29,7 @@ public class EnchereManager {
 		}
 	}
 	
-	public List<ArticleVendu> selectMesOffres (int noUtilisateur) {
+	public List<ArticleVendu> selectMesOffres (int noUtilisateur) throws BLLException {
 		List<ArticleVendu>mesOffres = null;
 		Utilisateur moi= new Utilisateur();
 		moi.setNoUtilisateur(noUtilisateur);
@@ -58,22 +58,22 @@ public class EnchereManager {
 			}
 			
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BLLException();		
 		}
 		
 		return mesOffres;
 		
 	}
 	
-	public EnchereComplete recupererEnchereEnCours (int noArticle) {
+	public EnchereComplete recupererEnchereEnCours (int noArticle) throws BLLException {
 		EnchereComplete enchereComplete = null;
 		
 		try {
 			enchereComplete=enchereDAO.lectureEnchereComplete(noArticle);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BLLException();
 		}
 		
 		return enchereComplete;

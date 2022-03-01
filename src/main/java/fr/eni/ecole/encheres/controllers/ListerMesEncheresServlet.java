@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bll.EnchereManager;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Utilisateur;
@@ -39,8 +40,12 @@ public class ListerMesEncheresServlet extends HttpServlet {
 		List<ArticleVendu> mesOffres; 
 		HttpSession session = request.getSession();
 		int noUtilisateur=((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur();
-		mesOffres =mgrEnchere.selectMesOffres(noUtilisateur);
-		request.setAttribute("mesOffres", mesOffres);
+		try {
+			mesOffres =mgrEnchere.selectMesOffres(noUtilisateur);
+			request.setAttribute("mesOffres", mesOffres);
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/mes_offres.jsp");
 		rd.forward(request, response);}

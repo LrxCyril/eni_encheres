@@ -30,10 +30,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	@SuppressWarnings("null")
 	@Override
 	public List<ArticleVendu> selectArticle(LocalDate date) throws DALException {
-
 		List<ArticleVendu> articles = new ArrayList<ArticleVendu>(); // on s'assure qu'il y a ait toujours une liste,
-																		// même vide.
-
 		// Recherche de l'utilisateur selon son identifiant dans la Base de donnée
 		// 1- Obtenir une connexion
 		try (Connection connexion = ConnectionProvider.getConnection();) {
@@ -44,13 +41,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			ordre.setDate(2, java.sql.Date.valueOf(date));
 			// Appel de la methode constuisant l'utilisateur
 			ResultSet rs = ordre.executeQuery();
-
 			// si il y'a un resultat de requete
 
 			while (rs.next()) {
 				ArticleVendu articleLu = new ArticleVendu();
-				// Alimentation de l'instance d'utilisateur depuis les champs récupérés de la
-				// requette
 				articleLu.setNoArticle(rs.getInt("no_article"));
 				articleLu.setNomArticle(rs.getString("nom_article"));
 				articleLu.setDescription(rs.getString("description"));
@@ -59,9 +53,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setPseudo(rs.getString("pseudo"));
 				articleLu.setUtilisateur(utilisateur);
-
 				articles.add(articleLu);
-
 			}
 			// 5-fermeture de la connexion
 		} catch (SQLException sqle) {
