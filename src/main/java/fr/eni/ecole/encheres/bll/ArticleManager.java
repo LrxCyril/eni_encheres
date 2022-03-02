@@ -171,4 +171,35 @@ public class ArticleManager {
 			}
 			return articles;
 		}
+public void insertVerifSaisi(String nomArticle, String description, int noCategorie, LocalDate dateDebut,
+		LocalDate dateFin, int prixIntial, String rue, String codePostal, String ville) throws BLLException {
+	List<String> listErreur = new ArrayList();
+	int idTabl =0;
+
+	//verifier les erreurs dans le champs de saisi
+		if (nomArticle.isEmpty()) {
+			listErreur.add("le nom article est vide");
+		}
+		if (description.isEmpty()) {
+			listErreur.add("le description est vide");
+		}
+		
+		if (dateDebut.isAfter(dateFin)) {
+			listErreur.add("la date de début d'enchère ne peut pas être posterieure à sa date de fin");
+		}
+		
+		if (rue.isEmpty()) {
+			listErreur.add("la rue est vide");
+		}
+		if (codePostal.isEmpty()) {
+			listErreur.add("le code postal est vide");
+		}
+		if (ville.isEmpty()) {
+			listErreur.add("la ville est vide");
+		}
+		
+		if (!listErreur.isEmpty()) {
+			throw new BLLException(listErreur.toString());
+		}
+}
 }

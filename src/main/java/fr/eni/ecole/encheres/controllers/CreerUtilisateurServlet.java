@@ -79,8 +79,6 @@ public class CreerUtilisateurServlet extends HttpServlet {
 		}
 		String[][] tablErreur;
 
-
-		
 		if (creation!=null) {
 			try {
 				//si champ vide ou erreur retourner sur la page, avertir et sortir de la fonction

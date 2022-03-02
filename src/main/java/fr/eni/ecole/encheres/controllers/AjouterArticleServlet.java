@@ -50,7 +50,6 @@ public class AjouterArticleServlet extends HttpServlet {
 			categorieArticle= manager.selectCategorie();		
 			request.setAttribute("listeCategories", categorieArticle);
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -78,6 +77,14 @@ public class AjouterArticleServlet extends HttpServlet {
 			String rue =(request.getParameter("rue"));
 			String codePostal=(request.getParameter("codePostal"));
 			String ville =(request.getParameter("ville"));
+			try {
+				manager.insertVerifSaisi(nomArticle,description,noCategorie,dateDebut,dateFin,prixIntial,rue,codePostal,ville);
+			}catch (BLLException e) {
+				request.setAttribute("erreur", e.getMessage());
+				doGet(request, response);
+			return;
+		}
+			
 			try {
 				manager.insertArticlesRetrait(noUtilisateur, nomArticle,description,noCategorie,dateDebut,dateFin,prixIntial,rue,codePostal,ville);
 			} catch (BLLException e) {

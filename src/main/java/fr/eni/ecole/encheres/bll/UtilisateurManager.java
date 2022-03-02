@@ -108,8 +108,6 @@ public class UtilisateurManager {
 
 		public void verifSaisi(String pseudo, String nom, String prenom, String telephone, String email, String rue, String codePostal, String ville, String motDePasse,
 				String confirmMotDePasse) throws BLLException {
-		boolean erreur=false;
-		String[][] tablErreur = new String[2][12];
 		List<String> listErreur = new ArrayList();
 		int idTabl =0;
 

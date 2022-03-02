@@ -40,22 +40,15 @@
                  	<!-- nom de l'article -->
                  	<div class="form__fields">
 	                 	<label class="form__label" for="nomArticle">Article :</label>
-	                    <input class="form__input" type="text" name="nomArticle" id="nomArticle" placeholder="Nom de l'article">
-	                    <c:if test="${not empty requestScope.article}">
-	                    	<p class="form__error">Champs obligatoire</p>
-	                    </c:if>
+	                    <input class="form__input" type="text" name="nomArticle" id="nomArticle" placeholder="Nom de l'article" required="required">
                  	</div>
                     
                     <!-- description -->
                     <div class="form__fields">
 	                    <label class="form__label" for="description">Description :</label>
-	                    <input class="form__input" type="text" name="description" id="description" placeholder="Description">
-	                    <c:if test="${not empty requestScope.description}">
-	                    	<p class="form__error">Champs obligatoire</p>
-	                    </c:if>
+	                    <input class="form__input" type="text" name="description" id="description" placeholder="Description" required="required">
                     </div>
-                    
-	                    
+                     
 	                <!-- categories -->
 	                <div class="form__fields">
 	                    <label class="form__label" for="categories">Categories</label>
@@ -66,74 +59,52 @@
 						</select>
                     </div>
 					
-                          
+
                     <!-- photo de l'article -->
                     <div class="form__fields">
 	                    <label class="form__label" for="photoArticle">Photo de l'article :</label>
 	                    <input class="form__input" type="file" name="photoArticle" id="photoArticle" accept="image/png, image/jpeg">
-	                    <c:if test="${not empty requestScope.photo_article}">
-	                    	<p class="form__error">Champs obligatoire</p>
-	                    </c:if>
                     </div>
-                    
-                    
+
                     <!-- prix initial -->
                     <div class="form__fields">
 	                    <label class="form__label" for="prixInitial">Mise à prix: </label>
-	                    <input class="form__input" type="number" name="prixInitial" min="2" max="5000" step="1" value="2">
+	                    <input class="form__input" type="number" name="prixInitial" min="2" max="5000" step="1" value="2" required="required">
                     </div>
                    
                     <!-- date de début de l'enchère -->
                     <div class="form__fields">
 	                    <label class="form__label" for="dateDebutEncheres">Début de l'enchère :</label>
 	                    <input class="form__input" type="date" name="dateDebutEncheres" id="dateDebutEncheres">
-	                    <c:if test="${not empty requestScope.date_debut_encheres}">
-	                    	<p class="form__error">Champs obligatoire</p>
-	                    </c:if>
                     </div>
                     
-	                    
 	                <!-- date de fin de l'enchère -->
 	                <div class="form__fields">
 	                    <label class="form__label" for="dateFinEncheres">Fin de l'enchère :</label>
 	                    <input class="form__input" type="date" name="dateFinEncheres" id="dateFinEncheres">
-	                    <c:if test="${not empty requestScope.date_fin_encheres}">
-	                    	<p class="form__error">Champs obligatoire</p>
-	                    </c:if>
                     </div>    
-                    
-                   
 
                     <!-- rue -->
                     <div class="form__fields">
 	                    <label class="form__label" for="rue">Rue :</label>
-	                    <input class="form__input" type="text" name="rue" id="rue" value="${utilisateurActif.getRue()}">
-	                    <c:if test="${not empty requestScope.rue}">
-	                    	<p class="form__error">Champs obligatoire</p>
-	                    </c:if>
+	                    <input class="form__input" type="text" name="rue" id="rue" value="${utilisateurActif.getRue()}" required="required">
                     </div>
-                    
-                    
+
 	                <!-- code postal --> 
 	                <div class="form__fields">
 	                    <label class="form__label" for="codePostal">Code postal :</label>
-	                    <input class="form__input" type="text" name="codePostal" id="codePostal" value="${utilisateurActif.getCodePostal()}">
-	                    <c:if test="${not empty requestScope.code_postal}">
-	                    	<p class="form__error">Champs obligatoire</p>
-	                    </c:if>
+	                    <input class="form__input" type="text" name="codePostal" id="codePostal" value="${utilisateurActif.getCodePostal()}" required="required">
                     </div>   
-                    
-                    
+
 	                <!-- ville -->
 	                <div class="form__fields">
 	                    <label class="form__label" for="ville">Ville :</label>
-	                    <input class="form__input" type="text" name="ville" id="ville" value="${utilisateurActif.getVille()}">
-	                    <c:if test="${not empty requestScope.ville}">
-	                    	<p class="form__error">Champs obligatoire</p>
-	                    </c:if>
+	                    <input class="form__input" type="text" name="ville" id="ville" value="${utilisateurActif.getVille()}" required="required">
                     </div>
-                    
-	                    
+                    	<c:if test="${erreur!=null}">
+							<p>${erreur}</p>
+						</c:if>
+
 	                <!-- soumettre -->
 	                <div class="form__fields">
 	                    <input class="form__submit" type="submit" name="enregistrer" value="Enregistrer">
