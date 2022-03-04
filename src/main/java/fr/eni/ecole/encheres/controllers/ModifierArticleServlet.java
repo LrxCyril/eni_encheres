@@ -10,49 +10,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.eni.ecole.encheres.bll.BLLException;
-import fr.eni.ecole.encheres.bll.UtilisateurManager;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 
 /**
- * Servlet implementation class SupprimerUtilisateurServlet
+ * Servlet implementation class ModifierUtilisateurServlet
  */
-@WebServlet("/supprimer/utilisateur")
-public class SupprimerUtilisateurServlet extends HttpServlet {
+@WebServlet("/modifier/article")
+public class ModifierArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private UtilisateurManager manager;  
-       
+	private Utilisateur profilUtilisateur;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SupprimerUtilisateurServlet() {
-    	manager = new UtilisateurManager();
+    public ModifierArticleServlet() {
+
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//recuperation de la session active
 		HttpSession session = request.getSession();
-		int noUtilisateur=((Utilisateur) session.getAttribute("utilisateurActif")).getNoUtilisateur();
-		System.out.println("servlet sup"+noUtilisateur);
-		try {
-		//appel de la fonction supprimer utilisateur
-			manager.supprimerUtilisateur(noUtilisateur);
-		}catch (BLLException e){
-			e.printStackTrace();
-		}
-		//deconnection et retour vers la page d'accueil
-		RequestDispatcher rd = request.getRequestDispatcher("/deconnect");
+		profilUtilisateur=(Utilisateur) session.getAttribute("utilisateurActif");
+		int noArticle=Integer.parseInt(request.getParameter("article"));
+		//appel de la page
+		RequestDispatcher rd = request.getRequestDispatcher("/creer/utilisateur");
 		rd.forward(request, response);
-	}
 
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+	
 	}
 
 }

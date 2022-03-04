@@ -49,6 +49,7 @@ public class SeConnecterServlet extends HttpServlet {
 		//verification de l'existance de l'utilisateur
 		try {
 			utilisateurConnecte = manager.verificationUtilisateur(identifiant, mdp);
+			System.out.println("servlet"+utilisateurConnecte.getNoUtilisateur());
 		} catch (BLLException e) {
 		// --- Si la connexion échoue, l'utilisateur n'a pas été trouve
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/connexion.jsp");

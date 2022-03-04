@@ -16,6 +16,7 @@ import fr.eni.ecole.encheres.bll.ArticleManager;
 import fr.eni.ecole.encheres.bll.BLLException;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
+import fr.eni.ecole.encheres.bo.Utilisateur;
 
 
 
@@ -60,10 +61,16 @@ public class AcceuillirServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean erreur=true;
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur;
+		utilisateur= (Utilisateur) session.getAttribute("utilisateurActif");
+		int idUtilisateur=	utilisateur.getNoUtilisateur();
 		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		List<Categorie> categorieArticle =new ArrayList<Categorie>();
 		int filtreCategorie = 1;
 		String recherche = null;
+		String filtreVente = null;
+		String filtreAchat = null;
 		// recuperation des parametres de filtres
 		if ((request.getParameter("categories"))!=null) {
 			filtreCategorie=Integer.parseInt(request.getParameter("categories"));
@@ -71,9 +78,23 @@ public class AcceuillirServlet extends HttpServlet {
 		if ((request.getParameter("rechercheArticle"))!=null) {
 			recherche= request.getParameter("rechercheArticle");
 			}
+		if(request.getParameter("mesVentes")!=null) {
+			filtreVente=request.getParameter("mesVentes");
+		}
+		if(request.getParameter("mesEncheres")!=null) {
+			filtreAchat=request.getParameter("mesEncheres");
+		}
+		
+		System.out.println(request.getParameter("mesVentes"));
+		System.out.println(request.getParameter("mesEncheres"));
+		//enCours //aVenir //fini
+		
 		try {
 			// recuperation des Articles en BDD
-			articles=manager.selectListArticles(filtreCategorie,recherche);	
+			if (filtreVente!=null | filtreAchat!=null) {
+				articles=manager.selectListArticles(idUtilisateur,filtreVente,filtreAchat);	
+			}else {
+				articles=manager.selectListArticles(filtreCategorie,recherche);	}
 			// recuperation des Categories en BDD
 			categorieArticle= manager.selectCategorie();
 			//creation des attributs pour affichage

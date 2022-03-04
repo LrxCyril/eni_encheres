@@ -17,6 +17,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	// creer constante de requete d'insertion d'un article
 
 	private static final String SQL_SELECT_ARTICLE = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres, date_debut_encheres, pseudo from ARTICLES_VENDUS  Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE (date_debut_encheres<=?)AND(date_fin_encheres>=?)";
+	private static final String SQL_SELECT_ARTICLE_BY_ID = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres,no_categorie, date_debut_encheres from ARTICLES_VENDUS WHERE no_article=?;";
 	private static final String SQL_SELECT_ARTICLE_BY_CATE = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?) AND Categories.no_categorie=?)";
 	private static final String SQL_SELECT_ARTICLE_BY_NOM = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?)AND nom_article Like ?)";
 	private static final String SQL_SELECT_ARTICLE_BY_CATE_NOM = "SELECT no_article, nom_article, description, prix_initial,date_fin_encheres, date_debut_encheres, pseudo from ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE ((date_debut_encheres<=?)AND(date_fin_encheres>=?) AND nom_article Like ? AND Categories.no_categorie=?)";
@@ -25,7 +26,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SQL_SELECT_LIBELLE = "Select no_categorie, libelle from CATEGORIES";
 	private static final String SQL_UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET prix_vente=? WHERE  no_article=?";
 	private static final String SQL_INSERT_ADRESSE_RETRAIT = "INSERT INTO RETRAITS (no_article,rue, code_postal,ville) VALUES (?,?,?,?)";
-
+	private static final String SQL_SELECT_ARTICLE_BY_USER_ATTENTE = "Select no_article,pseudo, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial FROM ARTICLES_VENDUS inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur  WHERE( ARTICLES_VENDUS.no_utilisateur=? and date_debut_encheres> ? );";
+	private static final String SQL_SELECT_ARTICLE_BY_USER_ENCOURS = "Select no_article,pseudo, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial FROM ARTICLES_VENDUS inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur  WHERE( ARTICLES_VENDUS.no_utilisateur=? and date_debut_encheres< ? and date_fin_encheres>?);";
+	private static final String SQL_SELECT_ARTICLE_BY_USER_FINI = "Select no_article,pseudo, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial FROM ARTICLES_VENDUS inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur  WHERE( ARTICLES_VENDUS.no_utilisateur=? and date_fin_encheres< ?);";
 
 	@SuppressWarnings("null")
 	@Override
@@ -64,6 +67,23 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		return articles;
 	}
 
+	@Override
+	public void deleteAricle(int noArticle) throws DALException {
+		// creer commande SQL inserer article (idem inserer utilisateur dans Utilisateur
+
+		// --- Obtenir la requête
+		try (Connection connexion = ConnectionProvider.getConnection();) {
+			// --- Construire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_DELETE_ARTICLE);
+
+			ordre.setInt(1, noArticle);
+			// --- Exécuter la requête
+			ResultSet rs =ordre.executeQuery();
+		} catch (SQLException sqle) {
+			// Levée de l'exception pas d'article
+			throw new DALException("Insert invalide !");
+		}
+	}
 
 	@Override
 	public List<Categorie> selectLibelle() throws DALException {
@@ -280,6 +300,159 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					throw new DALException("Insert invalide !");
 				}
 			}
+	@Override
+	public List<ArticleVendu> selectArticleEnAttente(int id, LocalDate date) throws DALException {
+		List<ArticleVendu> articles = new ArrayList<ArticleVendu>(); // on s'assure qu'il y a ait toujours une liste,
+		// Recherche de l'utilisateur selon son identifiant dans la Base de donnée
+		// 1- Obtenir une connexion
+		try (Connection connexion = ConnectionProvider.getConnection();) {
+			// 2- Contruire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_ARTICLE_BY_USER_ATTENTE);
+			// ajout du paramètre à la requete(Where pseudo)
+			ordre.setInt(1, id);
+			ordre.setDate(2, java.sql.Date.valueOf(date));
+			// Appel de la methode constuisant l'utilisateur
+			ResultSet rs = ordre.executeQuery();
+			// si il y'a un resultat de requete
+
+			while (rs.next()) {
+				ArticleVendu articleLu = new ArticleVendu();
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setNoUtilisateur(id);
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				articleLu.setUtilisateur(utilisateur);
+				//Etat 100 = article pas en vente
+				articleLu.setEtatVente(100);
+				articleLu.setNoArticle(rs.getInt("no_article"));
+				articleLu.setNomArticle(rs.getString("nom_article"));
+				articleLu.setDescription(rs.getString("description"));
+				articleLu.setMiseAPrix(rs.getInt("prix_initial"));
+				articleLu.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				articleLu.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articles.add(articleLu);
+			}
+			// 5-fermeture de la connexion
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			// Levé de l'exception l'utilisateur n'existe pas
+			throw new DALException("Impossible de lire la connexion");
+		}
+		return articles;
+	}
+
+
+	@Override
+	public List<ArticleVendu> selectArticleVenteFini(int noUtilisateur, LocalDate date) throws DALException {
+		List<ArticleVendu> articles = new ArrayList<ArticleVendu>(); // on s'assure qu'il y a ait toujours une liste,
+		// Recherche de l'utilisateur selon son identifiant dans la Base de donnée
+		// 1- Obtenir une connexion
+		try (Connection connexion = ConnectionProvider.getConnection();) {
+			// 2- Contruire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_ARTICLE_BY_USER_FINI);
+			// ajout du paramètre à la requete(Where pseudo)
+			ordre.setInt(1, noUtilisateur);
+			ordre.setDate(2, java.sql.Date.valueOf(date));
+			// Appel de la methode constuisant l'utilisateur
+			ResultSet rs = ordre.executeQuery();
+			// si il y'a un resultat de requete
+
+			while (rs.next()) {
+				ArticleVendu articleLu = new ArticleVendu();
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setNoUtilisateur(noUtilisateur);
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				articleLu.setUtilisateur(utilisateur);
+				articleLu.setNoArticle(rs.getInt("no_article"));
+				articleLu.setNomArticle(rs.getString("nom_article"));
+				articleLu.setDescription(rs.getString("description"));
+				articleLu.setMiseAPrix(rs.getInt("prix_initial"));
+				articleLu.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				articleLu.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articles.add(articleLu);
+			}
+			// 5-fermeture de la connexion
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			// Levé de l'exception l'utilisateur n'existe pas
+			throw new DALException("Impossible de lire la connexion");
+		}
+		return articles;
+	}
+
+
+	@Override
+	public List<ArticleVendu> selectArticleModif(int noUtilisateur, LocalDate date) throws DALException {
+		List<ArticleVendu> articles = new ArrayList<ArticleVendu>(); // on s'assure qu'il y a ait toujours une liste,
+		// Recherche de l'utilisateur selon son identifiant dans la Base de donnée
+		// 1- Obtenir une connexion
+		try (Connection connexion = ConnectionProvider.getConnection();) {
+			// 2- Contruire la requete
+			PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_ARTICLE_BY_USER_ENCOURS);
+			// ajout du paramètre à la requete(Where pseudo)
+			ordre.setInt(1, noUtilisateur);
+			ordre.setDate(2, java.sql.Date.valueOf(date));
+			ordre.setDate(3, java.sql.Date.valueOf(date));
+			// Appel de la methode constuisant l'utilisateur
+			ResultSet rs = ordre.executeQuery();
+			// si il y'a un resultat de requete
+
+			while (rs.next()) {
+				ArticleVendu articleLu = new ArticleVendu();
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setNoUtilisateur(noUtilisateur);
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				articleLu.setUtilisateur(utilisateur);
+				articleLu.setNoArticle(rs.getInt("no_article"));
+				articleLu.setNomArticle(rs.getString("nom_article"));
+				articleLu.setDescription(rs.getString("description"));
+				articleLu.setMiseAPrix(rs.getInt("prix_initial"));
+				articleLu.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				articleLu.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articles.add(articleLu);
+			}
+			// 5-fermeture de la connexion
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			// Levé de l'exception l'utilisateur n'existe pas
+			throw new DALException("Impossible de lire la connexion");
+		}
+		return articles;
+	}
+
+
+	@Override
+	public ArticleVendu selectArticlebyId(int noArticle) throws DALException {
+		ArticleVendu article = new ArticleVendu(); 
+		// Recherche de l'utilisateur selon son identifiant dans la Base de donnée
+				// 1- Obtenir une connexion
+				try (Connection connexion = ConnectionProvider.getConnection();) {
+					// 2- Contruire la requete
+					PreparedStatement ordre = connexion.prepareStatement(SQL_SELECT_ARTICLE_BY_ID);
+					// ajout du paramètre à la requete(Where pseudo)
+					ordre.setInt(1, noArticle);
+					// Appel de la methode constuisant l'utilisateur
+					ResultSet rs = ordre.executeQuery();
+
+					// si il y'a un resultat de requete
+
+					while (rs.next()) {
+						// Alimentation de l'instance d'utilisateur depuis les champs récupérés de la
+						// requette
+						article.setNoArticle(rs.getInt("no_article"));
+						article.setNomArticle(rs.getString("nom_article"));
+						article.setDescription(rs.getString("description"));
+						article.setMiseAPrix(rs.getInt("prix_initial"));
+						article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					}
+					// 5-fermeture de la connexion
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+					// Levé de l'exception l'utilisateur n'existe pas
+					throw new DALException("Impossible de lire la connexion");
+				}
+				return article;
+	}
+
 		
 }
 

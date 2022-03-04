@@ -17,5 +17,10 @@ public interface ArticleDAO {
 	List<ArticleVendu> selectArticlebyCateNom(LocalDate date, int filtreCategorie, String recherche)throws DALException;
 	void insertArticleComplet(ArticleVendu ajoutArticle)throws DALException;
 	void miseAJourArticle(ArticleVendu article, Connection cnx) throws DALException;
+	List<ArticleVendu> selectArticleModif(int id, LocalDate date) throws DALException;
+	List<ArticleVendu> selectArticleVenteFini(int noUtilisateur, LocalDate date)throws DALException;
+	List<ArticleVendu> selectArticleEnAttente(int noUtilisateur, LocalDate date)throws DALException;
+	ArticleVendu selectArticlebyId(int noArticle)throws DALException;
+	void deleteAricle(int noArticle) throws DALException;
 	
 }

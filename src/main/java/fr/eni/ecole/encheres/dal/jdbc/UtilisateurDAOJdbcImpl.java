@@ -39,6 +39,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			ordre.setString(3,motdepasse.trim());
 			//Appel de la methode constuisant l'utilisateur
 			utilisateurConnecte=lireEtCreerUtilisateur(utilisateurConnecte, connexion, ordre);
+			System.out.println("DAL"+utilisateurConnecte.getNoUtilisateur());
 		}catch  (SQLException sqle){
 			//Levé de l'exception l'utilisateur n'existe pas
 			throw new DALException("Impossible de lire la connexion");

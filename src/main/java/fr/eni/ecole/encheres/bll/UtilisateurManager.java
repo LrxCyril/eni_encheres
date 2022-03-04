@@ -58,6 +58,7 @@ public class UtilisateurManager {
 		// --- récupérer un utilisateur
 		try {
 			utilisateur = utilisateurDAO.verifUtilisateurIdentifiant(identifiant, mdp);
+			System.out.println("BLL"+utilisateur.getNoUtilisateur());
 			cnx = true;
 		} catch (DALException e) {
 			// --- Levée d'une exception quand l'email n'est pas reconnu

@@ -26,6 +26,12 @@ public class ArticleManager {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Selection de tout les articles en vente
+	 * @return liste d'articles
+	 * @throws BLLException
+	 */
 	public List<ArticleVendu> selectArticle() throws BLLException {
 		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 		LocalDate date=LocalDate.now();
@@ -38,7 +44,11 @@ public class ArticleManager {
 		}
 		return articles;
 	}
-		
+		/**
+		 * Selection des categories existantes
+		 * @return liste de categorie
+		 * @throws BLLException
+		 */
 		public List<Categorie> selectCategorie() throws BLLException {
 			List<Categorie> categorieArticle =new ArrayList<Categorie>();
 				// --- récupérer la liste des articles en vente
@@ -51,7 +61,22 @@ public class ArticleManager {
 			return categorieArticle;
 		
 	}
-
+		public void deleteArticle(int noArticle) throws BLLException {
+			try {
+				articleDAO.deleteAricle(noArticle);
+			} catch (DALException e) {
+				// --- Levée d'une exception quand l'email n'est pas reconnu
+				e.printStackTrace();
+				throw new BLLException("Erreur lors de la suppresion de l'article");
+			}
+	}
+		/**
+		 * Selection des articles selon 2 filtres
+		 * @param filtreCategorie
+		 * @param recherche
+		 * @return liste d'articles
+		 * @throws BLLException
+		 */
 		public List<ArticleVendu> selectArticlebyCateNom(int filtreCategorie, String recherche) throws BLLException {
 			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			LocalDate date=LocalDate.now();
@@ -66,7 +91,30 @@ public class ArticleManager {
 			}
 			return articles;
 		}
+	/**
+	 * selection d'un article selon son no
+	 * @param noArticle
+	 * @return
+	 * @throws BLLException
+	 */
+		public ArticleVendu selectArticlebyId(int noArticle) throws BLLException {
+			ArticleVendu article =new ArticleVendu();
+				// --- récupérer la liste des articles en vente
+			try {
 
+				article = articleDAO.selectArticlebyId(noArticle);
+			} catch (DALException e) {
+				// --- Levée d'une exception quand l'email n'est pas reconnu
+				throw new BLLException("Erreur lors de la selection par nom");
+			}
+			return article;
+		}
+		/**
+		 * selection des articles selon filtre de categorie
+		 * @param filtreCategorie
+		 * @return list d'articles
+		 * @throws BLLException
+		 */
 		public List<ArticleVendu> selectArticlebyCate(int filtreCategorie) throws BLLException {
 			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			LocalDate date=LocalDate.now();
@@ -80,6 +128,12 @@ public class ArticleManager {
 			return articles;
 		}
 
+		/**
+		 * selection des articles selon champs de recherche
+		 * @param recherche
+		 * @return liste d'articles
+		 * @throws BLLException
+		 */
 		public List<ArticleVendu> selectArticlebyNom(String recherche) throws BLLException {
 			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			LocalDate date=LocalDate.now();
@@ -94,6 +148,13 @@ public class ArticleManager {
 			return articles;
 		}
 
+		/**
+		 * Mise à jour d'un aricle existant
+		 * @param article
+		 * @param cnx
+		 * @return connection BDD
+		 * @throws BLLException
+		 */
 		public Connection MiseAJourArticle(ArticleVendu article, Connection cnx) throws BLLException {
 			try {
 				articleDAO.miseAJourArticle(article,cnx);
@@ -104,6 +165,20 @@ public class ArticleManager {
 			return cnx;
 		}
 
+		/**
+		 * Creer un article et l'inserer en BDD
+		 * @param noUtilisateur
+		 * @param nomArticle
+		 * @param description
+		 * @param noCategorie
+		 * @param dateDebut
+		 * @param dateFin
+		 * @param prixIntial
+		 * @param rue
+		 * @param codePostal
+		 * @param ville
+		 * @throws BLLException
+		 */
 		public void insertArticlesRetrait(int noUtilisateur, String nomArticle, String description, int noCategorie,
 			LocalDate dateDebut, LocalDate dateFin, int prixIntial, String rue, String codePostal, String ville) throws BLLException {
 			ArticleVendu ajoutArticle = new ArticleVendu();
@@ -136,13 +211,13 @@ public class ArticleManager {
 			}
 
 		}
-/**
- * Recherche de la liste d'article en fonction des filtres fournies
- * @param filtreCategorie
- * @param recherche
- * @return Liste d'articles
- * @throws BLLException
- */
+	/**
+	 * Recherche de la liste d'article en fonction des filtres fournies
+	 * @param filtreCategorie
+	 * @param recherche
+	 * @return Liste d'articles
+	 * @throws BLLException
+	 */
 		public List<ArticleVendu> selectListArticles(int filtreCategorie, String recherche) throws BLLException {
 			List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
 			boolean erreur=true;	
@@ -171,8 +246,27 @@ public class ArticleManager {
 			}
 			return articles;
 		}
-public void insertVerifSaisi(String nomArticle, String description, int noCategorie, LocalDate dateDebut,
-		LocalDate dateFin, int prixIntial, String rue, String codePostal, String ville) throws BLLException {
+
+		
+		
+	
+	/**
+	 * Verifier les champs de saisi d'un article (regle metier)
+	 * et lever une exception en cas de non respect
+	 * @param nomArticle
+	 * @param description
+	 * @param noCategorie
+	 * @param dateDebut
+	 * @param dateFin
+	 * @param prixIntial
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @throws BLLException
+	 */
+		
+	public void insertVerifSaisi(String nomArticle, String description, int noCategorie, LocalDate dateDebut,
+	LocalDate dateFin, int prixIntial, String rue, String codePostal, String ville) throws BLLException {
 	List<String> listErreur = new ArrayList();
 	int idTabl =0;
 
@@ -202,4 +296,81 @@ public void insertVerifSaisi(String nomArticle, String description, int noCatego
 			throw new BLLException(listErreur.toString());
 		}
 }
+/**
+ * Selectionne les articles pas encore en vente d'un user
+ * @param noUtilisateur
+ * @return ListArtcle
+ * @throws BLLException
+ */
+	public List<ArticleVendu> selectArticleEnVente(int noUtilisateur) throws BLLException {
+		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+		LocalDate date=LocalDate.now();
+			// --- récupérer la liste des articles en vente
+		try {
+			articles = articleDAO.selectArticleModif(noUtilisateur,date);
+		} catch (DALException e) {
+			// --- Levée d'une exception quand l'email n'est pas reconnu
+			throw new BLLException("Erreur lors de la selection par categorie");
+		}
+		return articles;
+	}
+	
+	public List<ArticleVendu> selectArticleEnAttente(int noUtilisateur) throws BLLException {
+		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+		LocalDate date=LocalDate.now();
+			// --- récupérer la liste des articles en vente
+		try {
+			articles = articleDAO.selectArticleEnAttente(noUtilisateur,date);
+		} catch (DALException e) {
+			// --- Levée d'une exception quand l'email n'est pas reconnu
+			throw new BLLException("Erreur lors de la selection par categorie");
+		}
+		return articles;
+	}
+	public List<ArticleVendu> selectArticleVenteFini(int noUtilisateur) throws BLLException {
+		List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+		LocalDate date=LocalDate.now();
+			// --- récupérer la liste des articles en vente
+		try {
+			articles = articleDAO.selectArticleVenteFini(noUtilisateur,date);
+		} catch (DALException e) {
+			// --- Levée d'une exception quand l'email n'est pas reconnu
+			throw new BLLException("Erreur lors de la selection par categorie");
+		}
+		return articles;
+	}
+
+public List<ArticleVendu> selectListArticles(int idUtilisateur,String filtreVente, String filtreAchat) {
+	List<ArticleVendu> articles =new ArrayList<ArticleVendu>();
+	//enCours //aVenir //fini
+	switch (filtreVente) {
+		case "enCours":
+			try {
+				articles=this.selectArticleEnVente(idUtilisateur);
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "aVenir":
+			try {
+				articles=this.selectArticleEnAttente(idUtilisateur);
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+			break;
+			
+			
+		case "fini":
+			try {
+				articles=this.selectArticleVenteFini(idUtilisateur);
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+			break;
+	}
+	
+	return articles;
+}
+	
+	
 }
